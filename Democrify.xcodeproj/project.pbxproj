@@ -1,0 +1,417 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50EECAE015CAA82C006E54FA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EECADF15CAA82C006E54FA /* Cocoa.framework */; };
+		50EECAEA15CAA82C006E54FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAE815CAA82C006E54FA /* InfoPlist.strings */; };
+		50EECAF015CAA82C006E54FA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAEE15CAA82C006E54FA /* Credits.rtf */; };
+		50EECAF315CAA82C006E54FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50EECAF215CAA82C006E54FA /* AppDelegate.m */; };
+		50EECAF615CAA82C006E54FA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAF415CAA82C006E54FA /* MainMenu.xib */; };
+		BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D7D16CEA5B600A899A1 /* Acid.hs */; };
+		BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
+		BF2F6D8316D11C5700A899A1 /* CocoaLibSpotify.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
+		BF2F6D8516D16F3400A899A1 /* democrify.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D8416D16F3400A899A1 /* democrify.icns */; };
+		BF41460E16CC5C8A00AD69AA /* statusicon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = BF41460C16CC5C8A00AD69AA /* statusicon.tiff */; };
+		BF41460F16CC5C8A00AD69AA /* statusicon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */; };
+		BF41461216CC5D2200AD69AA /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF41461016CC5D2200AD69AA /* AudioUnit.framework */; };
+		BF41461316CC5D2200AD69AA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF41461116CC5D2200AD69AA /* CoreAudio.framework */; };
+		BF41461A16CCF31D00AD69AA /* democrify.png in Resources */ = {isa = PBXBuildFile; fileRef = BF41461916CCF31D00AD69AA /* democrify.png */; };
+		BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461D16CCFEDD00AD69AA /* HSObjC_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461E16CCFEDD00AD69AA /* HSOBJC_dummy_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF41462816CCFF5A00AD69AA /* Main.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF41462516CCFF5A00AD69AA /* Main.hs */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		50EECB0C15CAA86D006E54FA /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BF2F6D8316D11C5700A899A1 /* CocoaLibSpotify.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		50EECADB15CAA82C006E54FA /* Democrify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Democrify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50EECADF15CAA82C006E54FA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		50EECAE215CAA82C006E54FA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		50EECAE315CAA82C006E54FA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		50EECAE415CAA82C006E54FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		50EECAE715CAA82C006E54FA /* Democrify-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Democrify-Info.plist"; sourceTree = "<group>"; };
+		50EECAE915CAA82C006E54FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		50EECAED15CAA82C006E54FA /* Democrify-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Democrify-Prefix.pch"; sourceTree = "<group>"; };
+		50EECAEF15CAA82C006E54FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		50EECAF115CAA82C006E54FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		50EECAF215CAA82C006E54FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		50EECAF515CAA82C006E54FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BF2F6D7D16CEA5B600A899A1 /* Acid.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Acid.hs; path = Democrify/Acid.hs; sourceTree = "<group>"; };
+		BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLibSpotify.framework; path = ../../../../Library/Frameworks/CocoaLibSpotify.framework; sourceTree = "<group>"; };
+		BF2F6D8416D16F3400A899A1 /* democrify.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = democrify.icns; sourceTree = "<group>"; };
+		BF41460C16CC5C8A00AD69AA /* statusicon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = statusicon.tiff; sourceTree = "<group>"; };
+		BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusicon@2x.tiff"; sourceTree = "<group>"; };
+		BF41461016CC5D2200AD69AA /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		BF41461116CC5D2200AD69AA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		BF41461916CCF31D00AD69AA /* democrify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = democrify.png; sourceTree = "<group>"; };
+		BF41461C16CCFEDD00AD69AA /* HSObjC_C.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSObjC_C.h; path = Democrify/HSObjC_C.h; sourceTree = "<group>"; };
+		BF41461D16CCFEDD00AD69AA /* HSObjC_C.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSObjC_C.m; path = Democrify/HSObjC_C.m; sourceTree = "<group>"; };
+		BF41461E16CCFEDD00AD69AA /* HSOBJC_dummy_C.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSOBJC_dummy_C.m; path = Democrify/HSOBJC_dummy_C.m; sourceTree = "<group>"; };
+		BF41461F16CCFEDD00AD69AA /* HSOBJC.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HSOBJC.hs; path = Democrify/HSOBJC.hs; sourceTree = "<group>"; };
+		BF41462316CCFF4A00AD69AA /* FFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFI.h; path = Democrify/FFI.h; sourceTree = "<group>"; };
+		BF41462516CCFF5A00AD69AA /* Main.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.hs; path = Democrify/Main.hs; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50EECAD815CAA82C006E54FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF41461216CC5D2200AD69AA /* AudioUnit.framework in Frameworks */,
+				BF41461316CC5D2200AD69AA /* CoreAudio.framework in Frameworks */,
+				50EECAE015CAA82C006E54FA /* Cocoa.framework in Frameworks */,
+				BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50EECAD015CAA82C006E54FA = {
+			isa = PBXGroup;
+			children = (
+				BF2F6D8416D16F3400A899A1 /* democrify.icns */,
+				BF41461416CCE8B400AD69AA /* Other Sources */,
+				50EECAE515CAA82C006E54FA /* Democrify */,
+				50EECADE15CAA82C006E54FA /* Frameworks */,
+				50EECADC15CAA82C006E54FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50EECADC15CAA82C006E54FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50EECADB15CAA82C006E54FA /* Democrify.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50EECADE15CAA82C006E54FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */,
+				BF41461016CC5D2200AD69AA /* AudioUnit.framework */,
+				BF41461116CC5D2200AD69AA /* CoreAudio.framework */,
+				50EECADF15CAA82C006E54FA /* Cocoa.framework */,
+				50EECAE115CAA82C006E54FA /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50EECAE115CAA82C006E54FA /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50EECAE215CAA82C006E54FA /* AppKit.framework */,
+				50EECAE315CAA82C006E54FA /* CoreData.framework */,
+				50EECAE415CAA82C006E54FA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		50EECAE515CAA82C006E54FA /* Democrify */ = {
+			isa = PBXGroup;
+			children = (
+				50EECAF115CAA82C006E54FA /* AppDelegate.h */,
+				50EECAF215CAA82C006E54FA /* AppDelegate.m */,
+				50EECAF415CAA82C006E54FA /* MainMenu.xib */,
+				50EECAE615CAA82C006E54FA /* Supporting Files */,
+			);
+			path = Democrify;
+			sourceTree = "<group>";
+		};
+		50EECAE615CAA82C006E54FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF41461916CCF31D00AD69AA /* democrify.png */,
+				BF41460C16CC5C8A00AD69AA /* statusicon.tiff */,
+				BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */,
+				50EECAE715CAA82C006E54FA /* Democrify-Info.plist */,
+				50EECAE815CAA82C006E54FA /* InfoPlist.strings */,
+				50EECAED15CAA82C006E54FA /* Democrify-Prefix.pch */,
+				50EECAEE15CAA82C006E54FA /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF41461416CCE8B400AD69AA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BF2F6D7D16CEA5B600A899A1 /* Acid.hs */,
+				BF41462516CCFF5A00AD69AA /* Main.hs */,
+				BF41462316CCFF4A00AD69AA /* FFI.h */,
+				BF41461B16CCFEC100AD69AA /* HSOBJC */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		BF41461B16CCFEC100AD69AA /* HSOBJC */ = {
+			isa = PBXGroup;
+			children = (
+				BF41461C16CCFEDD00AD69AA /* HSObjC_C.h */,
+				BF41461D16CCFEDD00AD69AA /* HSObjC_C.m */,
+				BF41461E16CCFEDD00AD69AA /* HSOBJC_dummy_C.m */,
+				BF41461F16CCFEDD00AD69AA /* HSOBJC.hs */,
+			);
+			name = HSOBJC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50EECADA15CAA82C006E54FA /* Democrify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50EECAF915CAA82C006E54FA /* Build configuration list for PBXNativeTarget "Democrify" */;
+			buildPhases = (
+				50EECAD915CAA82C006E54FA /* Resources */,
+				50EECB0C15CAA86D006E54FA /* Copy Frameworks */,
+				50EECAD715CAA82C006E54FA /* Sources */,
+				50EECAD815CAA82C006E54FA /* Frameworks */,
+				BF41462A16CD026000AD69AA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Democrify;
+			productName = Democrify;
+			productReference = 50EECADB15CAA82C006E54FA /* Democrify.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50EECAD215CAA82C006E54FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Your Company";
+			};
+			buildConfigurationList = 50EECAD515CAA82C006E54FA /* Build configuration list for PBXProject "Democrify" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 50EECAD015CAA82C006E54FA;
+			productRefGroup = 50EECADC15CAA82C006E54FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50EECADA15CAA82C006E54FA /* Democrify */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50EECAD915CAA82C006E54FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50EECAEA15CAA82C006E54FA /* InfoPlist.strings in Resources */,
+				50EECAF015CAA82C006E54FA /* Credits.rtf in Resources */,
+				50EECAF615CAA82C006E54FA /* MainMenu.xib in Resources */,
+				BF41460E16CC5C8A00AD69AA /* statusicon.tiff in Resources */,
+				BF41460F16CC5C8A00AD69AA /* statusicon@2x.tiff in Resources */,
+				BF41461A16CCF31D00AD69AA /* democrify.png in Resources */,
+				BF41462816CCFF5A00AD69AA /* Main.hs in Resources */,
+				BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */,
+				BF2F6D8516D16F3400A899A1 /* democrify.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BF41462A16CD026000AD69AA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python;
+			shellScript = "#!/usr/bin/python\n# -*- coding: utf-8 -*-\nimport sys\nimport os\nimport shutil\nfrom subprocess import Popen, PIPE\n\nos.chdir(\"Democrify\")\nenv = os.environ.get\n\n# Adjust these settings for your project!\n# TODO: These settings can surely be extracted automatically from Xcode...\nframeworks = [\"Cocoa\", \"CocoaLibSpotify\"]\nhsinterface_objectfile = \"HSOBJC_dummy_C.o\"  # this object file will be replaced by Haskell\nhssource = \"Main.hs\"\n\n\nprint \"Starting Haskell build phase...\"\n\n# STEP 1\nprint \"parsing filelist...\"\nfilelist_path = os.path.join(env('OBJECT_FILE_DIR_normal'), env('CURRENT_ARCH'),  \n                             env('EXECUTABLE_NAME') + \".LinkFileList\")\n\nwith open(filelist_path, 'r') as f:\n    stripped_lines = (x.strip() for x in f.readlines())\n    filelist = [('\"%s\"' % line) for line in stripped_lines \n                if os.path.basename(line) != hsinterface_objectfile]\n\t\t \n\n# STEP 2\nprint \"Building Haskell File(s)\"\n# TODO: Should be done with cabal? (But can cabal include *.o files??)\nframework_args = \" \".join(\"-framework \" + x for x in frameworks)\nobjects_path = os.path.join(env('OBJECT_FILE_DIR_normal'),\n                            env('CURRENT_ARCH'), \n                            \"*.o\")\nargs = \" \".join([\"-O\", \"--make\", \"-threaded\",\n                 '-framework-path \"' + env('BUILT_PRODUCTS_DIR') + '/' + env('FRAMEWORKS_FOLDER_PATH') + '/CocoaLibSpotify.framework/Versions/A/Frameworks\"',\n                 hssource,\n                 '-o \"./' + env('EXECUTABLE_NAME') + '\"',\n                 \" \".join(filelist),\n                 framework_args])\np = Popen(\"ghc \" + args, shell=True, stdout=PIPE, stderr=PIPE)\n(out, err) = p.communicate()\nprint err\nif p.returncode != 0:\n    sys.exit(p.returncode)\n    \n\n# STEP 3\nprint \"moving executable...\"\nexec_path = os.path.join(env('BUILT_PRODUCTS_DIR'),\n                         env('EXECUTABLE_PATH'))\nshutil.move(env('EXECUTABLE_NAME'), \n            exec_path)\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50EECAD715CAA82C006E54FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50EECAF315CAA82C006E54FA /* AppDelegate.m in Sources */,
+				BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */,
+				BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		50EECAE815CAA82C006E54FA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50EECAE915CAA82C006E54FA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		50EECAEE15CAA82C006E54FA /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50EECAEF15CAA82C006E54FA /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		50EECAF415CAA82C006E54FA /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50EECAF515CAA82C006E54FA /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50EECAF715CAA82C006E54FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		50EECAF815CAA82C006E54FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		50EECAFA15CAA82C006E54FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(CONFIGURATION_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)",
+					"$(CONFIGURATION_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLibSpotify.framework/Versions/A/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Democrify/Democrify-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(FRAMEWORKS_FOLDER_PATH)/CocoaLibSpotify.framework/Versions/A/Headers";
+				INFOPLIST_FILE = "Democrify/Democrify-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "\"$(FRAMEWORKS_FOLDER_PATH)\" @loader_path/../Frameworks";
+				PRODUCT_NAME = Democrify;
+				VALID_ARCHS = x86_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		50EECAFB15CAA82C006E54FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(CONFIGURATION_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)",
+					"$(CONFIGURATION_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLibSpotify.framework/Versions/A/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Democrify/Democrify-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(FRAMEWORKS_FOLDER_PATH)/CocoaLibSpotify.framework/Versions/A/Headers";
+				INFOPLIST_FILE = "Democrify/Democrify-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "\"$(FRAMEWORKS_FOLDER_PATH)\" @loader_path/../Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Democrify;
+				VALID_ARCHS = x86_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50EECAD515CAA82C006E54FA /* Build configuration list for PBXProject "Democrify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50EECAF715CAA82C006E54FA /* Debug */,
+				50EECAF815CAA82C006E54FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50EECAF915CAA82C006E54FA /* Build configuration list for PBXNativeTarget "Democrify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50EECAFA15CAA82C006E54FA /* Debug */,
+				50EECAFB15CAA82C006E54FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50EECAD215CAA82C006E54FA /* Project object */;
+}
