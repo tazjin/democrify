@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/vincent/Source/democrify",
+            "file_exclude_patterns": ["*.hi", "*.o"]
+		}
+	]
+}

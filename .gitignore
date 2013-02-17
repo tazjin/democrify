@@ -20,3 +20,8 @@ DerivedData
 # Haskell
 *.hi
 *.o
+
+# Sublime Text
+*.sublime-workspace
+
+appkey.c
