@@ -6,7 +6,7 @@ import           Control.Applicative   (optional, (<$>))
 import           Control.Monad         (msum)
 import           Data.ByteString.Char8 (ByteString)
 import           Data.IORef
-import           Data.Text             (Text)
+import           Data.Text             (Text, append)
 import           Happstack.Server
 import           System.IO.Unsafe      (unsafePerformIO)
 import           Control.Monad.IO.Class (liftIO)
@@ -71,12 +71,26 @@ queueView :: ServerPart Response
 queueView = do
     acid <- liftIO $ readIORef playQueue
     queue <- query' acid GetQueue
-    defaultLayout "Democrify - Queue" [] $ forM_ queue (\SpotifyTrack{..} ->
-        H.div ! A.class_ "row" $
-            H.div ! A.class_ "twelve columns" $ do
-                H.span ! A.class_ "artist" $ (toHtml artist)
-                toHtml (" - " :: Text)
-                H.span ! A.class_ "track" $ (toHtml track))
+    defaultLayout "Democrify - Queue" [] $ do
+        H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
+            H.br
+            forM_ queue (\SpotifyTrack{..} -> do
+                H.div ! A.class_ "row" $ do
+                    H.div ! A.class_ "two columns mobile-one" $
+                        H.a ! A.href (toValue $ append "/vote/" tId) $
+                            H.img ! A.src "http://placehold.it/80x80&text=UPVOTE"
+                    H.div ! A.class_ "ten columns trackitem" $ do
+                        H.span ! A.class_ "track" $ do
+                            toHtml track
+                        H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
+                                                        toHtml artist
+                H.hr)
+            H.div ! A.class_ "row" $ do
+                H.div ! A.class_ "two columns mobile-one" $
+                    H.img ! A.src "http://placehold.it/80x80&text=:("
+                H.div ! A.class_ "ten columns trackitem" $ do
+                    H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
+
 
 -- * Happstack things
 

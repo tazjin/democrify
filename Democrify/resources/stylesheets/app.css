@@ -13,6 +13,23 @@
    Shared Styles
 ----------------------------------------- */
 
+.trackitem {
+    font-size: 20;
+    vertical-align: middle;
+}
+
+.track {
+    font-weight: bold;
+}
+
+.artist {
+    font-style: italic;
+    font-weight: light;
+}
+
+.oh-no {
+    font-size: 18;
+}
 
 
 /* -----------------------------------------
