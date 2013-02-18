@@ -50,6 +50,7 @@ defaultLayout  title headers body = ok $ toResponse $
             -- Scripts
             H.script ! A.src "/modernizr.foundation.js" $ mempty
             H.script ! A.src "/foundation.min.js" $ mempty
+            H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/app.js" $ mempty
             sequence_ headers
         H.body $ do
@@ -94,14 +95,21 @@ queueView = do
                 H.div ! A.class_ "ten columns trackitem" $ do
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
 
+upvoteHandler :: Text -> ServerPart Response
+upvoteHandler song = do
+    acid <- liftIO $ readIORef playQueue
+    queue <- update' acid $ UpvoteTrack song
+    liftIO $ putStrLn $ "Upvoted " ++ (T.unpack song)
+    ok $ toResponse $ T.append "Upvoted " song
 
 -- * Happstack things
 
 -- |This contains the routing function for Happstack. I don't have time for type-safe routing in this project! :D
 democrify :: ServerPart Response
-democrify = liftIO webResources >>= \path -> msum
+democrify = liftIO webResources >>= \resPath -> msum
     [ nullDir >> queueView
-    , serveDirectory DisableBrowsing [] path
+    , dir "upvote" $ path $ \song -> upvoteHandler song
+    , serveDirectory DisableBrowsing [] resPath
     ]
 
 runServer :: IO ()

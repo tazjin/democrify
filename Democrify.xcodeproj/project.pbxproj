@@ -21,9 +21,6 @@
 		BF2F6E0016D2389B00A899A1 /* foundation.min.css in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6DDD16D2389B00A899A1 /* foundation.min.css */; };
 		BF2F6E0216D23A3F00A899A1 /* app.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DC616D2389B00A899A1 /* app.js */; };
 		BF2F6E0316D23A3F00A899A1 /* foundation.min.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DC716D2389B00A899A1 /* foundation.min.js */; };
-		BF2F6E0416D23A3F00A899A1 /* jquery.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DD616D2389B00A899A1 /* jquery.js */; };
-		BF2F6E0516D23A3F00A899A1 /* jquery.placeholder.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DD716D2389B00A899A1 /* jquery.placeholder.js */; };
-		BF2F6E0616D23A3F00A899A1 /* modernizr.foundation.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DD816D2389B00A899A1 /* modernizr.foundation.js */; };
 		BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DDB16D2389B00A899A1 /* app.css */; };
 		BF2F6E0816D23A3F00A899A1 /* foundation.min.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DDD16D2389B00A899A1 /* foundation.min.css */; };
 		BF2F6E0B16D2A29000A899A1 /* democrify_small.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6E0A16D2A29000A899A1 /* democrify_small.png */; };
@@ -32,6 +29,7 @@
 		BF2F6E1016D2BA8B00A899A1 /* upvote_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6E0E16D2BA8B00A899A1 /* upvote_bw.png */; };
 		BF2F6E1116D2BA9B00A899A1 /* upvote_colour.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6E0D16D2BA8B00A899A1 /* upvote_colour.png */; };
 		BF2F6E1216D2BA9E00A899A1 /* upvote_bw.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6E0E16D2BA8B00A899A1 /* upvote_bw.png */; };
+		BF2F6E1516D2E02800A899A1 /* jquery.cookie.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6E1316D2E01D00A899A1 /* jquery.cookie.js */; };
 		BF41460E16CC5C8A00AD69AA /* statusicon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = BF41460C16CC5C8A00AD69AA /* statusicon.tiff */; };
 		BF41460F16CC5C8A00AD69AA /* statusicon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */; };
 		BF41461216CC5D2200AD69AA /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF41461016CC5D2200AD69AA /* AudioUnit.framework */; };
@@ -62,12 +60,10 @@
 			files = (
 				BF2F6E0216D23A3F00A899A1 /* app.js in CopyFiles */,
 				BF2F6E0316D23A3F00A899A1 /* foundation.min.js in CopyFiles */,
-				BF2F6E0416D23A3F00A899A1 /* jquery.js in CopyFiles */,
-				BF2F6E0516D23A3F00A899A1 /* jquery.placeholder.js in CopyFiles */,
-				BF2F6E0616D23A3F00A899A1 /* modernizr.foundation.js in CopyFiles */,
 				BF2F6E1116D2BA9B00A899A1 /* upvote_colour.png in CopyFiles */,
 				BF2F6E1216D2BA9E00A899A1 /* upvote_bw.png in CopyFiles */,
 				BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */,
+				BF2F6E1516D2E02800A899A1 /* jquery.cookie.js in CopyFiles */,
 				BF2F6E0C16D2A29A00A899A1 /* democrify_small.png in CopyFiles */,
 				BF2F6E0816D23A3F00A899A1 /* foundation.min.css in CopyFiles */,
 			);
@@ -116,6 +112,7 @@
 		BF2F6E0A16D2A29000A899A1 /* democrify_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = democrify_small.png; path = Democrify/democrify_small.png; sourceTree = SOURCE_ROOT; };
 		BF2F6E0D16D2BA8B00A899A1 /* upvote_colour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upvote_colour.png; sourceTree = "<group>"; };
 		BF2F6E0E16D2BA8B00A899A1 /* upvote_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upvote_bw.png; sourceTree = "<group>"; };
+		BF2F6E1316D2E01D00A899A1 /* jquery.cookie.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.cookie.js; sourceTree = "<group>"; };
 		BF41460C16CC5C8A00AD69AA /* statusicon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = statusicon.tiff; sourceTree = "<group>"; };
 		BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusicon@2x.tiff"; sourceTree = "<group>"; };
 		BF41461016CC5D2200AD69AA /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -225,6 +222,7 @@
 		BF2F6DC516D2389B00A899A1 /* javascripts */ = {
 			isa = PBXGroup;
 			children = (
+				BF2F6E1316D2E01D00A899A1 /* jquery.cookie.js */,
 				BF2F6DC616D2389B00A899A1 /* app.js */,
 				BF2F6DC716D2389B00A899A1 /* foundation.min.js */,
 				BF2F6DC816D2389B00A899A1 /* jquery.foundation.accordion.js */,

@@ -23,7 +23,12 @@
       var thing = $(t.target);
       var song = $(t.target).attr('id');
       thing.attr('src', '/upvote_colour.png');
-      thing.parent.attr('class', '');
+      if (typeof ($.cookie(song)) != "undefined") {
+         alert('Already upvoted!');
+      } else {
+        $.cookie(song, '1', { expires: 1 });
+        $.get('/upvote/' + song);
+      }
     })
   });
 
@@ -37,7 +42,3 @@
   }
 
 })(jQuery, this);
-
-function vote(track){
-  $('#' + track).attr('src', '/upvote_colour.png');
-}
