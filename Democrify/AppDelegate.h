@@ -2,6 +2,7 @@
 #import <CocoaLibSpotify/CocoaLibSpotify.h>
 
 NSString *getNextTrack();
+void setResourcePath(NSString* path);
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, SPSessionDelegate> {
 @private

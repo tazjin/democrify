@@ -9,12 +9,13 @@ module Queue where
 import           Acid
 import           Control.Applicative ((<$>))
 import           Control.Concurrent
+import           Control.Monad.IO.Class (liftIO)
 import           Data.Acid
 import           Data.Acid.Advanced  (query', update')
 import           Data.Data           (Data, Typeable)
 import           Data.IORef
 import qualified Data.Sequence       as SQ
-import           Data.Text           (Text)
+import           Data.Text           (Text, unpack)
 import           HSObjC
 import           System.Directory    (createDirectoryIfMissing,
                                       getHomeDirectory)
@@ -26,6 +27,16 @@ initialPlayQueue = PlayQueue SQ.empty
 
 playQueue :: IORef (AcidState PlayQueue)
 playQueue = unsafePerformIO $ newIORef undefined
+
+resourcePath :: IORef FilePath
+resourcePath = unsafePerformIO $ newIORef ""
+
+setResourcePath :: Id -> IO ()
+setResourcePath p = do
+    runId $ do
+        path <- fromId p
+        liftIO $ writeIORef resourcePath $ unpack path
+    return ()
 
 -- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist
 statePath :: IO FilePath
@@ -65,4 +76,5 @@ getNextTrack = do
     next <- update' acid GetQueueHead
     runId $ return $ tId next
 
-foreign export ccall getNextTrack :: IO Id
+foreign export ccall getNextTrack    :: IO Id
+foreign export ccall setResourcePath :: Id -> IO ()

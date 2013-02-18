@@ -35,7 +35,7 @@ module HSObjC
      makeTarget, Action,
      setObjectValue, objectValue,
      setEnabled,
-     (#),
+     (#)
     ) where
 
 import Foreign hiding (newForeignPtr)

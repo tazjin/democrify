@@ -49,6 +49,7 @@
 	NSString *userAgent = [[[NSBundle mainBundle] infoDictionary] valueForKey:(__bridge NSString *)kCFBundleIdentifierKey];
 	NSData *appKey = [NSData dataWithBytes:&g_appkey length:g_appkey_size];
 
+    
 	NSError *error = nil;
 	[SPSession initializeSharedSessionWithApplicationKey:appKey
 											   userAgent:userAgent
@@ -70,6 +71,8 @@
 -(void)awakeFromNib {
     NSBundle *bundle = [NSBundle mainBundle];
 
+    setResourcePath([bundle resourcePath]);
+    
     // load login sheet image
     NSImage *democriIconImage = [[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"democrify" ofType:@"png"]];
     [democriIcon setImage:democriIconImage];

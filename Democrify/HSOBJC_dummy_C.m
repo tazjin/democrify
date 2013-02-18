@@ -33,6 +33,11 @@ NSString *getNextTrack()
     return nil;
 }
 
+void setResourcePath(NSString *path)
+{
+    return;
+}
+
 
 id getMethod(HSValue *controller, NSString *methodName)
 {
