@@ -3,7 +3,7 @@
 	[
 		{
 			"path": "/Users/vincent/Source/democrify",
-            "file_exclude_patterns": ["*.hi", "*.o"]
+            "file_exclude_patterns": ["*.hi", "*.o", "*stub*", "*.c", "*.pch", "*.png", "*.icns"]
 		}
 	]
 }
