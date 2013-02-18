@@ -18,13 +18,14 @@
     $.fn.foundationClearing         ? $doc.foundationClearing() : null;
 
     $.fn.placeholder                ? $('input, textarea').placeholder() : null;
-  });
 
-  // UNCOMMENT THE LINE YOU WANT BELOW IF YOU WANT IE8 SUPPORT AND ARE USING .block-grids
-  // $('.block-grid.two-up>li:nth-child(2n+1)').css({clear: 'both'});
-  // $('.block-grid.three-up>li:nth-child(3n+1)').css({clear: 'both'});
-  // $('.block-grid.four-up>li:nth-child(4n+1)').css({clear: 'both'});
-  // $('.block-grid.five-up>li:nth-child(5n+1)').css({clear: 'both'});
+    $('body').on('touchend tap click', '.vb', function(t){
+      var thing = $(t.target);
+      var song = $(t.target).attr('id');
+      thing.attr('src', '/upvote_colour.png');
+      thing.parent.attr('class', '');
+    })
+  });
 
   // Hide address bar on mobile devices (except if #hash present, so we don't mess up deep linking).
   if (Modernizr.touch && !window.location.hash) {
@@ -36,3 +37,7 @@
   }
 
 })(jQuery, this);
+
+function vote(track){
+  $('#' + track).attr('src', '/upvote_colour.png');
+}

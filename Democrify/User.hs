@@ -6,7 +6,8 @@ import           Control.Applicative   (optional, (<$>))
 import           Control.Monad         (msum)
 import           Data.ByteString.Char8 (ByteString)
 import           Data.IORef
-import           Data.Text             (Text, append)
+import           Data.Text             (Text)
+import qualified Data.Text as T
 import           Happstack.Server
 import           System.IO.Unsafe      (unsafePerformIO)
 import           Control.Monad.IO.Class (liftIO)
@@ -41,6 +42,7 @@ defaultLayout  title headers body = ok $ toResponse $
     H.html ! A.class_ "no-js" $ do
         H.head $ do
             H.title (H.toHtml title)
+            H.meta ! A.name "apple-mobile-web-app-capable" ! A.content "yes"
             H.meta ! A.name "viewport" ! A.content "width=device-width, user-scalable=no"
             -- Stylesheets
             H.link ! A.href "foundation.min.css" ! A.rel "stylesheet"
@@ -77,11 +79,12 @@ queueView = do
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
                     H.div ! A.class_ "two columns mobile-one" $
-                        H.a ! A.href (toValue $ append "/vote/" tId) $
-                            H.img ! A.src "http://placehold.it/80x80&text=UPVOTE"
+                        H.a ! A.class_ "vb"  $ -- ! A.onclick (toValue $ T.concat ["vote('", tId, "')"])
+                            H.img ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
                     H.div ! A.class_ "ten columns trackitem" $ do
                         H.span ! A.class_ "track" $ do
                             toHtml track
+                        H.br
                         H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
                                                         toHtml artist
                 H.hr)

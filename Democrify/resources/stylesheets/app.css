@@ -1,6 +1,6 @@
 /* Artfully masterminded by ZURB  */
 
-/* -------------------------------------------------- 
+/* --------------------------------------------------
    Table of Contents
 -----------------------------------------------------
 :: Shared Styles
@@ -25,10 +25,15 @@
 .artist {
     font-style: italic;
     font-weight: light;
+    font-size: 15px;
 }
 
 .oh-no {
     font-size: 18;
+}
+
+.vote {
+    width: 70px;
 }
 
 
