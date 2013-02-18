@@ -1582,14 +1582,6 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="811062312">
-						<reference key="NSMenu" ref="661934826"/>
-						<string key="NSTitle">Archive</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="35465992"/>
-						<reference key="NSMixedImage" ref="502551668"/>
-					</object>
 				</array>
 			</object>
 		</array>
@@ -2354,14 +2346,6 @@
 						<reference key="destination" ref="969873879"/>
 					</object>
 					<int key="connectionID">646</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">archiveButton:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="811062312"/>
-					</object>
-					<int key="connectionID">649</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3888,7 +3872,6 @@
 							<reference ref="387259685"/>
 							<reference ref="771509994"/>
 							<reference ref="102165426"/>
-							<reference ref="811062312"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4035,11 +4018,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">644</int>
 						<reference key="object" ref="102165426"/>
-						<reference key="parent" ref="661934826"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">647</int>
-						<reference key="object" ref="811062312"/>
 						<reference key="parent" ref="661934826"/>
 					</object>
 				</array>
@@ -4281,7 +4259,6 @@
 				<string key="641.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="642.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="644.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="647.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4306,7 +4283,6 @@
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="archiveButton:">id</string>
 						<string key="login:">id</string>
 						<string key="pauseButton:">id</string>
 						<string key="playButton:">id</string>
@@ -4314,10 +4290,6 @@
 						<string key="skipTrack:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="archiveButton:">
-							<string key="name">archiveButton:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="login:">
 							<string key="name">login:</string>
 							<string key="candidateClassName">id</string>
