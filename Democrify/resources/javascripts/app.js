@@ -19,6 +19,12 @@
 
     $.fn.placeholder                ? $('input, textarea').placeholder() : null;
 
+    //Check for all objects that have been voted on and turn the arrows orange
+    $.each($.cookie(), function(c, v){
+      $('#' + c).attr('src', '/upvote_colour.png');
+    });
+
+    // Attach the voting function to all voting objects
     $('body').on('touchend tap click', '.vb', function(t){
       var thing = $(t.target);
       var song = $(t.target).attr('id');
@@ -29,7 +35,9 @@
         $.cookie(song, '1', { expires: 1 });
         $.get('/upvote/' + song);
       }
-    })
+    });
+
+
   });
 
   // Hide address bar on mobile devices (except if #hash present, so we don't mess up deep linking).
