@@ -16,25 +16,6 @@
 		BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
 		BF2F6D8316D11C5700A899A1 /* CocoaLibSpotify.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
 		BF2F6D8516D16F3400A899A1 /* democrify.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D8416D16F3400A899A1 /* democrify.icns */; };
-		BF2F6DEA16D2389B00A899A1 /* app.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DC616D2389B00A899A1 /* app.js */; };
-		BF2F6DEB16D2389B00A899A1 /* foundation.min.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DC716D2389B00A899A1 /* foundation.min.js */; };
-		BF2F6DEC16D2389B00A899A1 /* jquery.foundation.accordion.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DC816D2389B00A899A1 /* jquery.foundation.accordion.js */; };
-		BF2F6DED16D2389B00A899A1 /* jquery.foundation.alerts.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DC916D2389B00A899A1 /* jquery.foundation.alerts.js */; };
-		BF2F6DEE16D2389B00A899A1 /* jquery.foundation.buttons.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DCA16D2389B00A899A1 /* jquery.foundation.buttons.js */; };
-		BF2F6DEF16D2389B00A899A1 /* jquery.foundation.clearing.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DCB16D2389B00A899A1 /* jquery.foundation.clearing.js */; };
-		BF2F6DF016D2389B00A899A1 /* jquery.foundation.forms.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DCC16D2389B00A899A1 /* jquery.foundation.forms.js */; };
-		BF2F6DF116D2389B00A899A1 /* jquery.foundation.joyride.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DCD16D2389B00A899A1 /* jquery.foundation.joyride.js */; };
-		BF2F6DF216D2389B00A899A1 /* jquery.foundation.magellan.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DCE16D2389B00A899A1 /* jquery.foundation.magellan.js */; };
-		BF2F6DF316D2389B00A899A1 /* jquery.foundation.mediaQueryToggle.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DCF16D2389B00A899A1 /* jquery.foundation.mediaQueryToggle.js */; };
-		BF2F6DF416D2389B00A899A1 /* jquery.foundation.navigation.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD016D2389B00A899A1 /* jquery.foundation.navigation.js */; };
-		BF2F6DF516D2389B00A899A1 /* jquery.foundation.orbit.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD116D2389B00A899A1 /* jquery.foundation.orbit.js */; };
-		BF2F6DF616D2389B00A899A1 /* jquery.foundation.reveal.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD216D2389B00A899A1 /* jquery.foundation.reveal.js */; };
-		BF2F6DF716D2389B00A899A1 /* jquery.foundation.tabs.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD316D2389B00A899A1 /* jquery.foundation.tabs.js */; };
-		BF2F6DF816D2389B00A899A1 /* jquery.foundation.tooltips.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD416D2389B00A899A1 /* jquery.foundation.tooltips.js */; };
-		BF2F6DF916D2389B00A899A1 /* jquery.foundation.topbar.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD516D2389B00A899A1 /* jquery.foundation.topbar.js */; };
-		BF2F6DFA16D2389B00A899A1 /* jquery.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD616D2389B00A899A1 /* jquery.js */; };
-		BF2F6DFB16D2389B00A899A1 /* jquery.placeholder.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD716D2389B00A899A1 /* jquery.placeholder.js */; };
-		BF2F6DFC16D2389B00A899A1 /* modernizr.foundation.js in Sources */ = {isa = PBXBuildFile; fileRef = BF2F6DD816D2389B00A899A1 /* modernizr.foundation.js */; };
 		BF2F6DFE16D2389B00A899A1 /* app.css in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6DDB16D2389B00A899A1 /* app.css */; };
 		BF2F6DFF16D2389B00A899A1 /* foundation.css in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6DDC16D2389B00A899A1 /* foundation.css */; };
 		BF2F6E0016D2389B00A899A1 /* foundation.min.css in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6DDD16D2389B00A899A1 /* foundation.min.css */; };
@@ -45,6 +26,8 @@
 		BF2F6E0616D23A3F00A899A1 /* modernizr.foundation.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DD816D2389B00A899A1 /* modernizr.foundation.js */; };
 		BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DDB16D2389B00A899A1 /* app.css */; };
 		BF2F6E0816D23A3F00A899A1 /* foundation.min.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DDD16D2389B00A899A1 /* foundation.min.css */; };
+		BF2F6E0B16D2A29000A899A1 /* democrify_small.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6E0A16D2A29000A899A1 /* democrify_small.png */; };
+		BF2F6E0C16D2A29A00A899A1 /* democrify_small.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6E0A16D2A29000A899A1 /* democrify_small.png */; };
 		BF41460E16CC5C8A00AD69AA /* statusicon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = BF41460C16CC5C8A00AD69AA /* statusicon.tiff */; };
 		BF41460F16CC5C8A00AD69AA /* statusicon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */; };
 		BF41461216CC5D2200AD69AA /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF41461016CC5D2200AD69AA /* AudioUnit.framework */; };
@@ -79,6 +62,7 @@
 				BF2F6E0516D23A3F00A899A1 /* jquery.placeholder.js in CopyFiles */,
 				BF2F6E0616D23A3F00A899A1 /* modernizr.foundation.js in CopyFiles */,
 				BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */,
+				BF2F6E0C16D2A29A00A899A1 /* democrify_small.png in CopyFiles */,
 				BF2F6E0816D23A3F00A899A1 /* foundation.min.css in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,6 +107,7 @@
 		BF2F6DDB16D2389B00A899A1 /* app.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = app.css; sourceTree = "<group>"; };
 		BF2F6DDC16D2389B00A899A1 /* foundation.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = foundation.css; sourceTree = "<group>"; };
 		BF2F6DDD16D2389B00A899A1 /* foundation.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = foundation.min.css; sourceTree = "<group>"; };
+		BF2F6E0A16D2A29000A899A1 /* democrify_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = democrify_small.png; path = Democrify/democrify_small.png; sourceTree = SOURCE_ROOT; };
 		BF41460C16CC5C8A00AD69AA /* statusicon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = statusicon.tiff; sourceTree = "<group>"; };
 		BF41460D16CC5C8A00AD69AA /* statusicon@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusicon@2x.tiff"; sourceTree = "<group>"; };
 		BF41461016CC5D2200AD69AA /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -221,6 +206,7 @@
 		BF2F6DB516D2389B00A899A1 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF2F6E0916D2A27C00A899A1 /* images */,
 				BF2F6DC516D2389B00A899A1 /* javascripts */,
 				BF2F6DDA16D2389B00A899A1 /* stylesheets */,
 			);
@@ -262,6 +248,14 @@
 				BF2F6DDD16D2389B00A899A1 /* foundation.min.css */,
 			);
 			path = stylesheets;
+			sourceTree = "<group>";
+		};
+		BF2F6E0916D2A27C00A899A1 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				BF2F6E0A16D2A29000A899A1 /* democrify_small.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		BF41461416CCE8B400AD69AA /* Other Sources */ = {
@@ -352,6 +346,7 @@
 				BF2F6DFE16D2389B00A899A1 /* app.css in Resources */,
 				BF2F6DFF16D2389B00A899A1 /* foundation.css in Resources */,
 				BF2F6E0016D2389B00A899A1 /* foundation.min.css in Resources */,
+				BF2F6E0B16D2A29000A899A1 /* democrify_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,25 +376,6 @@
 				50EECAF315CAA82C006E54FA /* AppDelegate.m in Sources */,
 				BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */,
 				BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */,
-				BF2F6DEA16D2389B00A899A1 /* app.js in Sources */,
-				BF2F6DEB16D2389B00A899A1 /* foundation.min.js in Sources */,
-				BF2F6DEC16D2389B00A899A1 /* jquery.foundation.accordion.js in Sources */,
-				BF2F6DED16D2389B00A899A1 /* jquery.foundation.alerts.js in Sources */,
-				BF2F6DEE16D2389B00A899A1 /* jquery.foundation.buttons.js in Sources */,
-				BF2F6DEF16D2389B00A899A1 /* jquery.foundation.clearing.js in Sources */,
-				BF2F6DF016D2389B00A899A1 /* jquery.foundation.forms.js in Sources */,
-				BF2F6DF116D2389B00A899A1 /* jquery.foundation.joyride.js in Sources */,
-				BF2F6DF216D2389B00A899A1 /* jquery.foundation.magellan.js in Sources */,
-				BF2F6DF316D2389B00A899A1 /* jquery.foundation.mediaQueryToggle.js in Sources */,
-				BF2F6DF416D2389B00A899A1 /* jquery.foundation.navigation.js in Sources */,
-				BF2F6DF516D2389B00A899A1 /* jquery.foundation.orbit.js in Sources */,
-				BF2F6DF616D2389B00A899A1 /* jquery.foundation.reveal.js in Sources */,
-				BF2F6DF716D2389B00A899A1 /* jquery.foundation.tabs.js in Sources */,
-				BF2F6DF816D2389B00A899A1 /* jquery.foundation.tooltips.js in Sources */,
-				BF2F6DF916D2389B00A899A1 /* jquery.foundation.topbar.js in Sources */,
-				BF2F6DFA16D2389B00A899A1 /* jquery.js in Sources */,
-				BF2F6DFB16D2389B00A899A1 /* jquery.placeholder.js in Sources */,
-				BF2F6DFC16D2389B00A899A1 /* modernizr.foundation.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

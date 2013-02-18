@@ -10,7 +10,6 @@ import           Acid
 import           Control.Applicative ((<$>))
 import           Control.Concurrent
 import           Data.Acid
-import           Data.Acid.Advanced  (query', update')
 import           Data.Data           (Data, Typeable)
 import           Data.IORef
 import qualified Data.Sequence       as SQ
@@ -63,7 +62,7 @@ testQueue = PlayQueue $ SQ.fromList
 getNextTrack :: IO Id
 getNextTrack = do
     acid <- readIORef playQueue
-    next <- update' acid GetQueueHead
+    next <- update acid GetQueueHead
     runId $ return $ tId next
 
 foreign export ccall getNextTrack    :: IO Id
