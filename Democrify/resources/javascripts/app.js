@@ -25,12 +25,12 @@
     });
 
     // Attach the voting function to all voting objects
-    $('body').on('touchend tap click', '.vb', function(t){
+    $('body').on('click touchstart', '.vb', function(t){
       var thing = $(t.target);
       var song = $(t.target).attr('id');
       thing.attr('src', '/upvote_colour.png');
       if (typeof ($.cookie(song)) != "undefined") {
-         alert('Already upvoted!');
+         void(0);
       } else {
         $.cookie(song, '1', { expires: 1 });
         $.get('/upvote/' + song);

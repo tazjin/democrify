@@ -39,7 +39,7 @@ defaultLayout :: Text     -- ^ Title
               -> H.Html   -- ^ Body
               -> ServerPart Response
 defaultLayout  title headers body = ok $ toResponse $
-    H.html ! A.class_ "no-js" $ do
+    H.html $ do
         H.head $ do
             H.title (H.toHtml title)
             H.meta ! A.name "apple-mobile-web-app-capable" ! A.content "yes"
@@ -48,7 +48,6 @@ defaultLayout  title headers body = ok $ toResponse $
             H.link ! A.href "foundation.min.css" ! A.rel "stylesheet"
             H.link ! A.href "app.css" ! A.rel "stylesheet"
             -- Scripts
-            H.script ! A.src "/modernizr.foundation.js" $ mempty
             H.script ! A.src "/foundation.min.js" $ mempty
             H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/app.js" $ mempty
@@ -80,7 +79,7 @@ queueView = do
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
                     H.div ! A.class_ "two columns mobile-one" $
-                        H.a ! A.class_ "vb"  $ -- ! A.onclick (toValue $ T.concat ["vote('", tId, "')"])
+                        H.a ! A.class_ "vb" ! A.onclick "void(0)" $
                             H.img ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
                     H.div ! A.class_ "ten columns trackitem" $ do
                         H.span ! A.class_ "track" $ do
@@ -94,12 +93,14 @@ queueView = do
                     H.img ! A.src "http://placehold.it/80x80&text=:("
                 H.div ! A.class_ "ten columns trackitem" $ do
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
+        H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ H.footer $ do
+            H.hr
+            H.p ! A.style "text-align:center;" $ "Powered by Democrify"
 
 upvoteHandler :: Text -> ServerPart Response
 upvoteHandler song = do
     acid <- liftIO $ readIORef playQueue
     queue <- update' acid $ UpvoteTrack song
-    liftIO $ putStrLn $ "Upvoted " ++ (T.unpack song)
     ok $ toResponse $ T.append "Upvoted " song
 
 -- * Happstack things
