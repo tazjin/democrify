@@ -21,7 +21,7 @@
     });
 
     // Attach the voting function to all voting objects
-    $('body').on('click touchstart', '.vote', function(t){
+    $('body').on('click', '.vote', function(t){
       var thing = $(t.target);
       var song = $(t.target).attr('id');
       thing.attr('src', '/upvote_colour.png');

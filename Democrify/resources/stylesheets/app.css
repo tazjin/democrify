@@ -34,7 +34,8 @@
 
 .vote {
     width: 70px;
-    cursor: pointer;
+    z-index: 9001;
+    position: relative;
 }
 
 

@@ -39,7 +39,7 @@ defaultLayout :: Text     -- ^ Title
               -> H.Html   -- ^ Body
               -> ServerPart Response
 defaultLayout  title headers body = ok $ toResponse $
-    H.html $ do
+    H.docTypeHtml $ do
         H.head $ do
             H.title (H.toHtml title)
             H.meta ! A.name "apple-mobile-web-app-capable" ! A.content "yes"
