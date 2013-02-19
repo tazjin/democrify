@@ -79,8 +79,7 @@ queueView = do
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
                     H.div ! A.class_ "two columns mobile-one" $
-                        H.a ! A.class_ "vb" ! A.onclick "void(0)" $
-                            H.img ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
+                        H.img ! A.onclick "void(0)" ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
                     H.div ! A.class_ "ten columns trackitem" $ do
                         H.span ! A.class_ "track" $ do
                             toHtml track
