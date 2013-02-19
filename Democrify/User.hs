@@ -23,6 +23,7 @@ import Data.Monoid (mempty)
 -- Democrify modules
 import Acid
 import Queue
+import WebAPI
 
 -- *Helpers
 -- |This contains a global IORef to the Resource folder inside the Application bundle. All web assets are stored in Resources/web
@@ -115,11 +116,25 @@ displayCurrentTrack = do
         H.div ! A.class_ "ten columns" $ content
 
 
+-- |Upvotes a song based on the ID
 upvoteHandler :: Text -> ServerPart Response
 upvoteHandler song = do
     acid <- liftIO $ readIORef playQueue
-    queue <- update' acid $ UpvoteTrack song
+    update' acid $ UpvoteTrack song
     ok $ toResponse $ T.append "Upvoted " song
+
+-- |Adds a song to the queue based on its ID. If the song cannot be
+--  found a 404 will be returned, if the song is already in the queue
+--  it will be upvoted.
+addHandler :: Text -> ServerPart Response
+addHandler trackId = do
+    track <- liftIO $ identifyTrack trackId
+    case track of
+        Nothing  -> notFound $ toResponse $ ("notfound" :: Text)
+        (Just t) -> do acid <- liftIO $ readIORef playQueue
+                       update' acid $ AddTrackToQueue t
+                       ok $ toResponse $ ("ok" :: Text)
+
 
 -- * Happstack things
 
@@ -128,6 +143,7 @@ democrify :: ServerPart Response
 democrify = liftIO webResources >>= \resPath -> msum
     [ nullDir >> queueView
     , dir "upvote" $ path $ \song -> upvoteHandler song
+    , dir "add" $ path $ \song -> addHandler song
     , serveDirectory DisableBrowsing [] resPath
     ]
 
