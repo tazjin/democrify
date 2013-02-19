@@ -39,6 +39,7 @@ data SpotifyTrack = SpotifyTrack {
     tId    :: Text -- Track ID in Spotify
 } deriving (Read, Show, Data, Typeable)
 
+
 instance Ord SpotifyTrack where
     -- |Reverse sort order. Sorry :)
     (SpotifyTrack v1 _ _ _) `compare` (SpotifyTrack v2 _ _ _) = v2 `compare` v1
@@ -85,12 +86,20 @@ instance SafeCopy PlayQueue where
 rickroll :: SpotifyTrack
 rickroll = SpotifyTrack 0 "Rick Astley" "Never Gonna Give You Up" "6JEK0CvvjDjjMUBFoXShNZ"
 
+-- |Alternative "-roll"
+polkaroll :: SpotifyTrack
+polkaroll = SpotifyTrack 0 "Säkkijärven Polka" "Solistiyhtye Suomi" "5CqLCUgOFplIyscaoSNkPm"
+
+-- |Alternative "-roll"
+psyroll :: SpotifyTrack
+psyroll = SpotifyTrack 0 "Psy" "Gangnam Style" "1R2SZUOGJqqBiLuvwKOT2Y"
+
 -- |Gets the next track without modifying the queue.
 --  No use-case yet but it could come in handy? :]
 peekNext :: Query PlayQueue SpotifyTrack
 peekNext = head' <$> queue <$> ask
     where
-        head' s = if SQ.null s then rickroll else SQ.index s 0
+        head' s = if SQ.null s then polkaroll else SQ.index s 0
 
 -- |Gets the entire play queue
 getQueue :: Query PlayQueue (Seq SpotifyTrack)
