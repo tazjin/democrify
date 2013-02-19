@@ -28,7 +28,8 @@
       if (typeof ($.cookie(song)) != "undefined") {
          void(0);
       } else {
-        $.cookie(song, '1', { expires: 1 });
+        var now = new Date();
+        $.cookie(song, '1', {expires : now.addHours(1) });
         $.get('/upvote/' + song);
       }
     });

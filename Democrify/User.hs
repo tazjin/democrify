@@ -58,7 +58,7 @@ defaultLayout  title headers body = ok $ toResponse $
                     H.li $
                         H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;"
                     H.li ! A.class_ "name" $
-                        H.h1 $ H.a ! A.href "#" $ toHtml ("Democrify" :: Text)
+                        H.h1 $ H.a $ toHtml ("Democrify" :: Text)
                     H.li ! A.class_ "toggle-topbar" $
                         H.a ! A.href "#" $ mempty
                 H.section $ do
@@ -103,16 +103,16 @@ displayCurrentTrack = do
     current <- readIORef currentTrack
     let content = case current of
                     Nothing -> do
-                        H.span ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
+                        H.p ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
                     Just SpotifyTrack{..} -> do
                         H.span ! A.class_ "track" $ toHtml track
                         H.br
                         H.span ! A.class_ "artist" $ do toHtml ("by " :: Text)
                                                         toHtml artist
-    return $ H.div ! A.class_ "row" $ do
-        H.div ! A.class_ "two columns mobile-one current" $
+    return $ H.div ! A.class_ "row current" $ do
+        H.div ! A.class_ "two columns mobile-one" $
             H.img ! A.src "/current.gif"
-        H.div ! A.class_ "ten columns current" $ content
+        H.div ! A.class_ "ten columns" $ content
 
 
 upvoteHandler :: Text -> ServerPart Response
