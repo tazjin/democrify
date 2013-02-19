@@ -12,6 +12,8 @@
 		50EECAF015CAA82C006E54FA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAEE15CAA82C006E54FA /* Credits.rtf */; };
 		50EECAF315CAA82C006E54FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50EECAF215CAA82C006E54FA /* AppDelegate.m */; };
 		50EECAF615CAA82C006E54FA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAF415CAA82C006E54FA /* MainMenu.xib */; };
+		BF09F95216D39680002E2FDA /* current.gif in Resources */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
+		BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
 		BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D7D16CEA5B600A899A1 /* Acid.hs */; };
 		BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
 		BF2F6D8316D11C5700A899A1 /* CocoaLibSpotify.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
@@ -63,6 +65,7 @@
 				BF2F6E1116D2BA9B00A899A1 /* upvote_colour.png in CopyFiles */,
 				BF2F6E1216D2BA9E00A899A1 /* upvote_bw.png in CopyFiles */,
 				BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */,
+				BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */,
 				BF2F6E1516D2E02800A899A1 /* jquery.cookie.js in CopyFiles */,
 				BF2F6E0C16D2A29A00A899A1 /* democrify_small.png in CopyFiles */,
 				BF2F6E0816D23A3F00A899A1 /* foundation.min.css in CopyFiles */,
@@ -84,6 +87,7 @@
 		50EECAF115CAA82C006E54FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		50EECAF215CAA82C006E54FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		50EECAF515CAA82C006E54FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BF09F95116D39680002E2FDA /* current.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = current.gif; sourceTree = "<group>"; };
 		BF2F6D7D16CEA5B600A899A1 /* Acid.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Acid.hs; path = Democrify/Acid.hs; sourceTree = "<group>"; };
 		BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLibSpotify.framework; path = ../../../../Library/Frameworks/CocoaLibSpotify.framework; sourceTree = "<group>"; };
 		BF2F6D8416D16F3400A899A1 /* democrify.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = democrify.icns; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 		BF2F6E0916D2A27C00A899A1 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BF09F95116D39680002E2FDA /* current.gif */,
 				BF2F6E0D16D2BA8B00A899A1 /* upvote_colour.png */,
 				BF2F6E0E16D2BA8B00A899A1 /* upvote_bw.png */,
 				BF2F6E0A16D2A29000A899A1 /* democrify_small.png */,
@@ -357,6 +362,7 @@
 				BF2F6E0B16D2A29000A899A1 /* democrify_small.png in Resources */,
 				BF2F6E0F16D2BA8B00A899A1 /* upvote_colour.png in Resources */,
 				BF2F6E1016D2BA8B00A899A1 /* upvote_bw.png in Resources */,
+				BF09F95216D39680002E2FDA /* current.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

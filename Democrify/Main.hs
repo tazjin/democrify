@@ -25,7 +25,6 @@ setResourcePath p = do
         liftIO $ writeIORef resourcePath $ unpack path
     return ()
 
-
 runHaskellPart :: IO ()
 runHaskellPart = do
     path <- statePath

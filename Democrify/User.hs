@@ -72,17 +72,19 @@ defaultLayout  title headers body = ok $ toResponse $
 queueView :: ServerPart Response
 queueView = do
     acid <- liftIO $ readIORef playQueue
+    current <- liftIO $ displayCurrentTrack
     queue <- query' acid GetQueue
     defaultLayout "Democrify - Queue" [] $ do
         H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
+            H.br
+            current
             H.br
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
                     H.div ! A.class_ "two columns mobile-one" $
                         H.img ! A.onclick "void(0)" ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
                     H.div ! A.class_ "ten columns trackitem" $ do
-                        H.span ! A.class_ "track" $ do
-                            toHtml track
+                        H.span ! A.class_ "track" $ toHtml track
                         H.br
                         H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
                                                         toHtml artist
@@ -95,6 +97,23 @@ queueView = do
         H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ H.footer $ do
             H.hr
             H.p ! A.style "text-align:center;" $ "Powered by Democrify"
+
+displayCurrentTrack :: IO H.Html
+displayCurrentTrack = do
+    current <- readIORef currentTrack
+    let content = case current of
+                    Nothing -> do
+                        H.span ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
+                    Just SpotifyTrack{..} -> do
+                        H.span ! A.class_ "track" $ toHtml track
+                        H.br
+                        H.span ! A.class_ "artist" $ do toHtml ("by " :: Text)
+                                                        toHtml artist
+    return $ H.div ! A.class_ "row" $ do
+        H.div ! A.class_ "two columns mobile-one current" $
+            H.img ! A.src "/current.gif"
+        H.div ! A.class_ "ten columns current" $ content
+
 
 upvoteHandler :: Text -> ServerPart Response
 upvoteHandler song = do

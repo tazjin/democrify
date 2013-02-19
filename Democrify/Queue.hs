@@ -18,6 +18,7 @@ import           HSObjC
 import           System.Directory    (createDirectoryIfMissing,
                                       getHomeDirectory)
 import           System.IO.Unsafe    (unsafePerformIO)
+import           WebAPI
 
 
 initialPlayQueue :: PlayQueue
@@ -25,6 +26,9 @@ initialPlayQueue = PlayQueue SQ.empty
 
 playQueue :: IORef (AcidState PlayQueue)
 playQueue = unsafePerformIO $ newIORef undefined
+
+currentTrack :: IORef (Maybe SpotifyTrack)
+currentTrack = unsafePerformIO $ newIORef Nothing
 
 
 -- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist
@@ -65,6 +69,14 @@ getNextTrack :: IO Id
 getNextTrack = do
     acid <- readIORef playQueue
     next <- update acid GetQueueHead
+    setCurrentTrack $ tId next
     runId $ return $ tId next
+
+-- |Sets the currently playing track by requesting it from the Spotify Lookup API
+--  based on the track ID. If the track is not found no track will be set.
+setCurrentTrack :: Text -> IO ()
+setCurrentTrack track = do
+    song <- identifyTrack track
+    writeIORef currentTrack song
 
 foreign export ccall getNextTrack    :: IO Id
