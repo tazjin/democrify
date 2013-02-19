@@ -14,6 +14,8 @@
 		50EECAF615CAA82C006E54FA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAF415CAA82C006E54FA /* MainMenu.xib */; };
 		BF09F95216D39680002E2FDA /* current.gif in Resources */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
 		BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
+		BF09F95516D3ECE6002E2FDA /* addsong.js in Sources */ = {isa = PBXBuildFile; fileRef = BF09F95416D3ECE6002E2FDA /* addsong.js */; };
+		BF09F95816D3ECFB002E2FDA /* addsong.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95416D3ECE6002E2FDA /* addsong.js */; };
 		BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D7D16CEA5B600A899A1 /* Acid.hs */; };
 		BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
 		BF2F6D8316D11C5700A899A1 /* CocoaLibSpotify.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
@@ -64,6 +66,7 @@
 				BF2F6E0316D23A3F00A899A1 /* foundation.min.js in CopyFiles */,
 				BF2F6E1116D2BA9B00A899A1 /* upvote_colour.png in CopyFiles */,
 				BF2F6E1216D2BA9E00A899A1 /* upvote_bw.png in CopyFiles */,
+				BF09F95816D3ECFB002E2FDA /* addsong.js in CopyFiles */,
 				BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */,
 				BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */,
 				BF2F6E1516D2E02800A899A1 /* jquery.cookie.js in CopyFiles */,
@@ -88,6 +91,7 @@
 		50EECAF215CAA82C006E54FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		50EECAF515CAA82C006E54FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BF09F95116D39680002E2FDA /* current.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = current.gif; sourceTree = "<group>"; };
+		BF09F95416D3ECE6002E2FDA /* addsong.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = addsong.js; sourceTree = "<group>"; };
 		BF2F6D7D16CEA5B600A899A1 /* Acid.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Acid.hs; path = Democrify/Acid.hs; sourceTree = "<group>"; };
 		BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLibSpotify.framework; path = ../../../../Library/Frameworks/CocoaLibSpotify.framework; sourceTree = "<group>"; };
 		BF2F6D8416D16F3400A899A1 /* democrify.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = democrify.icns; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 		BF2F6DC516D2389B00A899A1 /* javascripts */ = {
 			isa = PBXGroup;
 			children = (
+				BF09F95416D3ECE6002E2FDA /* addsong.js */,
 				BF2F6E1316D2E01D00A899A1 /* jquery.cookie.js */,
 				BF2F6DC616D2389B00A899A1 /* app.js */,
 				BF2F6DC716D2389B00A899A1 /* foundation.min.js */,
@@ -392,6 +397,7 @@
 				50EECAF315CAA82C006E54FA /* AppDelegate.m in Sources */,
 				BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */,
 				BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */,
+				BF09F95516D3ECE6002E2FDA /* addsong.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

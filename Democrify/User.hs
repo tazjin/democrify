@@ -115,6 +115,31 @@ displayCurrentTrack = do
             H.img ! A.src "/current.gif"
         H.div ! A.class_ "ten columns" $ content
 
+-- |Page that displays the song adding interface
+addSongView :: ServerPart Response
+addSongView =
+    defaultLayout "Democrify - Add song"
+                  [ H.script ! A.src "/addsong.js" $ mempty ] $ do
+        H.style $ toHtml ("body{background-color: #222 !important;}" :: Text)
+        H.div ! A.class_ "row collapse" $ do
+            H.div ! A.class_ "ten mobile-two columns" $
+                H.input ! A.id "search" ! A.type_ "text"
+            H.div ! A.class_ "one mobile-one columns" $
+                H.a ! A.class_ "button expand postfix" ! A.id "searchbutton"  $
+                    toHtml ("Search" :: Text)
+            H.div ! A.class_ "one mobile-one columns" $ H.form ! A.class_ "custom" $ do
+                H.select ! A.style "display:none;" ! A.id "searchtype" $ do
+                    H.option ! A.selected "" $ toHtml ("Track" :: Text)
+                    H.option $ toHtml ("Artist" :: Text)
+                    H.option $ toHtml ("Album" :: Text)
+                H.div ! A.class_ "custom dropdown" $ do
+                    H.a ! A.href "#" ! A.class_ "selector" $ mempty
+                    H.a ! A.href "#" ! A.class_ "current" $ toHtml ("Track" :: Text)
+                    H.ul $ do
+                        H.li $ toHtml ("Track" :: Text)
+                        H.li $ toHtml ("Artist" :: Text)
+                        H.li $ toHtml ("Album" :: Text)
+        H.div ! A.class_ "row" ! A.id "resultcontainer" ! A.class_ "twelve columns" $ mempty
 
 -- |Upvotes a song based on the ID
 upvoteHandler :: Text -> ServerPart Response
@@ -143,6 +168,7 @@ democrify :: ServerPart Response
 democrify = liftIO webResources >>= \resPath -> msum
     [ nullDir >> queueView
     , dir "upvote" $ path $ \song -> upvoteHandler song
+    , dir "add" $ nullDir >> addSongView
     , dir "add" $ path $ \song -> addHandler song
     , serveDirectory DisableBrowsing [] resPath
     ]
