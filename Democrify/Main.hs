@@ -28,7 +28,7 @@ setResourcePath p = do
 runHaskellPart :: IO ()
 runHaskellPart = do
     path <- statePath
-    bracket (openLocalStateFrom path testQueue)
+    bracket (openLocalStateFrom path initialPlayQueue)
             (createCheckpointAndClose)
             (\acid -> do createArchive acid
                          writeIORef playQueue acid

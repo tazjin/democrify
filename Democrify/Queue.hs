@@ -75,15 +75,6 @@ dbLoop n = do
     threadDelay 30000000
     dbLoop newN
 
-testQueue :: PlayQueue
-testQueue = PlayQueue $ SQ.fromList
-    [ SpotifyTrack 1 "Röyksopp" "Teppefall" "5jlvtJ8S9STmSGm56lu2LB"
-    , SpotifyTrack 1 "The Sounds" "It's So Easy" "6UXamUYDogS7rqGjZpwZ8p"
-    , SpotifyTrack 2 "Dominik Eulberg" "Offenbach - Original Mix" "0GgCVHoVoWXFkfpR0rnU50"
-    , SpotifyTrack 3 "Extrawelt" "Soopertrack" "5vIHGNhS9AH1aTiRgsHSna"
-    , SpotifyTrack 2 "Deadmau5" "Strobe" "4kJWtxDDNb9oAk3h7sX3N4"
-    , SpotifyTrack 1 "Oliver Koletzki feat. Fran" "Hypnotized - Original Version" "7rlBzRoOYEe9ByCOiv2vs9"]
-
 
 -- |Returns the Spotify ID for the next track and updates the 'currentTrack'-
 --  This is a prime example of what Haskell is not supposed to look like! :-)
