@@ -112,7 +112,7 @@ getQueueHead :: Update PlayQueue SpotifyTrack
 getQueueHead = do
     q@PlayQueue{..} <- get
     if SQ.null queue
-        then return rickroll
+        then return polkaroll
         else do put $ q { queue = SQ.drop 1 queue }
                 return $ SQ.index queue 0
 

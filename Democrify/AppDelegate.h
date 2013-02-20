@@ -7,6 +7,7 @@ void setResourcePath(NSString* path);
 @interface AppDelegate : NSObject <NSApplicationDelegate, SPSessionDelegate> {
 @private
     IBOutlet NSMenu *democriMenu;
+    IBOutlet NSMenu *playlistsMenu;
     IBOutlet NSImageView *democriIcon;
     
     NSStatusItem *democriItem;
@@ -16,6 +17,7 @@ void setResourcePath(NSString* path);
 	NSSecureTextField *__weak passwordField;
    
     NSObject *playObserver;
+
     
     SPPlaybackManager *playbackManager;
 
@@ -30,6 +32,8 @@ void setResourcePath(NSString* path);
 
 - (void)playTrack:(NSString *)trackId;
 - (void)updateMenu;
+- (void)updatePlaylists;
+- (void)loadPlaylistIntoQueue:(id)sender;
 
 - (IBAction)skipTrack:(id)sender;
 - (IBAction)playButton:(id)sender;

@@ -38,6 +38,11 @@ void setResourcePath(NSString *path)
     return;
 }
 
+void loadPlaylist(NSArray *tracks)
+{
+    return;
+}
+
 
 id getMethod(HSValue *controller, NSString *methodName)
 {

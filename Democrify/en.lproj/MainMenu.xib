@@ -1525,7 +1525,7 @@
 					<string key="NSFrameSize">{562, 152}</string>
 					<reference key="NSNextKeyView" ref="89654965"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
@@ -1555,6 +1555,38 @@
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="716395881">
+						<reference key="NSMenu" ref="661934826"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="466566148">
+						<reference key="NSMenu" ref="661934826"/>
+						<string key="NSTitle">Playlists</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+						<string key="NSAction">submenuAction:</string>
+						<object class="NSMenu" key="NSSubmenu" id="897507776">
+							<string key="NSTitle">Playlists</string>
+							<array class="NSMutableArray" key="NSMenuItems">
+								<object class="NSMenuItem" id="438144350">
+									<reference key="NSMenu" ref="897507776"/>
+									<string key="NSTitle">Item</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+							</array>
+						</object>
 					</object>
 					<object class="NSMenuItem" id="35525056">
 						<reference key="NSMenu" ref="661934826"/>
@@ -2346,6 +2378,14 @@
 						<reference key="destination" ref="969873879"/>
 					</object>
 					<int key="connectionID">646</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">playlistsMenu</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="897507776"/>
+					</object>
+					<int key="connectionID">654</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3872,6 +3912,8 @@
 							<reference ref="387259685"/>
 							<reference ref="771509994"/>
 							<reference ref="102165426"/>
+							<reference ref="466566148"/>
+							<reference ref="716395881"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4018,6 +4060,32 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">644</int>
 						<reference key="object" ref="102165426"/>
+						<reference key="parent" ref="661934826"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">650</int>
+						<reference key="object" ref="466566148"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="897507776"/>
+						</array>
+						<reference key="parent" ref="661934826"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">651</int>
+						<reference key="object" ref="897507776"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="438144350"/>
+						</array>
+						<reference key="parent" ref="466566148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">652</int>
+						<reference key="object" ref="438144350"/>
+						<reference key="parent" ref="897507776"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">653</int>
+						<reference key="object" ref="716395881"/>
 						<reference key="parent" ref="661934826"/>
 					</object>
 				</array>
@@ -4259,6 +4327,10 @@
 				<string key="641.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="642.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="644.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="650.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="651.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="652.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="653.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4275,7 +4347,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">649</int>
+			<int key="maxID">654</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4315,6 +4387,7 @@
 						<string key="democriIcon">NSImageView</string>
 						<string key="democriMenu">NSMenu</string>
 						<string key="passwordField">NSSecureTextField</string>
+						<string key="playlistsMenu">NSMenu</string>
 						<string key="userNameField">NSTextField</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
@@ -4330,6 +4403,10 @@
 						<object class="IBToOneOutletInfo" key="passwordField">
 							<string key="name">passwordField</string>
 							<string key="candidateClassName">NSSecureTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="playlistsMenu">
+							<string key="name">playlistsMenu</string>
+							<string key="candidateClassName">NSMenu</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="userNameField">
 							<string key="name">userNameField</string>

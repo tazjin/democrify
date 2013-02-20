@@ -10,16 +10,20 @@ import           Acid
 import           Control.Applicative ((<$>))
 import           Control.Concurrent
 import           Data.Acid
+import           Data.Acid.Advanced  (update')
 import           Data.Data           (Data, Typeable)
 import           Data.IORef
 import qualified Data.Sequence       as SQ
-import           Data.Text           (Text)
+import           Data.Text           (Text, unpack)
+import qualified Data.Text           as T
 import           HSObjC
 import           System.Directory    (createDirectoryIfMissing,
                                       getHomeDirectory)
 import           System.IO.Unsafe    (unsafePerformIO)
 import           WebAPI
-
+import Data.Maybe (isJust)
+import Control.Monad (forM, forM_)
+import           Control.Monad.IO.Class (liftIO)
 
 initialPlayQueue :: PlayQueue
 initialPlayQueue = PlayQueue SQ.empty
@@ -29,6 +33,24 @@ playQueue = unsafePerformIO $ newIORef undefined
 
 currentTrack :: IORef (Maybe SpotifyTrack)
 currentTrack = unsafePerformIO $ newIORef Nothing
+
+-- |This is supplised with the NSArray that contains all the NSStrings to the URLs.
+loadPlaylist :: Id -> IO ()
+loadPlaylist pl = do
+    acid <- readIORef playQueue
+    runId $ do
+        trackIds <- fromId pl
+        mTracks <- liftIO $ getTrackData trackIds
+        let tracks = map (\(Just t) -> t) $ filter isJust mTracks
+        forM_ tracks $ \t -> update' acid $ AddTrackToQueue t
+    return ()
+
+getTrackData :: [Text] -> IO [Maybe SpotifyTrack]
+getTrackData trackIds = forM (map (T.drop 14) trackIds) $ \t -> do
+    print t
+    track <- identifyTrack t
+    threadDelay 125000 -- Evade Web API querying limit. Should be done with libspotify as well but ICBA right now
+    return track
 
 
 -- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist
@@ -80,3 +102,4 @@ setCurrentTrack track = do
     writeIORef currentTrack song
 
 foreign export ccall getNextTrack    :: IO Id
+foreign export ccall loadPlaylist    :: Id -> IO ()

@@ -66,6 +66,7 @@
     //KVO current track
     [self.playbackManager addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
 
+
 }
 
 -(void)awakeFromNib {
@@ -85,6 +86,10 @@
     [democriItem setImage:democriStatusIcon];
     [democriItem setMenu:democriMenu];
     [democriMenu setAutoenablesItems:NO];
+    [playlistsMenu setAutoenablesItems:NO];
+    [playlistsMenu removeAllItems];
+    
+    [[democriMenu itemWithTitle:@"Playlists"] setEnabled:NO]; // No playlists before login!
     
     [[democriMenu itemWithTitle:@"Play"] setEnabled:NO]; //No play before login!
     [[democriMenu itemWithTitle:@"Pause"] setHidden:YES]; //No pause before play!
@@ -111,6 +116,11 @@
     [[democriMenu itemWithTitle:@"Play"] setEnabled:YES];
     [self updateMenu];
     [self.window close];
+    
+    // initialize playlists
+    [[democriMenu itemWithTitle:@"Playlists"] setEnabled:YES];
+
+    [self updatePlaylists];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error {
@@ -213,6 +223,45 @@
     }
 }
 
+- (void)updatePlaylists {
+
+    // load and display playlists in the submenu
+    SPSession *session = [SPSession sharedSession];
+
+    
+    [SPAsyncLoading waitUntilLoaded:session timeout:10.0 then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+        [SPAsyncLoading waitUntilLoaded:session.userPlaylists timeout:10.0 then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+            SPPlaylistContainer *container = [SPSession sharedSession].userPlaylists;
+            NSArray *playlists = container.flattenedPlaylists;
+            // ^These likely won't have been loaded yet.
+            [SPAsyncLoading waitUntilLoaded:playlists timeout:60.0 then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+                // Some playlists will have loaded by now. If the user has a lot of playlists and/or they have a lot of tracks, it'll take a lot longer than 10 seconds.
+                for (SPPlaylist *p in loadedItems){
+                    [playlistsMenu addItemWithTitle:p.name action:@selector(loadPlaylistIntoQueue:) keyEquivalent:@""];
+                    [[playlistsMenu itemWithTitle:p.name] setRepresentedObject:p];
+                    [[playlistsMenu itemWithTitle:p.name] setEnabled:YES];
+                }
+            }];
+        }];
+    }];
+}
+
+- (void)loadPlaylistIntoQueue:(id)sender {
+    SPPlaylist *p = [sender representedObject];
+
+    //get NSStrings from this stuff
+    NSMutableArray *tracksM = [NSMutableArray arrayWithCapacity:[p.items count]];
+    for (SPPlaylistItem *i in p.items){
+        if (i.itemURLType == SP_LINKTYPE_TRACK) {
+            NSString *iUrl = [i.itemURL absoluteString];
+            [tracksM addObject:iUrl];
+        }
+    }
+    
+    NSArray *tracks = [[NSArray alloc] initWithArray:tracksM];
+
+    loadPlaylist(tracks);
+}
 
 // Interface actions
 
