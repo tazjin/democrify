@@ -148,7 +148,7 @@ upvoteTrack t = do
 sortQueue :: Update PlayQueue ()
 sortQueue = do
     q@PlayQueue{..} <- get
-    put $ q { queue = SQ.unstableSort queue }
+    put $ q { queue = SQ.sort queue }
 
 -- * Acid state's nitty gritty details
 data PeekNext = PeekNext
