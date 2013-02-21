@@ -47,7 +47,6 @@ loadPlaylist pl = do
 
 getTrackData :: [Text] -> IO [Maybe SpotifyTrack]
 getTrackData trackIds = forM (map (T.drop 14) trackIds) $ \t -> do
-    print t
     track <- identifyTrack t
     threadDelay 125000 -- Evade Web API querying limit. Should be done with libspotify as well but ICBA right now
     return track
