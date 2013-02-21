@@ -181,7 +181,7 @@ democrify = liftIO webResources >>= \resPath -> msum
     , dir "add" $ nullDir >> addSongView
     , dir "add" $ path $ \song -> addHandler song
     , serveDirectory DisableBrowsing [] resPath
-    , dir "admin" $ host "localhost:8686" adminHandler
+    , dir "admin" $ nullDir >> host "localhost:8686" adminHandler
     , dir "admin" $ dir "vote" $ host "localhost:8686" $ path $ \song -> adminUpvoteHandler song
     , dir "admin" $ dir "delete" $ host "localhost:8686" $ path $ \song -> adminDeleteHandler song
     ]

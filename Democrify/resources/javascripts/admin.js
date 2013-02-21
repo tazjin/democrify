@@ -1,15 +1,16 @@
 $(function (){
     //Attach admin voting function
-    $('#adminc').on('click', '.next', function(t){
+    $('.next').click(function(t){
         var song = $(this).attr('id');
         $(this).attr('src', '/upvote_colour.png');
+        $(this).attr('style', 'width:80px;height:80px;')
         $.get('/admin/vote/' + song);
     });
 
     //Attach admin delete function
-    $('#adminc').on('click', '.delete', function(t){
+    $('.delete').click(function(t){
         var song = $(this).attr('id');
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
         $.get('/admin/delete/' + song);
     });
 });
