@@ -287,6 +287,10 @@
     [self updateMenu];
 }
 
+// Empty the queue
+- (IBAction)emptyQueue:(id)sender {
+    extEmptyQueue();
+}
 
 //Launch admin UI
 - (IBAction)adminUI:(id)sender {

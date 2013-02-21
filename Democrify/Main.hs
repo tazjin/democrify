@@ -7,7 +7,7 @@ import           Control.Exception      (bracket)
 import           Control.Monad.IO.Class (liftIO)
 import           Data.Acid
 import           Data.Acid.Local
-import           Data.IORef             (writeIORef)
+import           Data.IORef             (writeIORef, readIORef)
 import           Data.Text              (unpack)
 import           Foreign
 import           HSObjC
@@ -17,6 +17,12 @@ import           HSObjC
 import           Acid
 import           Queue
 import           User
+
+-- |Function to empty the queue from ObjC
+extEmptyQueue :: IO ()
+extEmptyQueue = do
+    acid <- readIORef playQueue
+    update acid EmptyQueue
 
 setResourcePath :: Id -> IO ()
 setResourcePath p = do
@@ -40,4 +46,5 @@ main = do
     forkIO runHaskellPart -- Start webserver
     c_NSApplicationMain 0 nullPtr -- Start Cocoa app
 
+foreign export ccall extEmptyQueue   :: IO ()
 foreign export ccall setResourcePath :: Id -> IO ()

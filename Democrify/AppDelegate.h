@@ -3,6 +3,8 @@
 
 NSString *getNextTrack();
 void setResourcePath(NSString* path);
+void extEmptyQueue();
+void loadPlaylist(NSArray *tracks);
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, SPSessionDelegate> {
 @private
@@ -39,6 +41,7 @@ void setResourcePath(NSString* path);
 - (IBAction)playButton:(id)sender;
 - (IBAction)pauseButton:(id)sender;
 - (IBAction)adminUI:(id)sender;
+- (IBAction)emptyQueue:(id)sender;
 
 #pragma mark -
 

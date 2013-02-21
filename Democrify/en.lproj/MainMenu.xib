@@ -1598,9 +1598,17 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="118193692">
+					<object class="NSMenuItem" id="182993934">
 						<reference key="NSMenu" ref="661934826"/>
 						<string key="NSTitle">Admin</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="908591786">
+						<reference key="NSMenu" ref="661934826"/>
+						<string key="NSTitle">Empty queue</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -1623,30 +1631,6 @@
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
 				</array>
-			</object>
-			<object class="NSButton" id="363218116">
-				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">268</int>
-				<string key="NSFrameSize">{82, 32}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<bool key="NSEnabled">YES</bool>
-				<object class="NSButtonCell" key="NSCell" id="7784246">
-					<int key="NSCellFlags">67108864</int>
-					<int key="NSCellFlags2">134217728</int>
-					<string key="NSContents">Button</string>
-					<reference key="NSSupport" ref="1049301768"/>
-					<string key="NSCellIdentifier">_NS:9</string>
-					<reference key="NSControlView" ref="363218116"/>
-					<int key="NSButtonFlags">-2038284288</int>
-					<int key="NSButtonFlags2">129</int>
-					<string key="NSAlternateContents"/>
-					<string key="NSKeyEquivalent"/>
-					<int key="NSPeriodicDelay">200</int>
-					<int key="NSPeriodicInterval">25</int>
-				</object>
-				<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -2423,9 +2407,17 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">adminUI:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="118193692"/>
+						<reference key="destination" ref="182993934"/>
 					</object>
 					<int key="connectionID">658</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">emptyQueue:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="908591786"/>
+					</object>
+					<int key="connectionID">661</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3954,7 +3946,8 @@
 							<reference ref="102165426"/>
 							<reference ref="466566148"/>
 							<reference ref="716395881"/>
-							<reference ref="118193692"/>
+							<reference ref="182993934"/>
+							<reference ref="908591786"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4130,21 +4123,13 @@
 						<reference key="parent" ref="661934826"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">655</int>
-						<reference key="object" ref="363218116"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="7784246"/>
-						</array>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">656</int>
-						<reference key="object" ref="7784246"/>
-						<reference key="parent" ref="363218116"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">657</int>
-						<reference key="object" ref="118193692"/>
+						<reference key="object" ref="182993934"/>
+						<reference key="parent" ref="661934826"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">660</int>
+						<reference key="object" ref="908591786"/>
 						<reference key="parent" ref="661934826"/>
 					</object>
 				</array>
@@ -4390,9 +4375,8 @@
 				<string key="651.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="652.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="653.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="655.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="656.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="657.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="660.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4409,7 +4393,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">658</int>
+			<int key="maxID">661</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4418,6 +4402,7 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="adminUI:">id</string>
+						<string key="emptyQueue:">id</string>
 						<string key="login:">id</string>
 						<string key="pauseButton:">id</string>
 						<string key="playButton:">id</string>
@@ -4427,6 +4412,10 @@
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="adminUI:">
 							<string key="name">adminUI:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="emptyQueue:">
+							<string key="name">emptyQueue:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="login:">

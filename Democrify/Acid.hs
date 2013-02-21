@@ -168,6 +168,12 @@ adminUpvote t = do
         Nothing -> return ()
         Just i  -> (put $ q { queue = SQ.adjust upvote9000 i queue }) >> return ()
 
+-- |Empties the queue (Who would've guessed?)
+emptyQueue :: Update PlayQueue ()
+emptyQueue = do
+    q@PlayQueue{..} <- get
+    put $ q { queue = SQ.empty }
+
 -- * Acid state's nitty gritty details
 data PeekNext = PeekNext
 data GetQueue = GetQueue
@@ -179,6 +185,7 @@ data UpvoteTrack = UpvoteTrack Text
 data SortQueue = SortQueue
 data RemoveTrack = RemoveTrack Text
 data AdminUpvote = AdminUpvote Text
+data EmptyQueue = EmptyQueue
 
 deriving instance Typeable PeekNext
 deriving instance Typeable GetQueue
@@ -190,6 +197,7 @@ deriving instance Typeable UpvoteTrack
 deriving instance Typeable SortQueue
 deriving instance Typeable RemoveTrack
 deriving instance Typeable AdminUpvote
+deriving instance Typeable EmptyQueue
 
 instance SafeCopy PeekNext where
     putCopy PeekNext = contain $ return ()
@@ -227,6 +235,10 @@ instance SafeCopy AdminUpvote where
     putCopy (AdminUpvote t) = contain $ safePut t
     getCopy = contain $ AdminUpvote <$> safeGet
 
+instance SafeCopy EmptyQueue where
+    putCopy EmptyQueue = contain $ return ()
+    getCopy = contain $ return EmptyQueue
+
 instance Method PeekNext where
     type MethodResult PeekNext = SpotifyTrack
     type MethodState PeekNext = PlayQueue
@@ -263,6 +275,10 @@ instance Method AdminUpvote where
     type MethodResult AdminUpvote = ()
     type MethodState AdminUpvote = PlayQueue
 
+instance Method EmptyQueue where
+    type MethodResult EmptyQueue = ()
+    type MethodState EmptyQueue = PlayQueue
+
 instance QueryEvent PeekNext
 instance QueryEvent GetQueue
 
@@ -273,6 +289,7 @@ instance UpdateEvent UpvoteTrack
 instance UpdateEvent SortQueue
 instance UpdateEvent RemoveTrack
 instance UpdateEvent AdminUpvote
+instance UpdateEvent EmptyQueue
 
 instance IsAcidic PlayQueue where
     acidEvents = [ QueryEvent (\PeekNext     -> peekNext)
@@ -283,4 +300,5 @@ instance IsAcidic PlayQueue where
                  , UpdateEvent (\(UpvoteTrack t) -> upvoteTrack t)
                  , UpdateEvent (\SortQueue   -> sortQueue)
                  , UpdateEvent (\(RemoveTrack t) -> removeTrack t)
-                 , UpdateEvent (\(AdminUpvote t) -> adminUpvote t)]
+                 , UpdateEvent (\(AdminUpvote t) -> adminUpvote t)
+                 , UpdateEvent (\EmptyQueue -> emptyQueue)]

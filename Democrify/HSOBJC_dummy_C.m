@@ -38,6 +38,11 @@ void setResourcePath(NSString *path)
     return;
 }
 
+void extEmptyQueue()
+{
+    return;
+}
+
 void loadPlaylist(NSArray *tracks)
 {
     return;
