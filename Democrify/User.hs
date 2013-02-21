@@ -23,6 +23,7 @@ import qualified Text.Blaze.Html5.Attributes as A
 
 -- Democrify modules
 import           Acid
+import           Admin
 import           Queue
 import           WebAPI
 
@@ -162,6 +163,13 @@ addHandler trackId = do
                        update' acid $ AddTrackToQueue t
                        ok $ toResponse $ ("ok" :: Text)
 
+adminHandler :: ServerPart Response
+adminHandler = do
+    acid <- liftIO $ readIORef playQueue
+    queue <- query' acid GetQueue
+    defaultLayout "Democrify - Admin"
+                  [ H.script ! A.src "/admin.js" $ mempty ]
+                  (adminQueue queue)
 
 -- * Happstack things
 
@@ -173,6 +181,9 @@ democrify = liftIO webResources >>= \resPath -> msum
     , dir "add" $ nullDir >> addSongView
     , dir "add" $ path $ \song -> addHandler song
     , serveDirectory DisableBrowsing [] resPath
+    , dir "admin" $ host "localhost:8686" adminHandler
+    , dir "admin" $ dir "vote" $ host "localhost:8686" $ path $ \song -> adminUpvoteHandler song
+    , dir "admin" $ dir "delete" $ host "localhost:8686" $ path $ \song -> adminDeleteHandler song
     ]
 
 runServer :: IO ()

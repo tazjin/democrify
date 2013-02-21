@@ -44,6 +44,7 @@
 		BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26916D6291D00BD2AB3 /* Queue.hs */; };
 		BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26A16D6291D00BD2AB3 /* User.hs */; };
 		BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */; };
+		BF95D27116D6888700BD2AB3 /* admin.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF95D26F16D6887D00BD2AB3 /* admin.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,6 +69,7 @@
 				BF2F6E0316D23A3F00A899A1 /* foundation.min.js in CopyFiles */,
 				BF2F6E1116D2BA9B00A899A1 /* upvote_colour.png in CopyFiles */,
 				BF2F6E1216D2BA9E00A899A1 /* upvote_bw.png in CopyFiles */,
+				BF95D27116D6888700BD2AB3 /* admin.js in CopyFiles */,
 				BF09F95816D3ECFB002E2FDA /* addsong.js in CopyFiles */,
 				BF2F6E0716D23A3F00A899A1 /* app.css in CopyFiles */,
 				BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */,
@@ -137,6 +139,7 @@
 		BF95D26916D6291D00BD2AB3 /* Queue.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Queue.hs; path = Democrify/Queue.hs; sourceTree = "<group>"; };
 		BF95D26A16D6291D00BD2AB3 /* User.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = User.hs; path = Democrify/User.hs; sourceTree = "<group>"; };
 		BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WebAPI.hs; path = Democrify/WebAPI.hs; sourceTree = "<group>"; };
+		BF95D26F16D6887D00BD2AB3 /* admin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = admin.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +238,7 @@
 		BF2F6DC516D2389B00A899A1 /* javascripts */ = {
 			isa = PBXGroup;
 			children = (
+				BF95D26F16D6887D00BD2AB3 /* admin.js */,
 				BF09F95416D3ECE6002E2FDA /* addsong.js */,
 				BF2F6E1316D2E01D00A899A1 /* jquery.cookie.js */,
 				BF2F6DC616D2389B00A899A1 /* app.js */,
