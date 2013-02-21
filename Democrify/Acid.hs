@@ -53,6 +53,10 @@ instance Eq SpotifyTrack where
 upvote :: SpotifyTrack -> SpotifyTrack
 upvote t@SpotifyTrack{..} = t { votes = votes + 1 }
 
+-- |Mighty admin upvote!
+upvote9000 :: SpotifyTrack -> SpotifyTrack
+upvote9000 t@SpotifyTrack{..} = t { votes = votes + 9000 }
+
 -- |The play queue
 data PlayQueue = PlayQueue { queue :: Seq SpotifyTrack }
     deriving (Eq, Ord, Read, Show, Data, Typeable)
@@ -150,6 +154,20 @@ sortQueue = do
     q@PlayQueue{..} <- get
     put $ q { queue = SQ.sort queue }
 
+-- |Removes a track from the queue (admin only)
+removeTrack :: Text -> Update PlayQueue ()
+removeTrack track = do
+    q@PlayQueue{..} <- get
+    put $ q { queue = SQ.filter (\t -> tId t /= track) queue}
+
+-- |Upvotes a track over 9000 (admin only)
+adminUpvote :: Text -> Update PlayQueue ()
+adminUpvote t = do
+    q@PlayQueue{..} <- get
+    case SQ.findIndexL (\tr -> tId tr == t) queue of
+        Nothing -> return ()
+        Just i  -> (put $ q { queue = SQ.adjust upvote9000 i queue }) >> return ()
+
 -- * Acid state's nitty gritty details
 data PeekNext = PeekNext
 data GetQueue = GetQueue
@@ -159,6 +177,8 @@ data AddTrackToQueue = AddTrackToQueue SpotifyTrack
 data ForceAddTrack = ForceAddTrack SpotifyTrack
 data UpvoteTrack = UpvoteTrack Text
 data SortQueue = SortQueue
+data RemoveTrack = RemoveTrack Text
+data AdminUpvote = AdminUpvote Text
 
 deriving instance Typeable PeekNext
 deriving instance Typeable GetQueue
@@ -168,6 +188,8 @@ deriving instance Typeable AddTrackToQueue
 deriving instance Typeable ForceAddTrack
 deriving instance Typeable UpvoteTrack
 deriving instance Typeable SortQueue
+deriving instance Typeable RemoveTrack
+deriving instance Typeable AdminUpvote
 
 instance SafeCopy PeekNext where
     putCopy PeekNext = contain $ return ()
@@ -197,6 +219,14 @@ instance SafeCopy SortQueue where
     putCopy SortQueue = contain $ return ()
     getCopy = contain $ return SortQueue
 
+instance SafeCopy RemoveTrack where
+    putCopy (RemoveTrack t) = contain $ safePut t
+    getCopy = contain $ RemoveTrack <$> safeGet
+
+instance SafeCopy AdminUpvote where
+    putCopy (AdminUpvote t) = contain $ safePut t
+    getCopy = contain $ AdminUpvote <$> safeGet
+
 instance Method PeekNext where
     type MethodResult PeekNext = SpotifyTrack
     type MethodState PeekNext = PlayQueue
@@ -225,6 +255,14 @@ instance Method SortQueue where
     type MethodResult SortQueue = ()
     type MethodState SortQueue = PlayQueue
 
+instance Method RemoveTrack where
+    type MethodResult RemoveTrack = ()
+    type MethodState RemoveTrack = PlayQueue
+
+instance Method AdminUpvote where
+    type MethodResult AdminUpvote = ()
+    type MethodState AdminUpvote = PlayQueue
+
 instance QueryEvent PeekNext
 instance QueryEvent GetQueue
 
@@ -233,6 +271,8 @@ instance UpdateEvent AddTrackToQueue
 instance UpdateEvent ForceAddTrack
 instance UpdateEvent UpvoteTrack
 instance UpdateEvent SortQueue
+instance UpdateEvent RemoveTrack
+instance UpdateEvent AdminUpvote
 
 instance IsAcidic PlayQueue where
     acidEvents = [ QueryEvent (\PeekNext     -> peekNext)
@@ -241,4 +281,6 @@ instance IsAcidic PlayQueue where
                  , UpdateEvent (\(AddTrackToQueue t) -> addTrackToQueue t)
                  , UpdateEvent (\(ForceAddTrack t) -> forceAddTrack t)
                  , UpdateEvent (\(UpvoteTrack t) -> upvoteTrack t)
-                 , UpdateEvent (\SortQueue   -> sortQueue)]
+                 , UpdateEvent (\SortQueue   -> sortQueue)
+                 , UpdateEvent (\(RemoveTrack t) -> removeTrack t)
+                 , UpdateEvent (\(AdminUpvote t) -> adminUpvote t)]
