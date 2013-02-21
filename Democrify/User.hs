@@ -58,7 +58,7 @@ defaultLayout  title headers body = ok $ toResponse $
             H.nav ! A.class_ "top-bar" $ do
                 H.ul $ do
                     H.li $
-                        H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;"
+                        H.a ! A.href "/" $ H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;"
                     H.li ! A.class_ "name" $
                         H.h1 $ H.a ! A.href "/" $ toHtml ("Democrify" :: Text)
                     H.li ! A.class_ "toggle-topbar" $
