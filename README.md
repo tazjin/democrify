@@ -5,9 +5,16 @@ A Mac application for democratic handling of music at parties, using libspotify.
 
 ## Building
 
-Building this project should be pretty straightforward. Make sure you have CocoaLibSpotify.framework sitting in /Library/Frameworks, get an appkey.c file from Spotify, install the Haskell Platform (64 Bit) plus the packages happstack-server, acid-state, hastache
+Building this project should be pretty straightforward.
 
-You should then just be able to build & run!
+1. Make sure you have CocoaLibSpotify.framework sitting in /Library/Frameworks
+
+2. Get an appkey.c file from Spotify and place it in the folder with the other Democrify source files (don't add it to the Xcode project!)
+
+3. Install the Haskell Platform (64 Bit, tested GHC version is 7.4.2), then `cd` into the democrify/Democrify directory and run `cabal install --only-dependencies`.
+Do not try to build and install using `cabal`, it is only used for managing the Haskell dependencies!
+
+4. You should then just be able to build & run in Xcode!
 
 More detailed instructions will follow :)
 
