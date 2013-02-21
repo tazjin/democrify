@@ -60,7 +60,7 @@ defaultLayout  title headers body = ok $ toResponse $
                     H.li $
                         H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;"
                     H.li ! A.class_ "name" $
-                        H.h1 $ H.a $ toHtml ("Democrify" :: Text)
+                        H.h1 $ H.a ! A.href "/" $ toHtml ("Democrify" :: Text)
                     H.li ! A.class_ "toggle-topbar" $
                         H.a ! A.href "#" $ mempty
                 H.section $ do
@@ -69,6 +69,9 @@ defaultLayout  title headers body = ok $ toResponse $
                         H.li $
                             H.a ! A.href "/add" $ toHtml ("Add song" :: Text)
             body
+            H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ H.footer $ do
+                H.hr
+                H.p ! A.style "text-align:center;" $ "Powered by Democrify"
 
 -- |Displays the user facing queue list
 queueView :: ServerPart Response
@@ -96,9 +99,7 @@ queueView = do
                     H.img ! A.src "http://placehold.it/80x80&text=:("
                 H.div ! A.class_ "ten columns trackitem" $ do
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
-        H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ H.footer $ do
-            H.hr
-            H.p ! A.style "text-align:center;" $ "Powered by Democrify"
+
 
 displayCurrentTrack :: IO H.Html
 displayCurrentTrack = do
@@ -121,7 +122,7 @@ addSongView :: ServerPart Response
 addSongView =
     defaultLayout "Democrify - Add song"
                   [ H.script ! A.src "/addsong.js" $ mempty ] $ do
-        H.style $ toHtml ("body{background-color: #222 !important;}" :: Text)
+        H.style $ toHtml ("body{background-color: #222 !important;} footer{color:white;}" :: Text)
         H.div ! A.class_ "row collapse" $ do
             H.div ! A.class_ "ten mobile-two columns" $
                 H.input ! A.id "search" ! A.type_ "text"
