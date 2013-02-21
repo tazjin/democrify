@@ -18,6 +18,14 @@ Do not try to build and install using `cabal`, it is only used for managing the 
 
 More detailed instructions will follow :)
 
+## User guide
+
+When you start Democrify it is initialized with an empty play queue. You can load new tracks into the queue either through the webinterface (host:8686) or through the playlist loading function (in the menubar on the host machine).
+
+Everybody who is connected to the same network can then access the web interface at host:8686, an admin interface is available at /admin but it is only accessible from the host computer itself.
+
+There are other functions like Skip, Pause and Empty Queue which are integrated as options in the menu bar icon's dropdown list.
+
 ## Important
 
 Please note that this project contains a lot of Haskell code that is written in a way in which **no Haskell code should ever be written**. Please do **not** use this project as a guide on how to use Haskell! :D
