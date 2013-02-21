@@ -1,29 +1,30 @@
-{-# LANGUAGE OverloadedStrings, RecordWildCards      #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
 
 module User where
 
-import           Control.Applicative   (optional, (<$>))
-import           Control.Monad         (msum)
-import           Data.ByteString.Char8 (ByteString)
+import           Control.Applicative         (optional, (<$>))
+import           Control.Monad               (msum)
+import           Control.Monad.IO.Class      (liftIO)
+import           Data.Acid.Advanced          (query', update')
+import           Data.ByteString.Char8       (ByteString)
+import           Data.Foldable               (forM_)
 import           Data.IORef
-import           Data.Text             (Text)
-import qualified Data.Text as T
+import           Data.Monoid                 (mempty)
+import qualified Data.Sequence               as SQ
+import           Data.Text                   (Text)
+import qualified Data.Text                   as T
 import           Happstack.Server
-import           System.IO.Unsafe      (unsafePerformIO)
-import           Control.Monad.IO.Class (liftIO)
-import           Text.Blaze ((!), toValue)
-import qualified Text.Blaze.Html5 as H
+import           System.IO.Unsafe            (unsafePerformIO)
+import           Text.Blaze                  (toValue, (!))
+import           Text.Blaze.Html5            (toHtml)
+import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
-import Text.Blaze.Html5 (toHtml)
-import           Data.Acid.Advanced  (query', update')
-import Data.Foldable (forM_)
-import qualified Data.Sequence        as SQ
-import Data.Monoid (mempty)
 
 -- Democrify modules
-import Acid
-import Queue
-import WebAPI
+import           Acid
+import           Queue
+import           WebAPI
 
 -- *Helpers
 -- |This contains a global IORef to the Resource folder inside the Application bundle. All web assets are stored in Resources/web
