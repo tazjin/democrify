@@ -38,6 +38,7 @@ void setResourcePath(NSString* path);
 - (IBAction)skipTrack:(id)sender;
 - (IBAction)playButton:(id)sender;
 - (IBAction)pauseButton:(id)sender;
+- (IBAction)adminUI:(id)sender;
 
 #pragma mark -
 

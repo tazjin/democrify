@@ -288,6 +288,11 @@
 }
 
 
+//Launch admin UI
+- (IBAction)adminUI:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/admin"]];
+}
+
 
 - (IBAction)login:(id)sender {
 	
