@@ -14,7 +14,6 @@
 		50EECAF615CAA82C006E54FA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50EECAF415CAA82C006E54FA /* MainMenu.xib */; };
 		BF09F95216D39680002E2FDA /* current.gif in Resources */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
 		BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
-		BF09F95516D3ECE6002E2FDA /* addsong.js in Sources */ = {isa = PBXBuildFile; fileRef = BF09F95416D3ECE6002E2FDA /* addsong.js */; };
 		BF09F95816D3ECFB002E2FDA /* addsong.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95416D3ECE6002E2FDA /* addsong.js */; };
 		BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D7D16CEA5B600A899A1 /* Acid.hs */; };
 		BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
@@ -42,6 +41,9 @@
 		BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461D16CCFEDD00AD69AA /* HSObjC_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461E16CCFEDD00AD69AA /* HSOBJC_dummy_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF41462816CCFF5A00AD69AA /* Main.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF41462516CCFF5A00AD69AA /* Main.hs */; };
+		BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26916D6291D00BD2AB3 /* Queue.hs */; };
+		BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26A16D6291D00BD2AB3 /* User.hs */; };
+		BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,6 +134,9 @@
 		BF41461F16CCFEDD00AD69AA /* HSOBJC.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HSOBJC.hs; path = Democrify/HSOBJC.hs; sourceTree = "<group>"; };
 		BF41462316CCFF4A00AD69AA /* FFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFI.h; path = Democrify/FFI.h; sourceTree = "<group>"; };
 		BF41462516CCFF5A00AD69AA /* Main.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.hs; path = Democrify/Main.hs; sourceTree = "<group>"; };
+		BF95D26916D6291D00BD2AB3 /* Queue.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Queue.hs; path = Democrify/Queue.hs; sourceTree = "<group>"; };
+		BF95D26A16D6291D00BD2AB3 /* User.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = User.hs; path = Democrify/User.hs; sourceTree = "<group>"; };
+		BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WebAPI.hs; path = Democrify/WebAPI.hs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +284,9 @@
 		BF41461416CCE8B400AD69AA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BF95D26916D6291D00BD2AB3 /* Queue.hs */,
+				BF95D26A16D6291D00BD2AB3 /* User.hs */,
+				BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */,
 				BF2F6D7D16CEA5B600A899A1 /* Acid.hs */,
 				BF41462516CCFF5A00AD69AA /* Main.hs */,
 				BF41462316CCFF4A00AD69AA /* FFI.h */,
@@ -368,6 +376,9 @@
 				BF2F6E0F16D2BA8B00A899A1 /* upvote_colour.png in Resources */,
 				BF2F6E1016D2BA8B00A899A1 /* upvote_bw.png in Resources */,
 				BF09F95216D39680002E2FDA /* current.gif in Resources */,
+				BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */,
+				BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */,
+				BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +408,6 @@
 				50EECAF315CAA82C006E54FA /* AppDelegate.m in Sources */,
 				BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */,
 				BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */,
-				BF09F95516D3ECE6002E2FDA /* addsong.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
