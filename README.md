@@ -5,7 +5,11 @@ A Mac application for democratic handling of music at parties, using libspotify.
 
 ## Download
 
-A first binary release is available at http://klaud.tazj.in/N6Ex
+The current release is available at http://klaud.tazj.in/N6UA
+
+Please file all issues you find here in Github or - if you don't have a Github account - send them to vincent@spotify.com
+
+Have fun!
 
 ## Building
 
