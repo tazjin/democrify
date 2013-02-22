@@ -1598,9 +1598,27 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
+					<object class="NSMenuItem" id="722011397">
+						<reference key="NSMenu" ref="661934826"/>
+						<string key="NSTitle">User UI</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
 					<object class="NSMenuItem" id="182993934">
 						<reference key="NSMenu" ref="661934826"/>
-						<string key="NSTitle">Admin</string>
+						<string key="NSTitle">Admin UI</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="605297374">
+						<reference key="NSMenu" ref="661934826"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -2418,6 +2436,14 @@
 						<reference key="destination" ref="908591786"/>
 					</object>
 					<int key="connectionID">661</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">userUI:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="722011397"/>
+					</object>
+					<int key="connectionID">666</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3948,6 +3974,8 @@
 							<reference ref="716395881"/>
 							<reference ref="182993934"/>
 							<reference ref="908591786"/>
+							<reference ref="722011397"/>
+							<reference ref="605297374"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4130,6 +4158,16 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">660</int>
 						<reference key="object" ref="908591786"/>
+						<reference key="parent" ref="661934826"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">664</int>
+						<reference key="object" ref="722011397"/>
+						<reference key="parent" ref="661934826"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">665</int>
+						<reference key="object" ref="605297374"/>
 						<reference key="parent" ref="661934826"/>
 					</object>
 				</array>
@@ -4377,6 +4415,8 @@
 				<string key="653.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="657.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="660.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="664.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="665.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4393,7 +4433,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">661</int>
+			<int key="maxID">666</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4408,6 +4448,7 @@
 						<string key="playButton:">id</string>
 						<string key="quitFromAction:">id</string>
 						<string key="skipTrack:">id</string>
+						<string key="userUI:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="adminUI:">
@@ -4436,6 +4477,10 @@
 						</object>
 						<object class="IBActionInfo" key="skipTrack:">
 							<string key="name">skipTrack:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="userUI:">
+							<string key="name">userUI:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

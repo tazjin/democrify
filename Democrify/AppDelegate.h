@@ -41,6 +41,7 @@ void loadPlaylist(NSArray *tracks);
 - (IBAction)playButton:(id)sender;
 - (IBAction)pauseButton:(id)sender;
 - (IBAction)adminUI:(id)sender;
+- (IBAction)userUI:(id)sender;
 - (IBAction)emptyQueue:(id)sender;
 
 #pragma mark -

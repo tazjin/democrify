@@ -292,6 +292,11 @@
     extEmptyQueue();
 }
 
+//Launch user UI
+- (IBAction)userUI:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/"]];
+}
+
 //Launch admin UI
 - (IBAction)adminUI:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/admin"]];
