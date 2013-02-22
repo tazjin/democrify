@@ -1,7 +1,7 @@
 democrify
 =========
 
-A Mac application for democratic handling of music at parties, using libspotify.
+A Mac application for democratic handling of music at parties, using libspotify. This is **not** an official Spotify project!
 
 ## Download
 
