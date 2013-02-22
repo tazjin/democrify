@@ -3,6 +3,10 @@ democrify
 
 A Mac application for democratic handling of music at parties, using libspotify.
 
+## Download
+
+A first binary release is available at http://klaud.tazj.in/N6Ex
+
 ## Building
 
 Building this project should be pretty straightforward.
