@@ -109,7 +109,10 @@ displayCurrentTrack = do
                     Nothing -> do
                         H.p ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
                     Just SpotifyTrack{..} -> do
-                        H.span ! A.class_ "track" $ toHtml track
+                        H.br
+                        H.span ! A.class_ "track" $ do toHtml ("Current track:" :: Text)
+                                                       H.br
+                                                       toHtml track
                         H.br
                         H.span ! A.class_ "artist" $ do toHtml ("by " :: Text)
                                                         toHtml artist
