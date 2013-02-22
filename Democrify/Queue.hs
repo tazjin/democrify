@@ -71,7 +71,7 @@ dbLoop n = do
     newN <- case n of
         60 -> createCheckpoint acid >> return 0
         n  -> return $ n + 1
-    threadDelay 30000000
+    threadDelay 15000000
     dbLoop newN
 
 

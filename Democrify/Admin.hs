@@ -48,7 +48,6 @@ adminQueue queue = do
 adminDeleteHandler :: Text -- ^ Track id
                    -> ServerPart Response
 adminDeleteHandler track = do
-    liftIO $ putStrLn "Called delete"
     acid <- liftIO $ readIORef playQueue
     update' acid $ RemoveTrack track
     ok $ toResponse $ ("removed" :: Text)
@@ -57,7 +56,6 @@ adminDeleteHandler track = do
 adminUpvoteHandler :: Text
                    -> ServerPart Response
 adminUpvoteHandler track = do
-    liftIO $ putStrLn "Called upvote"
     acid <- liftIO $ readIORef playQueue
     update' acid $ AdminUpvote track
     ok $ toResponse $ ("over9000" :: Text)

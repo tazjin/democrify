@@ -41,6 +41,7 @@
 		BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461D16CCFEDD00AD69AA /* HSObjC_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461E16CCFEDD00AD69AA /* HSOBJC_dummy_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF41462816CCFF5A00AD69AA /* Main.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF41462516CCFF5A00AD69AA /* Main.hs */; };
+		BF7D22D316D7817600460FC4 /* Admin.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF7D22D216D7817600460FC4 /* Admin.hs */; };
 		BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26916D6291D00BD2AB3 /* Queue.hs */; };
 		BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26A16D6291D00BD2AB3 /* User.hs */; };
 		BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */; };
@@ -136,6 +137,7 @@
 		BF41461F16CCFEDD00AD69AA /* HSOBJC.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HSOBJC.hs; path = Democrify/HSOBJC.hs; sourceTree = "<group>"; };
 		BF41462316CCFF4A00AD69AA /* FFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFI.h; path = Democrify/FFI.h; sourceTree = "<group>"; };
 		BF41462516CCFF5A00AD69AA /* Main.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Main.hs; path = Democrify/Main.hs; sourceTree = "<group>"; };
+		BF7D22D216D7817600460FC4 /* Admin.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Admin.hs; path = Democrify/Admin.hs; sourceTree = "<group>"; };
 		BF95D26916D6291D00BD2AB3 /* Queue.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Queue.hs; path = Democrify/Queue.hs; sourceTree = "<group>"; };
 		BF95D26A16D6291D00BD2AB3 /* User.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = User.hs; path = Democrify/User.hs; sourceTree = "<group>"; };
 		BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WebAPI.hs; path = Democrify/WebAPI.hs; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				BF95D26916D6291D00BD2AB3 /* Queue.hs */,
+				BF7D22D216D7817600460FC4 /* Admin.hs */,
 				BF95D26A16D6291D00BD2AB3 /* User.hs */,
 				BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */,
 				BF2F6D7D16CEA5B600A899A1 /* Acid.hs */,
@@ -383,6 +386,7 @@
 				BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */,
 				BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */,
 				BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */,
+				BF7D22D316D7817600460FC4 /* Admin.hs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
