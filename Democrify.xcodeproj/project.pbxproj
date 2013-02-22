@@ -102,22 +102,7 @@
 		BF2F6D8416D16F3400A899A1 /* democrify.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = democrify.icns; sourceTree = "<group>"; };
 		BF2F6DC616D2389B00A899A1 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		BF2F6DC716D2389B00A899A1 /* foundation.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = foundation.min.js; sourceTree = "<group>"; };
-		BF2F6DC816D2389B00A899A1 /* jquery.foundation.accordion.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.accordion.js; sourceTree = "<group>"; };
-		BF2F6DC916D2389B00A899A1 /* jquery.foundation.alerts.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.alerts.js; sourceTree = "<group>"; };
-		BF2F6DCA16D2389B00A899A1 /* jquery.foundation.buttons.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.buttons.js; sourceTree = "<group>"; };
-		BF2F6DCB16D2389B00A899A1 /* jquery.foundation.clearing.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.clearing.js; sourceTree = "<group>"; };
-		BF2F6DCC16D2389B00A899A1 /* jquery.foundation.forms.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.forms.js; sourceTree = "<group>"; };
-		BF2F6DCD16D2389B00A899A1 /* jquery.foundation.joyride.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.joyride.js; sourceTree = "<group>"; };
-		BF2F6DCE16D2389B00A899A1 /* jquery.foundation.magellan.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.magellan.js; sourceTree = "<group>"; };
-		BF2F6DCF16D2389B00A899A1 /* jquery.foundation.mediaQueryToggle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.mediaQueryToggle.js; sourceTree = "<group>"; };
-		BF2F6DD016D2389B00A899A1 /* jquery.foundation.navigation.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.navigation.js; sourceTree = "<group>"; };
-		BF2F6DD116D2389B00A899A1 /* jquery.foundation.orbit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.orbit.js; sourceTree = "<group>"; };
-		BF2F6DD216D2389B00A899A1 /* jquery.foundation.reveal.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.reveal.js; sourceTree = "<group>"; };
-		BF2F6DD316D2389B00A899A1 /* jquery.foundation.tabs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.tabs.js; sourceTree = "<group>"; };
-		BF2F6DD416D2389B00A899A1 /* jquery.foundation.tooltips.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.tooltips.js; sourceTree = "<group>"; };
-		BF2F6DD516D2389B00A899A1 /* jquery.foundation.topbar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.foundation.topbar.js; sourceTree = "<group>"; };
 		BF2F6DD616D2389B00A899A1 /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
-		BF2F6DD716D2389B00A899A1 /* jquery.placeholder.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.placeholder.js; sourceTree = "<group>"; };
 		BF2F6DD816D2389B00A899A1 /* modernizr.foundation.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = modernizr.foundation.js; sourceTree = "<group>"; };
 		BF2F6DDB16D2389B00A899A1 /* app.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = app.css; sourceTree = "<group>"; };
 		BF2F6DDC16D2389B00A899A1 /* foundation.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = foundation.css; sourceTree = "<group>"; };
@@ -245,22 +230,7 @@
 				BF2F6E1316D2E01D00A899A1 /* jquery.cookie.js */,
 				BF2F6DC616D2389B00A899A1 /* app.js */,
 				BF2F6DC716D2389B00A899A1 /* foundation.min.js */,
-				BF2F6DC816D2389B00A899A1 /* jquery.foundation.accordion.js */,
-				BF2F6DC916D2389B00A899A1 /* jquery.foundation.alerts.js */,
-				BF2F6DCA16D2389B00A899A1 /* jquery.foundation.buttons.js */,
-				BF2F6DCB16D2389B00A899A1 /* jquery.foundation.clearing.js */,
-				BF2F6DCC16D2389B00A899A1 /* jquery.foundation.forms.js */,
-				BF2F6DCD16D2389B00A899A1 /* jquery.foundation.joyride.js */,
-				BF2F6DCE16D2389B00A899A1 /* jquery.foundation.magellan.js */,
-				BF2F6DCF16D2389B00A899A1 /* jquery.foundation.mediaQueryToggle.js */,
-				BF2F6DD016D2389B00A899A1 /* jquery.foundation.navigation.js */,
-				BF2F6DD116D2389B00A899A1 /* jquery.foundation.orbit.js */,
-				BF2F6DD216D2389B00A899A1 /* jquery.foundation.reveal.js */,
-				BF2F6DD316D2389B00A899A1 /* jquery.foundation.tabs.js */,
-				BF2F6DD416D2389B00A899A1 /* jquery.foundation.tooltips.js */,
-				BF2F6DD516D2389B00A899A1 /* jquery.foundation.topbar.js */,
 				BF2F6DD616D2389B00A899A1 /* jquery.js */,
-				BF2F6DD716D2389B00A899A1 /* jquery.placeholder.js */,
 				BF2F6DD816D2389B00A899A1 /* modernizr.foundation.js */,
 			);
 			path = javascripts;
