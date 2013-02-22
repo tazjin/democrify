@@ -17,7 +17,7 @@
 
     //Check for all objects that have been voted on and turn the arrows orange
     $.each($.cookie(), function(c, v){
-      $('#' + c).attr('src', '/upvote_colour.png');
+      $('img[id$="' + c '"][class$="vote"]').attr('src', '/upvote_colour.png');
     });
 
     // Attach the voting function to all voting objects

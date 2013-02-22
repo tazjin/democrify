@@ -10,7 +10,11 @@ $(function (){
     //Attach admin delete function
     $('.delete').click(function(t){
         var song = $(this).attr('id');
-        $(this).parent().parent().remove();
-        $.get('/admin/delete/' + song);
+        var c = confirm('Do you want to delete this song?');
+        if (c) {
+            $(this).parent().parent().next().remove(); // remove hr
+            $(this).parent().parent().remove();        // remove the track
+            $.get('/admin/delete/' + song);
+        }
     });
 });

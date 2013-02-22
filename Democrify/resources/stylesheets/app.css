@@ -38,7 +38,7 @@
     position: relative;
 }
 
-.vote, .delete {
+.next, .delete {
     width: 70px;
 }
 
