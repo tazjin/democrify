@@ -17,6 +17,7 @@ import           Data.Data              (Data, Typeable)
 import           Data.IORef
 import           Data.Maybe             (isJust)
 import qualified Data.Sequence          as SQ
+import           Data.Random.Extras     (shuffleSeq)
 import           Data.Text              (Text, unpack)
 import qualified Data.Text              as T
 import           HSObjC
@@ -24,6 +25,9 @@ import           System.Directory       (createDirectoryIfMissing,
                                          getHomeDirectory)
 import           System.IO.Unsafe       (unsafePerformIO)
 import           WebAPI
+
+import Data.Random.Source.DevRandom (DevRandom(..))
+import Data.Random (runRVar)
 
 initialPlayQueue :: PlayQueue
 initialPlayQueue = PlayQueue SQ.empty
@@ -51,6 +55,13 @@ getTrackData trackIds = forM (map (T.drop 14) trackIds) $ \t -> do
     threadDelay 125000 -- Evade Web API querying limit. Should be done with libspotify as well but ICBA right now
     return track
 
+-- |Shuffles the play queue through a weird combination of things :(
+shuffleQueue :: IO ()
+shuffleQueue = do
+    acid <- readIORef playQueue
+    queue <- query acid GetQueue
+    shuffled <- SQ.fromList <$> (runRVar (shuffleSeq queue) DevURandom)
+    update acid $ PutQueue shuffled
 
 -- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist
 statePath :: IO FilePath
@@ -93,3 +104,4 @@ setCurrentTrack track = do
 
 foreign export ccall getNextTrack    :: IO Id
 foreign export ccall loadPlaylist    :: Id -> IO ()
+foreign export ccall shuffleQueue    :: IO ()

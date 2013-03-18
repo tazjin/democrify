@@ -109,6 +109,10 @@ peekNext = head' <$> queue <$> ask
 getQueue :: Query PlayQueue (Seq SpotifyTrack)
 getQueue = queue <$> ask
 
+-- |\"Puts" (replaces) the entire queue
+putQueue :: Seq SpotifyTrack -> Update PlayQueue ()
+putQueue q = put $ PlayQueue q
+
 -- * Acid state update functions
 
 -- |Gets the first song in the queue and removes it from the queue.
@@ -179,6 +183,7 @@ data PeekNext = PeekNext
 data GetQueue = GetQueue
 data GetQueueHead = GetQueueHead
 
+data PutQueue = PutQueue (Seq SpotifyTrack)
 data AddTrackToQueue = AddTrackToQueue SpotifyTrack
 data ForceAddTrack = ForceAddTrack SpotifyTrack
 data UpvoteTrack = UpvoteTrack Text
@@ -191,6 +196,7 @@ deriving instance Typeable PeekNext
 deriving instance Typeable GetQueue
 deriving instance Typeable GetQueueHead
 
+deriving instance Typeable PutQueue
 deriving instance Typeable AddTrackToQueue
 deriving instance Typeable ForceAddTrack
 deriving instance Typeable UpvoteTrack
@@ -210,6 +216,10 @@ instance SafeCopy GetQueue where
 instance SafeCopy GetQueueHead where
     putCopy GetQueueHead = contain $ return ()
     getCopy = contain $ return GetQueueHead
+
+instance SafeCopy PutQueue where
+    putCopy (PutQueue q) = contain $ safePut q
+    getCopy = contain $ PutQueue <$> safeGet
 
 instance SafeCopy AddTrackToQueue where
     putCopy (AddTrackToQueue t) = contain $ safePut t
@@ -259,6 +269,10 @@ instance Method ForceAddTrack where
     type MethodResult ForceAddTrack = SpotifyTrack
     type MethodState ForceAddTrack = PlayQueue
 
+instance Method PutQueue where
+    type MethodResult PutQueue = ()
+    type MethodState PutQueue = PlayQueue
+
 instance Method UpvoteTrack where
     type MethodResult UpvoteTrack = ()
     type MethodState UpvoteTrack = PlayQueue
@@ -282,6 +296,7 @@ instance Method EmptyQueue where
 instance QueryEvent PeekNext
 instance QueryEvent GetQueue
 
+instance UpdateEvent PutQueue
 instance UpdateEvent GetQueueHead
 instance UpdateEvent AddTrackToQueue
 instance UpdateEvent ForceAddTrack
@@ -294,6 +309,7 @@ instance UpdateEvent EmptyQueue
 instance IsAcidic PlayQueue where
     acidEvents = [ QueryEvent (\PeekNext     -> peekNext)
                  , QueryEvent (\GetQueue     -> getQueue)
+                 , UpdateEvent (\(PutQueue q) -> putQueue q)
                  , UpdateEvent (\GetQueueHead -> getQueueHead)
                  , UpdateEvent (\(AddTrackToQueue t) -> addTrackToQueue t)
                  , UpdateEvent (\(ForceAddTrack t) -> forceAddTrack t)

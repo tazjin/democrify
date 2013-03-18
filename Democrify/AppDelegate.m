@@ -292,6 +292,11 @@
     extEmptyQueue();
 }
 
+// Shuffle the queue
+- (IBAction)ibShuffleQueue:(id)sender {
+    shuffleQueue();
+}
+
 //Launch user UI
 - (IBAction)userUI:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/"]];

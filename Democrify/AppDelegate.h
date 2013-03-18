@@ -3,7 +3,8 @@
 
 NSString *getNextTrack();
 void setResourcePath(NSString* path);
-void extEmptyQueue();
+void extEmptyQueue(); // from Haskell
+void shuffleQueue();  // from Haskell
 void loadPlaylist(NSArray *tracks);
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, SPSessionDelegate> {
@@ -43,6 +44,7 @@ void loadPlaylist(NSArray *tracks);
 - (IBAction)adminUI:(id)sender;
 - (IBAction)userUI:(id)sender;
 - (IBAction)emptyQueue:(id)sender;
+- (IBAction)ibShuffleQueue:(id)sender;
 
 #pragma mark -
 

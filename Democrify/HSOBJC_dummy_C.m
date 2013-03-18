@@ -43,6 +43,11 @@ void extEmptyQueue()
     return;
 }
 
+void shuffleQueue()
+{
+    return;
+}
+
 void loadPlaylist(NSArray *tracks)
 {
     return;
