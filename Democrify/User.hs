@@ -108,7 +108,7 @@ displayCurrentTrack = do
     let content = case current of
                     Nothing -> do
                         H.p ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
-                    Just SpotifyTrack{..} -> do
+                    Just SpotifyTrack{..} -> H.a ! A.href (toValue $ T.append "spotify:track:" tId) $ do
                         H.br
                         H.span ! A.class_ "track" $ do toHtml ("Current track:" :: Text)
                                                        H.br
