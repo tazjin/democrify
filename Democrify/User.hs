@@ -1,10 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
+
 
 module User where
 
 import           Control.Applicative         (optional, (<$>))
-import           Control.Monad               (msum)
+import           Control.Monad               (msum, when)
 import           Control.Monad.IO.Class      (liftIO)
 import           Data.Acid.Advanced          (query', update')
 import           Data.ByteString.Char8       (ByteString)
@@ -20,6 +22,8 @@ import           Text.Blaze                  (toValue, (!))
 import           Text.Blaze.Html5            (toHtml)
 import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
+import           HSObjC
+import           Data.Maybe             (isJust)
 
 -- Democrify modules
 import           Acid
@@ -169,9 +173,11 @@ upvoteHandler song = do
 addHandler :: Text -> ServerPart Response
 addHandler trackId = do
     track <- liftIO $ identifyTrack trackId
+    shuffleOnLoad <- autoShuffle <$> liftIO getPrefs
     case track of
         Nothing  -> notFound $ toResponse $ ("notfound" :: Text)
         (Just t) -> do acid <- liftIO $ readIORef playQueue
+                       when shuffleOnLoad (liftIO shuffleQueue)
                        update' acid $ AddTrackToQueue t
                        ok $ toResponse $ ("ok" :: Text)
 
@@ -182,6 +188,19 @@ adminHandler = do
     defaultLayout "Democrify - Admin"
                   [ H.script ! A.src "/admin.js" $ mempty ]
                   (adminQueue queue)
+
+-- |This is supplised with the NSArray that contains all the NSStrings to the URLs.
+loadPlaylist :: Id -> IO ()
+loadPlaylist pl = do
+    acid <- readIORef playQueue
+    shuffleOnLoad <- autoShuffle <$> liftIO getPrefs
+    runId $ do
+        trackIds <- fromId pl
+        mTracks <- liftIO $ getTrackData trackIds
+        let tracks = map (\(Just t) -> t) $ filter isJust mTracks
+        forM_ tracks $ \t -> update' acid $ AddTrackToQueue t
+    when shuffleOnLoad shuffleQueue
+    return ()
 
 -- * Happstack things
 
@@ -200,3 +219,5 @@ democrify = liftIO webResources >>= \resPath -> msum
 
 runServer :: IO ()
 runServer = simpleHTTP nullConf{port = 8686} democrify
+
+foreign export ccall loadPlaylist    :: Id -> IO ()

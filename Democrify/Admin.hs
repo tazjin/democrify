@@ -6,6 +6,7 @@ module Admin where
 import           Control.Applicative         (optional, (<$>), (<*>))
 import           Control.Monad               (mzero)
 import           Control.Monad.IO.Class      (liftIO)
+import Control.Exception.Base (catch)
 import           Data.Acid.Advanced          (query', update')
 import           Data.Yaml
 import           Data.Foldable               (forM_)
@@ -18,6 +19,9 @@ import           Text.Blaze                  (toValue, (!))
 import           Text.Blaze.Html5            (toHtml)
 import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
+import System.IO.Unsafe (unsafePerformIO)
+import System.Directory (doesFileExist)
+import Prelude hiding (catch)
 
 -- Democrify modules
 import           Acid
@@ -42,6 +46,40 @@ instance FromJSON Preferences where
                            v .: "duplicates"  <*>
                            v .: "autoshuffle"
     parseJSON _          = mzero
+
+defaultPreferences :: Preferences
+defaultPreferences = Preferences False False
+
+preferences :: IORef Preferences
+preferences = unsafePerformIO $ newIORef defaultPreferences
+
+-- |Updates preferences (in-memory and on disk)
+updatePrefs :: Preferences -> IO ()
+updatePrefs prefs = do
+    path <- prefsPath
+    encodeFile path prefs
+    writeIORef preferences prefs
+
+-- |Loads the preferences from disk. If no preference file exists
+--  'defaultPreferences' will be loaded.
+loadPrefs :: IO ()
+loadPrefs = do
+    path <- prefsPath
+    mprefs <- catch (decodeFile path) (initPrefs path)
+    case mprefs of
+        Nothing -> updatePrefs defaultPreferences
+        Just p  -> writeIORef preferences p
+  where
+    -- If for some reason the preferences can not be read
+    -- they will be (re-)initialized with default options
+    initPrefs :: FilePath -> ParseException -> IO (Maybe Preferences)
+    initPrefs path _ = do encodeFile path defaultPreferences
+                          return $ Just defaultPreferences
+
+
+-- |Gets the current preferences
+getPrefs :: IO Preferences
+getPrefs = readIORef preferences
 
 -- |This creates the admin queue view (including the remove and "Vote over 9000" option)
 adminQueue :: (Seq SpotifyTrack) -> H.Html

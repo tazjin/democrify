@@ -15,6 +15,7 @@ import           HSObjC
 
 -- Democrify modules
 import           Acid
+import           Admin
 import           Queue
 import           User
 
@@ -34,6 +35,7 @@ setResourcePath p = do
 runHaskellPart :: IO ()
 runHaskellPart = do
     path <- statePath
+    loadPrefs
     bracket (openLocalStateFrom path initialPlayQueue)
             (createCheckpointAndClose)
             (\acid -> do createArchive acid

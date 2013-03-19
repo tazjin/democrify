@@ -17,7 +17,6 @@ import           Control.Monad.Reader (ask)
 import           Control.Monad.State
 import           Data.Acid
 import           Data.Acid.Advanced
-import           Data.Acid.Local      (createCheckpointAndClose)
 import           Data.Data            (Data, Typeable)
 import           Data.SafeCopy
 import           Data.Sequence        (Seq (..), (<|), (|>))
@@ -25,9 +24,6 @@ import qualified Data.Sequence        as SQ
 import           Data.Text            (Text)
 import           Data.Typeable
 import           Data.Word
-import           System.Directory     (createDirectoryIfMissing,
-                                       getHomeDirectory)
-import           System.IO.Unsafe     (unsafePerformIO)
 
 -- * Data types
 

@@ -15,7 +15,6 @@ import           Data.Acid
 import           Data.Acid.Advanced     (update')
 import           Data.Data              (Data, Typeable)
 import           Data.IORef
-import           Data.Maybe             (isJust)
 import qualified Data.Sequence          as SQ
 import           Data.Random.Extras     (shuffleSeq)
 import           Data.Text              (Text, unpack)
@@ -25,7 +24,6 @@ import           System.Directory       (createDirectoryIfMissing,
                                          getHomeDirectory)
 import           System.IO.Unsafe       (unsafePerformIO)
 import           WebAPI
-
 import Data.Random.Source.DevRandom (DevRandom(..))
 import Data.Random (runRVar)
 
@@ -37,17 +35,6 @@ playQueue = unsafePerformIO $ newIORef undefined
 
 currentTrack :: IORef (Maybe SpotifyTrack)
 currentTrack = unsafePerformIO $ newIORef Nothing
-
--- |This is supplised with the NSArray that contains all the NSStrings to the URLs.
-loadPlaylist :: Id -> IO ()
-loadPlaylist pl = do
-    acid <- readIORef playQueue
-    runId $ do
-        trackIds <- fromId pl
-        mTracks <- liftIO $ getTrackData trackIds
-        let tracks = map (\(Just t) -> t) $ filter isJust mTracks
-        forM_ tracks $ \t -> update' acid $ AddTrackToQueue t
-    return ()
 
 getTrackData :: [Text] -> IO [Maybe SpotifyTrack]
 getTrackData trackIds = forM (map (T.drop 14) trackIds) $ \t -> do
@@ -63,12 +50,19 @@ shuffleQueue = do
     shuffled <- SQ.fromList <$> (runRVar (shuffleSeq queue) DevURandom)
     update acid $ PutQueue shuffled
 
--- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist
+-- |Gets the folder @~/Library/Application Support/Democrify/queue@ and creates it if it doesn't exist
 statePath :: IO FilePath
 statePath = do
-    path <- (++ "/Library/Application Support/Democrify/") <$> getHomeDirectory
+    path <- (++ "/Library/Application Support/Democrify/queue") <$> getHomeDirectory
     createDirectoryIfMissing False path
     return path
+
+-- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist
+prefsPath :: IO FilePath
+prefsPath = do
+    path <- (++ "/Library/Application Support/Democrify") <$> getHomeDirectory
+    createDirectoryIfMissing False path
+    return $ path ++ "/democrify.config"
 
 -- |Part of the DB loop that sorts the queue
 loopPartSort :: AcidState PlayQueue -> IO ()
@@ -102,6 +96,6 @@ setCurrentTrack track = do
     song <- identifyTrack track
     writeIORef currentTrack song
 
+
 foreign export ccall getNextTrack    :: IO Id
-foreign export ccall loadPlaylist    :: Id -> IO ()
 foreign export ccall shuffleQueue    :: IO ()
