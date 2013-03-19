@@ -48,8 +48,10 @@ defaultLayout  title headers body = ok $ toResponse $
             H.meta ! A.name "apple-mobile-web-app-capable" ! A.content "yes"
             H.meta ! A.name "viewport" ! A.content "width=device-width, user-scalable=no"
             -- Stylesheets
-            H.link ! A.href "foundation.min.css" ! A.rel "stylesheet"
-            H.link ! A.href "app.css" ! A.rel "stylesheet"
+            H.link ! A.href "/foundation.min.css" ! A.rel "stylesheet"
+            H.link ! A.href "/app.css" ! A.rel "stylesheet"
+            -- Favicon
+            H.link ! A.href "/democrify_small.png" ! A.rel "icon"
             -- Scripts
             H.script ! A.src "/foundation.min.js" $ mempty
             H.script ! A.src "/jquery.cookie.js" $ mempty
