@@ -93,7 +93,10 @@ adminQueue queue = do
                 H.div ! A.class_ "two columns mobile-one" $
                     H.img ! A.onclick "void(0)" ! A.class_ "next" ! A.id (toValue tId) ! A.src "http://placehold.it/80x80&text=NEXT"
                 H.div ! A.class_ "eight columns trackitem" $ do
-                    H.span ! A.class_ "track" $ toHtml track
+                    H.span ! A.class_ "track" $ do toHtml track
+                                                   toHtml (" (" :: Text)
+                                                   toHtml votes
+                                                   toHtml (")" :: Text)
                     H.br
                     H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
                                                     toHtml artist
