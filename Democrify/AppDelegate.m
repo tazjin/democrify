@@ -65,6 +65,10 @@
     
     //KVO current track
     [self.playbackManager addObserver:self forKeyPath:@"currentTrack" options:NSKeyValueObservingOptionNew context:nil];
+    
+    //KVO play status
+    [self.playbackManager addObserver:self forKeyPath:@"isPlaying" options:NSKeyValueObservingOptionNew context:nil];
+    
 
 
 }
@@ -186,6 +190,8 @@
         if (![[change objectForKey:NSKeyValueChangeNewKey] isKindOfClass:[SPTrack class]]) {
             [self playTrack:getNextTrack()];
         }
+    } else if ([keyPath isEqualToString:@"isPlaying"]) {
+        [self updateMenu];
     }
 }
 
