@@ -51,6 +51,10 @@
   color: white;
 }
 
+.queuenum {
+  font-weight: bold;
+}
+
 a {
   text-decoration: none;
   color: black;

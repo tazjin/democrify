@@ -84,7 +84,9 @@ queueView = do
         H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
             H.br
             current
-            H.br
+            H.div ! A.class_ "row" $ H.div ! A.class_ "ten columns" $
+                queueNum queue
+            H.hr
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
                     H.div ! A.class_ "two columns mobile-one" $
@@ -101,6 +103,11 @@ queueView = do
                 H.div ! A.class_ "ten columns trackitem" $ do
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
 
+queueNum :: SQ.Seq SpotifyTrack -> H.Html
+queueNum s | l == 1    = H.span ! A.class_ "queuenum" $ "1 song in the queue"
+           | otherwise = H.span ! A.class_ "queuenum" $ toHtml $ T.append (T.pack $ show $ l) " songs in the queue"
+  where
+    l = SQ.length s
 
 displayCurrentTrack :: IO H.Html
 displayCurrentTrack = do
