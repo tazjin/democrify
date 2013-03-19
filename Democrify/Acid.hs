@@ -154,7 +154,7 @@ upvoteTrack t = do
 sortQueue :: Update PlayQueue ()
 sortQueue = do
     q@PlayQueue{..} <- get
-    put $ q { queue = SQ.sort queue }
+    put $ q { queue = SQ.unstableSort queue }
 
 -- |Removes a track from the queue (admin only)
 removeTrack :: Text -> Update PlayQueue ()

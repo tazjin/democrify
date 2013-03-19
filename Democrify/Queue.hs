@@ -49,6 +49,7 @@ shuffleQueue = do
     queue <- query acid GetQueue
     shuffled <- SQ.fromList <$> (runRVar (shuffleSeq queue) DevURandom)
     update acid $ PutQueue shuffled
+    update acid SortQueue
 
 -- |Gets the folder @~/Library/Application Support/Democrify/queue@ and creates it if it doesn't exist
 statePath :: IO FilePath
