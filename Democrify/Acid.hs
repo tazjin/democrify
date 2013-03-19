@@ -120,18 +120,20 @@ getQueueHead = do
         else do put $ q { queue = SQ.drop 1 queue }
                 return $ SQ.index queue 0
 
--- |Adds a track to the tail of the queue. If the track is already in the
---  queue it will be upvoted.
-addTrackToQueue :: SpotifyTrack -> Update PlayQueue SpotifyTrack
-addTrackToQueue t = do
+-- |Adds a track to the tail of the queue. If duplicates are allowed
+--  a track can be added twice, if duplicates are disallowed existing
+--  tracks will be upvoted.
+addTrackToQueue :: Bool ->  SpotifyTrack -> Update PlayQueue SpotifyTrack
+addTrackToQueue d t = do
     q@PlayQueue{..} <- get
-    case SQ.findIndexL (t ==) queue of
-        Nothing -> put $ q { queue = queue |> t }
-        Just i  -> put $ q { queue = SQ.adjust upvote i queue }
+    if d then put $ q { queue = queue |> t }
+         else case SQ.findIndexL (t ==) queue of
+                Nothing -> put $ q { queue = queue |> t }
+                Just i  -> put $ q { queue = SQ.adjust upvote i queue }
     return t
 
 -- |Forcefully adds a track to the tail of the queue. This is only exposed in the
---  adminsitration interface
+--  administration interface
 forceAddTrack :: SpotifyTrack -> Update PlayQueue SpotifyTrack
 forceAddTrack t = do
     q@PlayQueue{..} <- get
@@ -180,7 +182,7 @@ data GetQueue = GetQueue
 data GetQueueHead = GetQueueHead
 
 data PutQueue = PutQueue (Seq SpotifyTrack)
-data AddTrackToQueue = AddTrackToQueue SpotifyTrack
+data AddTrackToQueue = AddTrackToQueue Bool SpotifyTrack
 data ForceAddTrack = ForceAddTrack SpotifyTrack
 data UpvoteTrack = UpvoteTrack Text
 data SortQueue = SortQueue
@@ -218,8 +220,8 @@ instance SafeCopy PutQueue where
     getCopy = contain $ PutQueue <$> safeGet
 
 instance SafeCopy AddTrackToQueue where
-    putCopy (AddTrackToQueue t) = contain $ safePut t
-    getCopy = contain $ AddTrackToQueue <$> safeGet
+    putCopy (AddTrackToQueue d t) = contain $ (safePut d >> safePut t)
+    getCopy = contain $ AddTrackToQueue <$> safeGet <*> safeGet
 
 instance SafeCopy ForceAddTrack where
     putCopy (ForceAddTrack t) = contain $ safePut t
@@ -307,7 +309,7 @@ instance IsAcidic PlayQueue where
                  , QueryEvent (\GetQueue     -> getQueue)
                  , UpdateEvent (\(PutQueue q) -> putQueue q)
                  , UpdateEvent (\GetQueueHead -> getQueueHead)
-                 , UpdateEvent (\(AddTrackToQueue t) -> addTrackToQueue t)
+                 , UpdateEvent (\(AddTrackToQueue d t) -> addTrackToQueue d t)
                  , UpdateEvent (\(ForceAddTrack t) -> forceAddTrack t)
                  , UpdateEvent (\(UpvoteTrack t) -> upvoteTrack t)
                  , UpdateEvent (\SortQueue   -> sortQueue)

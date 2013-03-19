@@ -173,12 +173,12 @@ upvoteHandler song = do
 addHandler :: Text -> ServerPart Response
 addHandler trackId = do
     track <- liftIO $ identifyTrack trackId
-    shuffleOnLoad <- autoShuffle <$> liftIO getPrefs
+    Preferences{..} <- liftIO getPrefs
     case track of
         Nothing  -> notFound $ toResponse $ ("notfound" :: Text)
         (Just t) -> do acid <- liftIO $ readIORef playQueue
-                       when shuffleOnLoad (liftIO shuffleQueue)
-                       update' acid $ AddTrackToQueue t
+                       when autoShuffle (liftIO shuffleQueue)
+                       update' acid $ AddTrackToQueue duplicates t
                        ok $ toResponse $ ("ok" :: Text)
 
 adminHandler :: ServerPart Response
@@ -193,13 +193,13 @@ adminHandler = do
 loadPlaylist :: Id -> IO ()
 loadPlaylist pl = do
     acid <- readIORef playQueue
-    shuffleOnLoad <- autoShuffle <$> liftIO getPrefs
+    Preferences{..} <- liftIO getPrefs
     runId $ do
         trackIds <- fromId pl
         mTracks <- liftIO $ getTrackData trackIds
         let tracks = map (\(Just t) -> t) $ filter isJust mTracks
-        forM_ tracks $ \t -> update' acid $ AddTrackToQueue t
-    when shuffleOnLoad shuffleQueue
+        forM_ tracks $ \t -> update' acid $ AddTrackToQueue duplicates t
+    when autoShuffle shuffleQueue
     return ()
 
 -- * Happstack things
