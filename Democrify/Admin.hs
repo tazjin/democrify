@@ -3,11 +3,14 @@
 
 module Admin where
 
-import           Control.Applicative         (optional, (<$>))
+import           Control.Applicative         (optional, (<$>), (<*>))
+import           Control.Monad               (mzero)
 import           Control.Monad.IO.Class      (liftIO)
 import           Data.Acid.Advanced          (query', update')
+import           Data.Yaml
 import           Data.Foldable               (forM_)
 import           Data.IORef
+import           Data.Sequence               (Seq (..))
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T
 import           Happstack.Server
@@ -15,11 +18,30 @@ import           Text.Blaze                  (toValue, (!))
 import           Text.Blaze.Html5            (toHtml)
 import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
-import           Data.Sequence        (Seq (..))
 
 -- Democrify modules
 import           Acid
 import           Queue
+
+-- |Democrify preferences type
+data Preferences = Preferences {
+      duplicates  :: Bool -- ^ If this is set to @True@, a duplicate song will be added
+                          --   to the queue again. If it is @False@ a duplicate song
+                          --   will be upvoted.
+    , autoShuffle :: Bool -- ^ If this is @True@ the queue will be automatically re-shuffled
+                          --   after a song or a playlist is added
+}
+
+-- JSON instances to be used for YAML config files
+instance ToJSON Preferences where
+    toJSON Preferences{..} = object [ "duplicates"  .= duplicates
+                                    , "autoshuffle" .= autoShuffle ]
+
+instance FromJSON Preferences where
+    parseJSON (Object v) = Preferences        <$>
+                           v .: "duplicates"  <*>
+                           v .: "autoshuffle"
+    parseJSON _          = mzero
 
 -- |This creates the admin queue view (including the remove and "Vote over 9000" option)
 adminQueue :: (Seq SpotifyTrack) -> H.Html
