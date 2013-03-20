@@ -1,2 +1,3 @@
 * evaluate what can be moved into State to get rid of unsafePerformIO
 * implement shuffle atomically (fun!)
+* implement preferences UI
