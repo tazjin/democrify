@@ -259,8 +259,14 @@
     NSMutableArray *tracksM = [NSMutableArray arrayWithCapacity:[p.items count]];
     for (SPPlaylistItem *i in p.items){
         if (i.itemURLType == SP_LINKTYPE_TRACK) {
-            NSString *iUrl = [i.itemURL absoluteString];
-            [tracksM addObject:iUrl];
+            [SPAsyncLoading waitUntilLoaded:i.item timeout:10.0 then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+                for (SPTrack *t in loadedItems){
+                    if (t.availability == SP_TRACK_AVAILABILITY_AVAILABLE) {
+                        NSString *iUrl = [i.itemURL absoluteString];
+                        [tracksM addObject:iUrl];
+                    }
+                }
+            }];
         }
     }
     
@@ -301,6 +307,12 @@
 // Shuffle the queue
 - (IBAction)ibShuffleQueue:(id)sender {
     shuffleQueue();
+}
+
+// reload the playlists
+- (IBAction)reloadPlaylists:(id)sender {
+    [playlistsMenu removeAllItems];
+    [self updatePlaylists];
 }
 
 //Launch user UI

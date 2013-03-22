@@ -45,6 +45,7 @@ void loadPlaylist(NSArray *tracks);
 - (IBAction)userUI:(id)sender;
 - (IBAction)emptyQueue:(id)sender;
 - (IBAction)ibShuffleQueue:(id)sender;
+- (IBAction)reloadPlaylists:(id)sender;
 
 #pragma mark -
 
