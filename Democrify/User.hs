@@ -131,9 +131,9 @@ displayCurrentTrack = do
                         H.span ! A.class_ "artist" $ do toHtml ("by " :: Text)
                                                         toHtml artist
     return $ H.div ! A.class_ "row current" $ do
-        H.div ! A.class_ "two columns mobile-one" $
+        H.div ! A.class_ "small-3 large-2 columns" $
             H.img ! A.src "/current.gif"
-        H.div ! A.class_ "ten columns" $ content
+        H.div ! A.class_ "large-10 columns" $ content
 
 -- |Page that displays the song adding interface
 addSongView :: ServerPart Response
