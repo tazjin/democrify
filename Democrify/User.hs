@@ -57,6 +57,7 @@ defaultLayout  title headers body = ok $ toResponse $
             -- Favicon
             H.link ! A.href "/democrify_small.png" ! A.rel "icon"
             -- Scripts
+            H.script ! A.src "/jquery.js" $ mempty
             H.script ! A.src "/foundation.min.js" $ mempty
             H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/app.js" $ mempty
