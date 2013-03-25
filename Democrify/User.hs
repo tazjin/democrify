@@ -77,7 +77,7 @@ defaultLayout  title headers body = ok $ toResponse $
                         H.li $
                             H.a ! A.href "/add" $ toHtml ("Add song" :: Text)
             body
-            H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ H.footer $ do
+            H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ H.footer $ do
                 H.hr
                 H.p ! A.style "text-align:center;" $ "Powered by Democrify"
 
@@ -88,26 +88,26 @@ queueView = do
     current <- liftIO $ displayCurrentTrack
     queue <- query' acid GetQueue
     defaultLayout "Democrify - Queue" [] $ do
-        H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
+        H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ do
             H.br
             current
-            H.div ! A.class_ "row" $ H.div ! A.class_ "ten columns" $
+            H.div ! A.class_ "row" $ H.div ! A.class_ "small-10 columns" $
                 queueNum queue
             H.hr
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
-                    H.div ! A.class_ "two columns mobile-one" $
+                    H.div ! A.class_ "small-3 large-2 columns" $
                         H.img ! A.onclick "void(0)" ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
-                    H.div ! A.class_ "ten columns trackitem" $ do
+                    H.div ! A.class_ "large-10 columns trackitem" $ do
                         H.span ! A.class_ "track" $ toHtml track
                         H.br
                         H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
                                                         toHtml artist
                 H.hr)
             H.div ! A.class_ "row" $ do
-                H.div ! A.class_ "two columns mobile-one" $
+                H.div ! A.class_ "small-3 large-2 columns" $
                     H.img ! A.src "http://placehold.it/80x80&text=:("
-                H.div ! A.class_ "ten columns trackitem" $ do
+                H.div ! A.class_ "large-10 columns trackitem" $ do
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
 
 queueNum :: SQ.Seq SpotifyTrack -> H.Html
