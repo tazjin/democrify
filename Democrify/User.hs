@@ -64,14 +64,14 @@ defaultLayout  title headers body = ok $ toResponse $
             sequence_ headers
         H.body $ do
             H.nav ! A.class_ "top-bar" $ do
-                H.ul $ do
-                    H.li $
-                        H.a ! A.href "/" $ H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;"
+                H.ul ! A.class_ "title-area" $ do
                     H.li ! A.class_ "name" $
-                        H.h1 $ H.a ! A.href "/" $ toHtml ("Democrify" :: Text)
-                    H.li ! A.class_ "toggle-topbar" $
-                        H.a ! A.href "#" $ mempty
-                H.section $ do
+                        H.h1 $ H.a ! A.href "/" $ do
+                            H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;float:left;"
+                            H.span ! A.style "margin-left:5px;float:right;" $ toHtml ("Democrify" :: Text)
+                    H.li ! A.class_ "toggle-topbar menu-icon" $
+                        H.a ! A.href "#" $ H.span $ "menu"
+                H.section ! A.class_ "top-bar-section" $ do
                     H.ul ! A.class_ "right" $ do
                         H.li ! A.class_ "divider" $ mempty
                         H.li $
