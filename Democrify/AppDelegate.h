@@ -43,6 +43,7 @@ void loadPlaylist(NSArray *tracks);
 - (IBAction)pauseButton:(id)sender;
 - (IBAction)adminUI:(id)sender;
 - (IBAction)userUI:(id)sender;
+- (IBAction)openPrefs:(id)sender;
 - (IBAction)emptyQueue:(id)sender;
 - (IBAction)ibShuffleQueue:(id)sender;
 - (IBAction)reloadPlaylists:(id)sender;

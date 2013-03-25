@@ -325,6 +325,10 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/admin"]];
 }
 
+//Open preferences
+- (IBAction)openPrefs:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/admin/config"]];
+}
 
 - (IBAction)login:(id)sender {
 	

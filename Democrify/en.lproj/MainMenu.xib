@@ -1608,7 +1608,7 @@
 					</object>
 					<object class="NSMenuItem" id="722011397">
 						<reference key="NSMenu" ref="661934826"/>
-						<string key="NSTitle">User UI</string>
+						<string key="NSTitle">Queue (User)</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -1616,7 +1616,15 @@
 					</object>
 					<object class="NSMenuItem" id="182993934">
 						<reference key="NSMenu" ref="661934826"/>
-						<string key="NSTitle">Admin UI</string>
+						<string key="NSTitle">Queue (Admin)</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="831897219">
+						<reference key="NSMenu" ref="661934826"/>
+						<string key="NSTitle">Preferences</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -1700,7 +1708,6 @@
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{82, 32}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<bool key="NSEnabled">YES</bool>
 				<object class="NSButtonCell" key="NSCell" id="408587120">
@@ -1710,6 +1717,29 @@
 					<reference key="NSSupport" ref="1049301768"/>
 					<string key="NSCellIdentifier">_NS:9</string>
 					<reference key="NSControlView" ref="670000143"/>
+					<int key="NSButtonFlags">-2038284288</int>
+					<int key="NSButtonFlags2">129</int>
+					<string key="NSAlternateContents"/>
+					<string key="NSKeyEquivalent"/>
+					<int key="NSPeriodicDelay">200</int>
+					<int key="NSPeriodicInterval">25</int>
+				</object>
+				<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+			</object>
+			<object class="NSButton" id="413489048">
+				<reference key="NSNextResponder"/>
+				<int key="NSvFlags">268</int>
+				<string key="NSFrameSize">{82, 32}</string>
+				<reference key="NSSuperview"/>
+				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<bool key="NSEnabled">YES</bool>
+				<object class="NSButtonCell" key="NSCell" id="857716492">
+					<int key="NSCellFlags">67108864</int>
+					<int key="NSCellFlags2">134217728</int>
+					<string key="NSContents">Button</string>
+					<reference key="NSSupport" ref="1049301768"/>
+					<string key="NSCellIdentifier">_NS:9</string>
+					<reference key="NSControlView" ref="413489048"/>
 					<int key="NSButtonFlags">-2038284288</int>
 					<int key="NSButtonFlags2">129</int>
 					<string key="NSAlternateContents"/>
@@ -2529,6 +2559,14 @@
 						<reference key="destination" ref="956266792"/>
 					</object>
 					<int key="connectionID">677</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openPrefs:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="831897219"/>
+					</object>
+					<int key="connectionID">681</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4063,6 +4101,7 @@
 							<reference ref="605297374"/>
 							<reference ref="98837300"/>
 							<reference ref="956266792"/>
+							<reference ref="831897219"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -4303,6 +4342,24 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">676</int>
 						<reference key="object" ref="956266792"/>
+						<reference key="parent" ref="661934826"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">678</int>
+						<reference key="object" ref="413489048"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="857716492"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">679</int>
+						<reference key="object" ref="857716492"/>
+						<reference key="parent" ref="413489048"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">680</int>
+						<reference key="object" ref="831897219"/>
 						<reference key="parent" ref="661934826"/>
 					</object>
 				</array>
@@ -4560,6 +4617,9 @@
 				<string key="673.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="674.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="676.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="678.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="679.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="680.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4576,7 +4636,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">677</int>
+			<int key="maxID">681</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4588,6 +4648,7 @@
 						<string key="emptyQueue:">id</string>
 						<string key="ibShuffleQueue:">id</string>
 						<string key="login:">id</string>
+						<string key="openPrefs:">id</string>
 						<string key="pauseButton:">id</string>
 						<string key="playButton:">id</string>
 						<string key="quitFromAction:">id</string>
@@ -4610,6 +4671,10 @@
 						</object>
 						<object class="IBActionInfo" key="login:">
 							<string key="name">login:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openPrefs:">
+							<string key="name">openPrefs:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="pauseButton:">

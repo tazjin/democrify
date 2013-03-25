@@ -189,6 +189,11 @@ adminHandler = do
                   [ H.script ! A.src "/admin.js" $ mempty ]
                   (adminQueue queue)
 
+showPrefs :: ServerPart Response
+showPrefs = do
+    prefs <- liftIO getPrefs
+    defaultLayout "Democrify - Settings" [] (adminPrefs prefs)
+
 -- |This is supplised with the NSArray that contains all the NSStrings to the URLs.
 loadPlaylist :: Id -> IO ()
 loadPlaylist pl = do
@@ -215,6 +220,7 @@ democrify = liftIO webResources >>= \resPath -> msum
     , dir "admin" $ nullDir >> host "localhost:8686" adminHandler
     , dir "admin" $ dir "vote" $ host "localhost:8686" $ path $ \song -> adminUpvoteHandler song
     , dir "admin" $ dir "delete" $ host "localhost:8686" $ path $ \song -> adminDeleteHandler song
+    , dir "admin" $ dir "config" $ host "localhost:8686" $ showPrefs
     ]
 
 runServer :: IO ()

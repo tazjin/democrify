@@ -6,6 +6,7 @@ module Admin where
 import           Control.Applicative         (optional, (<$>), (<*>))
 import           Control.Monad               (mzero)
 import           Control.Monad.IO.Class      (liftIO)
+import           Data.Monoid                 (mempty)
 import Control.Exception.Base (catch)
 import           Data.Acid.Advanced          (query', update')
 import           Data.Yaml
@@ -98,18 +99,34 @@ adminQueue queue = do
                     H.img ! A.onclick "void(0)" ! A.class_ "next" ! A.id (toValue tId) ! A.src "http://placehold.it/80x80&text=NEXT"
                 H.div ! A.class_ "eight columns trackitem" $ do
                     H.span ! A.class_ "track" $ do toHtml track
-                                                   toHtml (" (" :: Text)
+                                                   " ("
                                                    toHtml votes
-                                                   toHtml (")" :: Text)
+                                                   ")"
                     H.br
-                    H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
+                    H.span ! A.class_ "artist" $ do " by "
                                                     toHtml artist
             H.hr)
         H.div ! A.class_ "row" $ do
             H.div ! A.class_ "two columns mobile-one" $
                 H.img ! A.src "http://placehold.it/80x80&text=:("
             H.div ! A.class_ "ten columns trackitem" $ do
-                H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
+                H.span ! A.class_ "oh-no" $ "Oh no! There is nothing more in the queue! What will happen now?"
+
+-- |Admin web interface with the ability to set the few preferences that we have
+adminPrefs :: Preferences -> H.Html
+adminPrefs Preferences{..} = do
+  H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
+    H.div ! A.class_ "switch small-6" $ do
+      H.input ! A.id "doff" ! A.name "duplicates" ! A.type_ "radio" ! A.checked ""
+      H.label ! A.for "doff" ! A.onclick "" $ "Duplicates disallowed"
+
+      H.input ! A.id "don" ! A.name "duplicates" ! A.type_ "radio"
+      H.label ! A.for "don" ! A.onclick "" $ "Duplicates allowed"
+
+      H.span $ mempty
+    H.div ! A.class_ "six columns" $
+      H.p $ "If duplicates are allowed a song can be added to the queue twice."
+
 
 -- |Deletes a track when requested by the admin
 adminDeleteHandler :: Text -- ^ Track id
