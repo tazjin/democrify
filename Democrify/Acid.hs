@@ -111,14 +111,19 @@ putQueue q = put $ PlayQueue q
 
 -- * Acid state update functions
 
--- |Gets the first song in the queue and removes it from the queue.
-getQueueHead :: Update PlayQueue SpotifyTrack
-getQueueHead = do
+-- |Gets the first song in the queue. Worst function in the app!
+getQueueHead :: Bool -> Update PlayQueue SpotifyTrack
+getQueueHead repeatAll = do
     q@PlayQueue{..} <- get
     if SQ.null queue
         then return polkaroll
-        else do put $ q { queue = SQ.drop 1 queue }
-                return $ SQ.index queue 0
+        else if repeatAll
+                then let next = SQ.index queue 0
+                         newqueue = SQ.drop 1 queue
+                     in do put $ q { queue = newqueue |> next } -- re-add the song
+                           return next
+                else do put $ q { queue = SQ.drop 1 queue }
+                        return $ SQ.index queue 0
 
 -- |Adds a track to the tail of the queue. If duplicates are allowed
 --  a track can be added twice, if duplicates are disallowed existing
@@ -130,14 +135,6 @@ addTrackToQueue d t = do
          else case SQ.findIndexL (t ==) queue of
                 Nothing -> put $ q { queue = queue |> t }
                 Just i  -> put $ q { queue = SQ.adjust upvote i queue }
-    return t
-
--- |Forcefully adds a track to the tail of the queue. This is only exposed in the
---  administration interface
-forceAddTrack :: SpotifyTrack -> Update PlayQueue SpotifyTrack
-forceAddTrack t = do
-    q@PlayQueue{..} <- get
-    put $ q { queue = t <| queue }
     return t
 
 -- |Upvotes a track and does nothing if the track is not in the queue
@@ -179,11 +176,10 @@ emptyQueue = do
 -- * Acid state's nitty gritty details
 data PeekNext = PeekNext
 data GetQueue = GetQueue
-data GetQueueHead = GetQueueHead
 
+data GetQueueHead = GetQueueHead Bool
 data PutQueue = PutQueue (Seq SpotifyTrack)
 data AddTrackToQueue = AddTrackToQueue Bool SpotifyTrack
-data ForceAddTrack = ForceAddTrack SpotifyTrack
 data UpvoteTrack = UpvoteTrack Text
 data SortQueue = SortQueue
 data RemoveTrack = RemoveTrack Text
@@ -196,7 +192,6 @@ deriving instance Typeable GetQueueHead
 
 deriving instance Typeable PutQueue
 deriving instance Typeable AddTrackToQueue
-deriving instance Typeable ForceAddTrack
 deriving instance Typeable UpvoteTrack
 deriving instance Typeable SortQueue
 deriving instance Typeable RemoveTrack
@@ -212,8 +207,8 @@ instance SafeCopy GetQueue where
     getCopy = contain $ return GetQueue
 
 instance SafeCopy GetQueueHead where
-    putCopy GetQueueHead = contain $ return ()
-    getCopy = contain $ return GetQueueHead
+    putCopy (GetQueueHead b) = contain $ safePut b
+    getCopy = contain $ GetQueueHead <$> safeGet
 
 instance SafeCopy PutQueue where
     putCopy (PutQueue q) = contain $ safePut q
@@ -222,10 +217,6 @@ instance SafeCopy PutQueue where
 instance SafeCopy AddTrackToQueue where
     putCopy (AddTrackToQueue d t) = contain $ (safePut d >> safePut t)
     getCopy = contain $ AddTrackToQueue <$> safeGet <*> safeGet
-
-instance SafeCopy ForceAddTrack where
-    putCopy (ForceAddTrack t) = contain $ safePut t
-    getCopy = contain $ ForceAddTrack <$> safeGet
 
 instance SafeCopy UpvoteTrack where
     putCopy (UpvoteTrack t) = contain $ safePut t
@@ -263,10 +254,6 @@ instance Method AddTrackToQueue where
     type MethodResult AddTrackToQueue = SpotifyTrack
     type MethodState AddTrackToQueue = PlayQueue
 
-instance Method ForceAddTrack where
-    type MethodResult ForceAddTrack = SpotifyTrack
-    type MethodState ForceAddTrack = PlayQueue
-
 instance Method PutQueue where
     type MethodResult PutQueue = ()
     type MethodState PutQueue = PlayQueue
@@ -297,7 +284,6 @@ instance QueryEvent GetQueue
 instance UpdateEvent PutQueue
 instance UpdateEvent GetQueueHead
 instance UpdateEvent AddTrackToQueue
-instance UpdateEvent ForceAddTrack
 instance UpdateEvent UpvoteTrack
 instance UpdateEvent SortQueue
 instance UpdateEvent RemoveTrack
@@ -305,14 +291,13 @@ instance UpdateEvent AdminUpvote
 instance UpdateEvent EmptyQueue
 
 instance IsAcidic PlayQueue where
-    acidEvents = [ QueryEvent (\PeekNext     -> peekNext)
-                 , QueryEvent (\GetQueue     -> getQueue)
-                 , UpdateEvent (\(PutQueue q) -> putQueue q)
-                 , UpdateEvent (\GetQueueHead -> getQueueHead)
-                 , UpdateEvent (\(AddTrackToQueue d t) -> addTrackToQueue d t)
-                 , UpdateEvent (\(ForceAddTrack t) -> forceAddTrack t)
-                 , UpdateEvent (\(UpvoteTrack t) -> upvoteTrack t)
-                 , UpdateEvent (\SortQueue   -> sortQueue)
-                 , UpdateEvent (\(RemoveTrack t) -> removeTrack t)
-                 , UpdateEvent (\(AdminUpvote t) -> adminUpvote t)
-                 , UpdateEvent (\EmptyQueue -> emptyQueue)]
+    acidEvents = [ QueryEvent (\PeekNext                -> peekNext)
+                 , QueryEvent (\GetQueue                -> getQueue)
+                 , UpdateEvent (\(PutQueue q)           -> putQueue q)
+                 , UpdateEvent (\(GetQueueHead b)       -> getQueueHead b)
+                 , UpdateEvent (\(AddTrackToQueue d t)  -> addTrackToQueue d t)
+                 , UpdateEvent (\(UpvoteTrack t)        -> upvoteTrack t)
+                 , UpdateEvent (\SortQueue              -> sortQueue)
+                 , UpdateEvent (\(RemoveTrack t)        -> removeTrack t)
+                 , UpdateEvent (\(AdminUpvote t)        -> adminUpvote t)
+                 , UpdateEvent (\EmptyQueue             -> emptyQueue)]

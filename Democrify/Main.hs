@@ -25,6 +25,16 @@ extEmptyQueue = do
     acid <- readIORef playQueue
     update acid EmptyQueue
 
+-- |Returns the Spotify ID for the next track and updates the 'currentTrack'-
+--  This is a prime example of what Haskell is not supposed to look like! :-)
+getNextTrack :: IO Id
+getNextTrack = do
+    repeatAll <- fmap repeatAll getPrefs
+    acid <- readIORef playQueue
+    next <- update acid $ GetQueueHead repeatAll
+    setCurrentTrack $ tId next
+    runId $ return $ tId next
+
 setResourcePath :: Id -> IO ()
 setResourcePath p = do
     runId $ do
@@ -50,3 +60,4 @@ main = do
 
 foreign export ccall extEmptyQueue   :: IO ()
 foreign export ccall setResourcePath :: Id -> IO ()
+foreign export ccall getNextTrack    :: IO Id

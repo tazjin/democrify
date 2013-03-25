@@ -34,21 +34,26 @@ data Preferences = Preferences {
                           --   will be upvoted.
     , autoShuffle :: Bool -- ^ If this is @True@ the queue will be automatically re-shuffled
                           --   after a song or a playlist is added
+    , repeatAll   :: Bool -- ^ If this is @True@ the queue will be "looped", i.e. a song that
+                          --   has been played will be added to the queue again. Good for long
+                          --   parties with small playlists.
 }
 
 -- JSON instances to be used for YAML config files
 instance ToJSON Preferences where
     toJSON Preferences{..} = object [ "duplicates"  .= duplicates
-                                    , "autoshuffle" .= autoShuffle ]
+                                    , "autoshuffle" .= autoShuffle
+                                    , "repeatall"   .= repeatAll ]
 
 instance FromJSON Preferences where
     parseJSON (Object v) = Preferences        <$>
                            v .: "duplicates"  <*>
-                           v .: "autoshuffle"
+                           v .: "autoshuffle" <*>
+                           v .: "repeatall"
     parseJSON _          = mzero
 
 defaultPreferences :: Preferences
-defaultPreferences = Preferences False False
+defaultPreferences = Preferences False False False
 
 preferences :: IORef Preferences
 preferences = unsafePerformIO $ newIORef defaultPreferences
@@ -75,7 +80,6 @@ loadPrefs = do
     initPrefs :: FilePath -> ParseException -> IO (Maybe Preferences)
     initPrefs path _ = do encodeFile path defaultPreferences
                           return $ Just defaultPreferences
-
 
 -- |Gets the current preferences
 getPrefs :: IO Preferences

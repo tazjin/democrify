@@ -81,15 +81,6 @@ dbLoop n = do
     dbLoop newN
 
 
--- |Returns the Spotify ID for the next track and updates the 'currentTrack'-
---  This is a prime example of what Haskell is not supposed to look like! :-)
-getNextTrack :: IO Id
-getNextTrack = do
-    acid <- readIORef playQueue
-    next <- update acid GetQueueHead
-    setCurrentTrack $ tId next
-    runId $ return $ tId next
-
 -- |Sets the currently playing track by requesting it from the Spotify Lookup API
 --  based on the track ID. If the track is not found no track will be set.
 setCurrentTrack :: Text -> IO ()
@@ -97,6 +88,4 @@ setCurrentTrack track = do
     song <- identifyTrack track
     writeIORef currentTrack song
 
-
-foreign export ccall getNextTrack    :: IO Id
 foreign export ccall shuffleQueue    :: IO ()
