@@ -115,16 +115,41 @@ adminQueue queue = do
 -- |Admin web interface with the ability to set the few preferences that we have
 adminPrefs :: Preferences -> H.Html
 adminPrefs Preferences{..} = do
-  H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
-    H.div ! A.class_ "switch small-6" $ do
-      H.input ! A.id "doff" ! A.name "duplicates" ! A.type_ "radio" ! A.checked ""
-      H.label ! A.for "doff" ! A.onclick "" $ "Duplicates disallowed"
+-- repeat all
+  H.div ! A.class_ "row" $ do
+    H.div ! A.class_ "switch small-4 columns" $ do
+      H.input ! A.id "roff" ! A.name "repeat" ! A.type_ "radio" ! A.checked ""
+      H.label ! A.for "roff" ! A.onclick "" $ "Repeat off"
 
-      H.input ! A.id "don" ! A.name "duplicates" ! A.type_ "radio"
-      H.label ! A.for "don" ! A.onclick "" $ "Duplicates allowed"
+      H.input ! A.id "ron" ! A.name "repeat" ! A.type_ "radio"
+      H.label ! A.for "ron" ! A.onclick "" $ "Repeat on"
 
       H.span $ mempty
-    H.div ! A.class_ "six columns" $
+    H.div ! A.class_ "small-8 columns" $
+      H.p $ "If repeat is activated a played song will be re-added at the end of the queue."
+-- auto shuffle
+  H.div ! A.class_ "row" $ do
+    H.div ! A.class_ "switch small-4 columns" $ do
+      H.input ! A.id "soff" ! A.name "shuffle" ! A.type_ "radio" ! A.checked ""
+      H.label ! A.for "soff" ! A.onclick "" $ "Shuffle off"
+
+      H.input ! A.id "son" ! A.name "shuffle" ! A.type_ "radio"
+      H.label ! A.for "son" ! A.onclick "" $ "Shuffle on"
+
+      H.span $ mempty
+    H.div ! A.class_ "small-8 columns" $
+      H.p $ "When shuffle is activated the queue will be shuffled when a song / playlist is added."
+-- duplicates
+  H.div ! A.class_ "row" $ do
+    H.div ! A.class_ "switch small-4 columns" $ do
+      H.input ! A.id "doff" ! A.name "duplicates" ! A.type_ "radio" ! A.checked ""
+      H.label ! A.for "doff" ! A.onclick "" $ "Duplicates off"
+
+      H.input ! A.id "don" ! A.name "duplicates" ! A.type_ "radio"
+      H.label ! A.for "don" ! A.onclick "" $ "Duplicates on"
+
+      H.span $ mempty
+    H.div ! A.class_ "small-8 columns" $
       H.p $ "If duplicates are allowed a song can be added to the queue twice."
 
 
