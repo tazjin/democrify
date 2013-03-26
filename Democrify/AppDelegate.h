@@ -5,7 +5,9 @@ NSString *getNextTrack();
 void setResourcePath(NSString* path);
 void extEmptyQueue(); // from Haskell
 void shuffleQueue();  // from Haskell
+void gracefulQuit();  // from Haskell
 void loadPlaylist(NSArray *tracks);
+
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, SPSessionDelegate> {
 @private

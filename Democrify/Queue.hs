@@ -13,6 +13,7 @@ import           Control.Monad                (forM, forM_)
 import           Control.Monad.IO.Class       (liftIO)
 import           Data.Acid
 import           Data.Acid.Advanced           (update')
+import           Data.Acid.Local              (createCheckpointAndClose, createArchive)
 import           Data.Data                    (Data, Typeable)
 import           Data.IORef
 import           Data.Random                  (runRVar)
@@ -50,6 +51,13 @@ shuffleQueue = do
     shuffled <- SQ.fromList <$> (runRVar (shuffleSeq queue) DevURandom)
     update acid $ PutQueue shuffled
     update acid SortQueue
+
+-- |Gracefully shuts down the state and archives
+gracefulQuit :: IO ()
+gracefulQuit = do
+    acid <- readIORef playQueue
+    createArchive acid
+    createCheckpointAndClose acid
 
 -- |Gets the folder @~/Library/Application Support/Democrify/queue@ and creates it if it doesn't exist
 statePath :: IO FilePath
@@ -89,3 +97,4 @@ setCurrentTrack track = do
     writeIORef currentTrack song
 
 foreign export ccall shuffleQueue    :: IO ()
+foreign export ccall gracefulQuit    :: IO ()

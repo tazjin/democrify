@@ -346,6 +346,7 @@
 
 // Invoked by clicking the "Quit" button in the UI.
 - (IBAction)quitFromAction:(id)sender {
+    gracefulQuit();
 	[NSApp terminate:self];
 }
 

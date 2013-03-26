@@ -43,6 +43,11 @@ void extEmptyQueue()
     return;
 }
 
+void gracefulQuit()
+{
+    return;
+}
+
 void shuffleQueue()
 {
     return;
