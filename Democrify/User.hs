@@ -79,8 +79,8 @@ defaultLayout  title headers body = ok $ toResponse $
                 H.p ! A.style "text-align:center;" $ "Powered by Democrify"
             --H.script $ "document.write('<script src=/js/vendor/' + ('__proto__' in {} ? 'zepto' : 'jquery') + '.js><\\/script>');"
             H.script ! A.src "/jquery.js" $ mempty
-            --H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/foundation.min.js" $ mempty
+            H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/app.js" $ mempty
 -- |Displays the user facing queue list
 queueView :: ServerPart Response
