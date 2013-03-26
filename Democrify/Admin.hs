@@ -89,15 +89,15 @@ getPrefs = readIORef preferences
 -- |This creates the admin queue view (including the remove and "Vote over 9000" option)
 adminQueue :: (Seq SpotifyTrack) -> H.Html
 adminQueue queue = do
-    H.div ! A.class_ "row" $ H.div ! A.class_ "twelve columns" $ do
+    H.div ! A.class_ "row" $ do
         H.br
         forM_ queue (\SpotifyTrack{..} -> do
             H.div ! A.class_ "row" ! A.id "adminc" $ do
-                H.div ! A.class_ "two columns mobile-one" $
+                H.div ! A.class_ "large-2 small-3 columns" $
                     H.img ! A.onclick "void(0)" ! A.class_ "delete" ! A.id (toValue tId) ! A.src "http://placehold.it/80x80&text=DELETE"
-                H.div ! A.class_ "two columns mobile-one" $
+                H.div ! A.class_ "large-2 small-3 columns" $
                     H.img ! A.onclick "void(0)" ! A.class_ "next" ! A.id (toValue tId) ! A.src "http://placehold.it/80x80&text=NEXT"
-                H.div ! A.class_ "eight columns trackitem" $ do
+                H.div ! A.class_ "large-8 columns trackitem" $ do
                     H.span ! A.class_ "track" $ do toHtml track
                                                    " ("
                                                    toHtml votes
@@ -107,9 +107,9 @@ adminQueue queue = do
                                                     toHtml artist
             H.hr)
         H.div ! A.class_ "row" $ do
-            H.div ! A.class_ "two columns mobile-one" $
+            H.div ! A.class_ "large-2 small-3 columns" $
                 H.img ! A.src "http://placehold.it/80x80&text=:("
-            H.div ! A.class_ "ten columns trackitem" $ do
+            H.div ! A.class_ "large-10 columns trackitem" $ do
                 H.span ! A.class_ "oh-no" $ "Oh no! There is nothing more in the queue! What will happen now?"
 
 -- |Admin web interface with the ability to set the few preferences that we have
