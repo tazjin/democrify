@@ -26,3 +26,5 @@ DerivedData
 *.sublime-workspace
 
 appkey.c
+
+Democrify/Setup.hs

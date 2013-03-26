@@ -4,25 +4,25 @@
 module Admin where
 
 import           Control.Applicative         (optional, (<$>), (<*>))
+import           Control.Exception.Base      (catch)
 import           Control.Monad               (mzero)
 import           Control.Monad.IO.Class      (liftIO)
-import           Data.Monoid                 (mempty)
-import Control.Exception.Base (catch)
 import           Data.Acid.Advanced          (query', update')
-import           Data.Yaml
 import           Data.Foldable               (forM_)
 import           Data.IORef
+import           Data.Monoid                 (mempty)
 import           Data.Sequence               (Seq (..))
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T
+import           Data.Yaml
 import           Happstack.Server
+import           Prelude                     hiding (catch)
+import           System.Directory            (doesFileExist)
+import           System.IO.Unsafe            (unsafePerformIO)
 import           Text.Blaze                  (toValue, (!))
 import           Text.Blaze.Html5            (toHtml)
 import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
-import System.IO.Unsafe (unsafePerformIO)
-import System.Directory (doesFileExist)
-import Prelude hiding (catch)
 
 -- Democrify modules
 import           Acid

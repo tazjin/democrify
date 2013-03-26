@@ -7,7 +7,7 @@ import           Control.Exception      (bracket)
 import           Control.Monad.IO.Class (liftIO)
 import           Data.Acid
 import           Data.Acid.Local
-import           Data.IORef             (writeIORef, readIORef)
+import           Data.IORef             (readIORef, writeIORef)
 import           Data.Text              (unpack)
 import           Foreign
 import           HSObjC

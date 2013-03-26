@@ -1,6 +1,6 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE OverloadedStrings        #-}
+{-# LANGUAGE RecordWildCards          #-}
 
 
 module User where
@@ -12,18 +12,18 @@ import           Data.Acid.Advanced          (query', update')
 import           Data.ByteString.Char8       (ByteString)
 import           Data.Foldable               (forM_)
 import           Data.IORef
+import           Data.Maybe                  (isJust)
 import           Data.Monoid                 (mempty)
 import qualified Data.Sequence               as SQ
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T
 import           Happstack.Server
+import           HSObjC
 import           System.IO.Unsafe            (unsafePerformIO)
 import           Text.Blaze                  (toValue, (!))
 import           Text.Blaze.Html5            (toHtml)
 import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
-import           HSObjC
-import           Data.Maybe             (isJust)
 
 -- Democrify modules
 import           Acid

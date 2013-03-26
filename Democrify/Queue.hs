@@ -7,25 +7,25 @@
 module Queue where
 
 import           Acid
-import           Control.Applicative    ((<$>))
+import           Control.Applicative          ((<$>))
 import           Control.Concurrent
-import           Control.Monad          (forM, forM_)
-import           Control.Monad.IO.Class (liftIO)
+import           Control.Monad                (forM, forM_)
+import           Control.Monad.IO.Class       (liftIO)
 import           Data.Acid
-import           Data.Acid.Advanced     (update')
-import           Data.Data              (Data, Typeable)
+import           Data.Acid.Advanced           (update')
+import           Data.Data                    (Data, Typeable)
 import           Data.IORef
-import qualified Data.Sequence          as SQ
-import           Data.Random.Extras     (shuffleSeq)
-import           Data.Text              (Text, unpack)
-import qualified Data.Text              as T
+import           Data.Random                  (runRVar)
+import           Data.Random.Extras           (shuffleSeq)
+import           Data.Random.Source.DevRandom (DevRandom (..))
+import qualified Data.Sequence                as SQ
+import           Data.Text                    (Text, unpack)
+import qualified Data.Text                    as T
 import           HSObjC
-import           System.Directory       (createDirectoryIfMissing,
-                                         getHomeDirectory)
-import           System.IO.Unsafe       (unsafePerformIO)
+import           System.Directory             (createDirectoryIfMissing,
+                                               getHomeDirectory)
+import           System.IO.Unsafe             (unsafePerformIO)
 import           WebAPI
-import Data.Random.Source.DevRandom (DevRandom(..))
-import Data.Random (runRVar)
 
 initialPlayQueue :: PlayQueue
 initialPlayQueue = PlayQueue SQ.empty

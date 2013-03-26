@@ -12,7 +12,7 @@ import           Control.Exception
 import           Data.Aeson
 import           Data.Text            (Text, unpack)
 import           Network.HTTP.Conduit
-import           Prelude hiding (catch)
+import           Prelude              hiding (catch)
 
 instance FromJSON (Text -> SpotifyTrack) where
     parseJSON (Object v) = do

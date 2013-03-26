@@ -1,4 +1,6 @@
-{-# LANGUAGE ForeignFunctionInterface, EmptyDataDecls, FlexibleInstances #-}
+{-# LANGUAGE EmptyDataDecls           #-}
+{-# LANGUAGE FlexibleInstances        #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
 
 --  ================================================================
 --  Copyright (C) 2010 Tim Scheffler
@@ -38,20 +40,20 @@ module HSObjC
      (#)
     ) where
 
-import Foreign hiding (newForeignPtr)
-import Foreign.Concurrent (newForeignPtr)
-import Foreign.C.Types
-import Foreign.C.String
-import Foreign.Marshal.Array
-import Foreign.StablePtr
-import Control.Monad.Error
-import qualified Data.ByteString as BS
+import           Control.Monad.Error
+import qualified Data.ByteString       as BS
 import qualified Data.ByteString.Char8 as BS8
-import qualified Data.Text as T
-import Data.Text.Encoding (encodeUtf8, decodeUtf8)
+import qualified Data.Text             as T
+import           Data.Text.Encoding    (decodeUtf8, encodeUtf8)
+import           Foreign               hiding (newForeignPtr)
+import           Foreign.C.String
+import           Foreign.C.Types
+import           Foreign.Concurrent    (newForeignPtr)
+import           Foreign.Marshal.Array
+import           Foreign.StablePtr
 
-import qualified Data.Map as M
-import Data.Map (Map)
+import           Data.Map              (Map)
+import qualified Data.Map              as M
 
 data ObjcObject
 type Id = Ptr ObjcObject    -- typed pointer for all NSObjects
