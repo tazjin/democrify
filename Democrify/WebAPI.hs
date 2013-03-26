@@ -8,10 +8,11 @@ module WebAPI (identifyTrack) where
 --import Acid
 import           Acid
 import           Control.Applicative  (pure, (<$>), (<*>))
+import           Control.Exception
 import           Data.Aeson
 import           Data.Text            (Text, unpack)
 import           Network.HTTP.Conduit
-
+import           Prelude hiding (catch)
 
 instance FromJSON (Text -> SpotifyTrack) where
     parseJSON (Object v) = do
@@ -24,7 +25,7 @@ instance FromJSON (Text -> SpotifyTrack) where
 -- |Requests a track ID from the Spotify lookup service
 identifyTrack :: Text -> IO (Maybe SpotifyTrack)
 identifyTrack trackId = do
-    r <- simpleHttp $ trackURL trackId
+    r <- catch (simpleHttp $ trackURL trackId) (\e -> return $ const "" (e :: HttpException))
     case decode r of
         Nothing -> return Nothing
         Just f  -> return $ Just $ f trackId
