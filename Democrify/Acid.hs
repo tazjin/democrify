@@ -120,7 +120,7 @@ getQueueHead repeatAll = do
         else if repeatAll
                 then let next = SQ.index queue 0
                          newqueue = SQ.drop 1 queue
-                     in do put $ q { queue = newqueue |> next } -- re-add the song
+                     in do put $ q { queue = newqueue |> (next {votes = 0}) } -- re-add the song
                            return next
                 else do put $ q { queue = SQ.drop 1 queue }
                         return $ SQ.index queue 0
