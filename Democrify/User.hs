@@ -42,10 +42,10 @@ webResources = (++ "/web/") <$> readIORef resourcePath
 
 -- |Default layout including Foundation stylesheets
 defaultLayout :: Text     -- ^ Title
-              -> [H.Html] -- ^ Headers
+              -> [H.Html] -- ^ Additional scripts
               -> H.Html   -- ^ Body
               -> ServerPart Response
-defaultLayout  title headers body = ok $ toResponse $
+defaultLayout  title scripts body = ok $ toResponse $
     H.docTypeHtml $ do
         H.head $ do
             H.title (H.toHtml title)
@@ -58,7 +58,6 @@ defaultLayout  title headers body = ok $ toResponse $
             H.link ! A.href "/democrify_small.png" ! A.rel "icon"
             -- Scripts
             H.script ! A.src "/custom.modernizr.js" $ mempty
-            sequence_ headers
         H.body $ do
             H.nav ! A.class_ "top-bar" $ do
                 H.ul ! A.class_ "title-area" $ do
@@ -77,11 +76,12 @@ defaultLayout  title headers body = ok $ toResponse $
             H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ H.footer $ do
                 H.hr
                 H.p ! A.style "text-align:center;" $ "Powered by Democrify"
-            --H.script $ "document.write('<script src=/js/vendor/' + ('__proto__' in {} ? 'zepto' : 'jquery') + '.js><\\/script>');"
             H.script ! A.src "/jquery.js" $ mempty
             H.script ! A.src "/foundation.min.js" $ mempty
             H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/app.js" $ mempty
+            sequence_ scripts
+
 -- |Displays the user facing queue list
 queueView :: ServerPart Response
 queueView = do
@@ -153,21 +153,6 @@ addSongView =
                     H.option ! A.selected "" $ "Track"
                     H.option $ "Artist"
                     H.option $ "Album"
-
-{- Dropdown (old)
-            H.div ! A.class_ "large-1 small-3 columns" $ H.form ! A.class_ "custom" $ do
-                H.select ! A.style "display:none;" ! A.id "searchtype" $ do
-                    H.option ! A.selected "" $ toHtml ("Track" :: Text)
-                    H.option $ toHtml ("Artist" :: Text)
-                    H.option $ toHtml ("Album" :: Text)
-                H.div ! A.class_ "custom dropdown" $ do
-                    H.a ! A.href "#" ! A.class_ "selector" $ mempty
-                    H.a ! A.href "#" ! A.class_ "current" $ toHtml ("Track" :: Text)
-                    H.ul $ do
-                        H.li $ toHtml ("Track" :: Text)
-                        H.li $ toHtml ("Artist" :: Text)
-                        H.li $ toHtml ("Album" :: Text)
--}
         H.div ! A.class_ "row" ! A.id "resultcontainer" ! A.class_ "small-12 columns" $ mempty
 
 -- |Upvotes a song based on the ID
