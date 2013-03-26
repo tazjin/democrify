@@ -47,10 +47,9 @@ runHaskellPart = do
     path <- statePath
     loadPrefs
     bracket (openLocalStateFrom path initialPlayQueue)
-            (createCheckpointAndClose)
-            (\acid -> do createArchive acid
-                         writeIORef playQueue acid
-                         forkIO $ dbLoop 0
+            (\a -> createArchive a >> createCheckpointAndClose a)
+            (\acid -> do writeIORef playQueue acid
+                         forkIO $ dbLoop acid
                          runServer )
 
 -- Start the mainloop!

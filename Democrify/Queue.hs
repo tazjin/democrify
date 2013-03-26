@@ -77,16 +77,12 @@ prefsPath = do
 loopPartSort :: AcidState PlayQueue -> IO ()
 loopPartSort = flip update SortQueue
 
--- |DB maintenance loop. Sorts the queue (every 30 seconds) and creates a checkpoint (every 30 minutes)
-dbLoop :: Int -> IO ()
-dbLoop n = do
-    acid <- readIORef playQueue
+-- |DB maintenance loop. Sorts the queue (every 30 seconds)
+dbLoop :: AcidState PlayQueue -> IO ()
+dbLoop acid = do
     loopPartSort acid
-    newN <- case n of
-        60 -> createCheckpoint acid >> return 0
-        n  -> return $ n + 1
     threadDelay 15000000
-    dbLoop newN
+    dbLoop acid
 
 
 -- |Sets the currently playing track by requesting it from the Spotify Lookup API
