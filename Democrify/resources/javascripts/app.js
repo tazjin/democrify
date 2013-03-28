@@ -11,7 +11,7 @@ $(document).ready(function() {
     var thing = $(t.target);
     var song = $(t.target).attr('id');
     thing.attr('src', '/upvote_colour.png');
-    if ($.cookie(song) !== null) {
+    if ($.cookie(song) !== undefined) {
        void(0);
     } else {
       var now = new Date();
