@@ -12,7 +12,7 @@ import           Control.Concurrent
 import           Control.Monad                (forM, forM_)
 import           Control.Monad.IO.Class       (liftIO)
 import           Data.Acid
-import           Data.Acid.Advanced           (update')
+import           Data.Acid.Advanced           (update', query')
 import           Data.Acid.Local              (createArchive,
                                                createCheckpointAndClose)
 import           Data.Data                    (Data, Typeable)
@@ -28,6 +28,12 @@ import           System.Directory             (createDirectoryIfMissing,
                                                getHomeDirectory)
 import           System.IO.Unsafe             (unsafePerformIO)
 import           WebAPI
+
+-- |This function runs an Acid Query and retrieves the state from the global IORef
+dfQuery u = (liftIO $ readIORef playQueue) >>= flip query' u
+
+-- |This function runs an Acid Update and retrieves the state from the global IORef
+dfUpdate u = (liftIO $ readIORef playQueue) >>= flip update' u
 
 initialPlayQueue :: PlayQueue
 initialPlayQueue = PlayQueue SQ.empty
@@ -47,11 +53,10 @@ getTrackData trackIds = forM (map (T.drop 14) trackIds) $ \t -> do
 -- |Shuffles the play queue through a weird combination of things :(
 shuffleQueue :: IO ()
 shuffleQueue = do
-    acid <- readIORef playQueue
-    queue <- query acid GetQueue
+    queue <- dfQuery GetQueue
     shuffled <- SQ.fromList <$> (runRVar (shuffleSeq queue) DevURandom)
-    update acid $ PutQueue shuffled
-    update acid SortQueue
+    dfUpdate $ PutQueue shuffled
+    dfUpdate SortQueue
 
 -- |Gracefully shuts down the state and archives
 gracefulQuit :: IO ()

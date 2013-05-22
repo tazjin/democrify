@@ -43,6 +43,12 @@ instance Parsable Text where
 -- |This function renders 'Html' as 'Text' and passes it to scotty
 html' = html . renderHtml
 
+-- |This function runs an Acid Query and retrieves the state from the global IORef
+dfQuery u = (liftIO $ readIORef playQueue) >>= flip query' u
+
+-- |This function runs an Acid Update and retrieves the state from the global IORef
+dfUpdate u = (liftIO $ readIORef playQueue) >>= flip update' u
+
 -- *Helpers
 -- |This contains a global IORef to the Resource folder inside the Application bundle. All web assets are stored in Resources/web
 resourcePath :: IORef FilePath
@@ -100,9 +106,8 @@ defaultLayout title scripts body =
 -- |Displays the user facing queue list
 queueView :: ActionM ()
 queueView = do
-    acid <- liftIO $ readIORef playQueue
     current <- liftIO $ displayCurrentTrack
-    queue <- query' acid GetQueue
+    queue <- dfQuery GetQueue
     defaultLayout "Democrify - Queue" [] $ do
         H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ do
             H.br
@@ -173,8 +178,7 @@ addSongView =
 -- |Upvotes a song based on the ID
 upvoteHandler :: TL.Text -> ActionM ()
 upvoteHandler song = do
-    acid <- liftIO $ readIORef playQueue
-    update' acid $ UpvoteTrack song
+    dfUpdate $ UpvoteTrack song
     text $ TL.append "Upvoted " song
 
 -- |Adds a song to the queue based on its ID. If the song cannot be
@@ -186,15 +190,13 @@ addHandler trackId = do
     Preferences{..} <- liftIO getPrefs
     case track of
         Nothing  -> (status $ mkStatus 404 "Not found") >> text "notfound"
-        (Just t) -> do acid <- liftIO $ readIORef playQueue
-                       when autoShuffle (liftIO shuffleQueue)
-                       update' acid $ AddTrackToQueue duplicates t
+        (Just t) -> do when autoShuffle (liftIO shuffleQueue)
+                       dfUpdate $ AddTrackToQueue duplicates t
                        text "ok"
 
 adminHandler :: ActionM ()
 adminHandler = do
-    acid <- liftIO $ readIORef playQueue
-    queue <- query' acid GetQueue
+    queue <- dfQuery GetQueue
     defaultLayout "Democrify - Admin"
                   [ H.script ! A.src "/admin.js" $ mempty ]
                   (adminQueue queue)
@@ -207,13 +209,12 @@ showPrefs = do
 -- |This is supplised with the NSArray that contains all the NSStrings to the URLs.
 loadPlaylist :: Id -> IO ()
 loadPlaylist pl = do
-    acid <- readIORef playQueue
     Preferences{..} <- liftIO getPrefs
     runId $ do
         trackIds <- fmap (map TL.fromStrict) $ fromId pl
         mTracks <- liftIO $ getTrackData trackIds
         let tracks = map (\(Just t) -> t) $ filter isJust mTracks
-        forM_ tracks $ \t -> update' acid $ AddTrackToQueue duplicates t
+        forM_ tracks $ \t -> dfUpdate $ AddTrackToQueue duplicates t
     when autoShuffle shuffleQueue
     return ()
 
