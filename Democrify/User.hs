@@ -57,8 +57,10 @@ defaultLayout :: TL.Text     -- ^ Title
               -> [H.Html] -- ^ Additional scripts
               -> H.Html   -- ^ Body
               -> ActionM ()
-defaultLayout title scripts body = html' $
-    H.docTypeHtml $ do
+defaultLayout title scripts body =
+  -- The weird-looking line below makes sure that the content header is set after executing html'.
+  -- This is done to prevent it from being overridden.
+  flip (>>) (header "Content-Type" "text/html; charset=utf-8") $ html' $ H.docTypeHtml $ do
         H.head $ do
             H.title (H.toHtml title)
             H.meta ! A.name "apple-mobile-web-app-capable" ! A.content "yes"
@@ -93,6 +95,7 @@ defaultLayout title scripts body = html' $
             H.script ! A.src "/jquery.cookie.js" $ mempty
             H.script ! A.src "/app.js" $ mempty
             sequence_ scripts
+
 
 -- |Displays the user facing queue list
 queueView :: ActionM ()
@@ -214,17 +217,20 @@ loadPlaylist pl = do
     when autoShuffle shuffleQueue
     return ()
 
--- * Happstack things
+-- * Scotty things
+
+-- |This serves static files
+serveStatic f = liftIO webResources >>= (\resPath -> file $ resPath ++ f)
 
 -- |This contains the routing function for Happstack. I don't have time for type-safe routing in this project! :D
 --democrify :: ActionM
 democrify :: ScottyM ()
-democrify = liftIO webResources >>= \resPath -> do
+democrify = do
     get "/"                     $ queueView
     get "/upvote/:song"         $ param "song" >>= upvoteHandler
     get "/add"                  $ addSongView
     get "/add/:song"            $ param "song" >>= addHandler
-    get "/:file"                $ param "file" >>= \f -> file $ resPath ++ ('/' : f)
+    get "/:file"                $ serveStatic
 
 -- |This is the Scotty Application representing the admin handler.
 adminRoutes :: ScottyM ()
@@ -233,7 +239,7 @@ adminRoutes = liftIO webResources >>= \resPath -> do
     get "/admin/vote/:song"     $ param "song" >>= adminUpvoteHandler
     get "/admin/delete/:song"   $ param "song" >>= adminDeleteHandler
     get "/admin/config"         $ showPrefs
-    get "/:file"                $ param "file" >>= \f -> file $ resPath ++ ('/' : f)
+    get "/:file"                $ serveStatic
 
 runServer :: IO ()
 runServer = scotty 8686 democrify
