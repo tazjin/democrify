@@ -51,6 +51,7 @@ runHaskellPart = do
             (\a -> createArchive a >> createCheckpointAndClose a)
             (\acid -> do writeIORef playQueue acid
                          forkIO $ dbLoop acid
+                         forkIO $ runAdminServer
                          runServer )
 
 -- Start the mainloop!

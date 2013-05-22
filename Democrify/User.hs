@@ -21,6 +21,7 @@ import           Data.Text.Lazy                (toStrict)
 import qualified Data.Text.Lazy                as TL
 import           HSObjC
 import           Network.HTTP.Types.Status
+import           Network.Wai.Handler.Warp
 import           System.IO.Unsafe              (unsafePerformIO)
 import           Text.Blaze                    (toValue, (!))
 import           Text.Blaze.Html.Renderer.Text
@@ -217,18 +218,29 @@ loadPlaylist pl = do
 
 -- |This contains the routing function for Happstack. I don't have time for type-safe routing in this project! :D
 --democrify :: ActionM
+democrify :: ScottyM ()
 democrify = liftIO webResources >>= \resPath -> do
     get "/"                     $ queueView
     get "/upvote/:song"         $ param "song" >>= upvoteHandler
     get "/add"                  $ addSongView
     get "/add/:song"            $ param "song" >>= addHandler
+    get "/:file"                $ param "file" >>= \f -> file $ resPath ++ ('/' : f)
+
+-- |This is the Scotty Application representing the admin handler.
+adminRoutes :: ScottyM ()
+adminRoutes = liftIO webResources >>= \resPath -> do
     get "/admin"                $ adminHandler -- FIXME: Check host param (on all /admin)
     get "/admin/vote/:song"     $ param "song" >>= adminUpvoteHandler
     get "/admin/delete/:song"   $ param "song" >>= adminDeleteHandler
     get "/admin/config"         $ showPrefs
-    get "/:file"                $ param "file" >>= \f -> file $ resPath ++ f
+    get "/:file"                $ param "file" >>= \f -> file $ resPath ++ ('/' : f)
 
 runServer :: IO ()
 runServer = scotty 8686 democrify
+
+runAdminServer :: IO ()
+runAdminServer = scottyOpts adminOpts adminRoutes
+    where
+        adminOpts = Options 0 $ defaultSettings { settingsPort = 1337, settingsHost = "127.0.0.1" }
 
 foreign export ccall loadPlaylist    :: Id -> IO ()

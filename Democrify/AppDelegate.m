@@ -322,12 +322,12 @@
 
 //Launch admin UI
 - (IBAction)adminUI:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/admin"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:1337/admin"]];
 }
 
 //Open preferences
 - (IBAction)openPrefs:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8686/admin/config"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:1337/admin/config"]];
 }
 
 - (IBAction)login:(id)sender {
