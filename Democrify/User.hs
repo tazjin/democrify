@@ -5,31 +5,42 @@
 
 module User where
 
-import           Control.Applicative         (optional, (<$>))
-import           Control.Monad               (msum, when)
-import           Control.Monad.IO.Class      (liftIO)
-import           Data.Acid.Advanced          (query', update')
-import           Data.ByteString.Char8       (ByteString)
-import           Data.Foldable               (forM_)
+import           Control.Applicative           (optional, (<$>))
+import           Control.Monad                 (msum, when)
+import           Control.Monad.IO.Class        (liftIO)
+import           Data.Acid.Advanced            (query', update')
+import           Data.ByteString.Char8         (ByteString)
+import           Data.Foldable                 (forM_)
 import           Data.IORef
-import           Data.Maybe                  (isJust)
-import           Data.Monoid                 (mempty)
-import qualified Data.Sequence               as SQ
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
-import           Happstack.Server
+import           Data.Maybe                    (isJust)
+import           Data.Monoid                   (mempty)
+import qualified Data.Sequence                 as SQ
+import           Data.Text                     (Text)
+import qualified Data.Text                     as T
+import           Data.Text.Lazy                (toStrict)
+import qualified Data.Text.Lazy                as TL
 import           HSObjC
-import           System.IO.Unsafe            (unsafePerformIO)
-import           Text.Blaze                  (toValue, (!))
-import           Text.Blaze.Html5            (toHtml)
-import qualified Text.Blaze.Html5            as H
-import qualified Text.Blaze.Html5.Attributes as A
+import           Network.HTTP.Types.Status
+import           System.IO.Unsafe              (unsafePerformIO)
+import           Text.Blaze                    (toValue, (!))
+import           Text.Blaze.Html.Renderer.Text
+import           Text.Blaze.Html5              (toHtml)
+import qualified Text.Blaze.Html5              as H
+import qualified Text.Blaze.Html5.Attributes   as A
+import           Web.Scotty
 
 -- Democrify modules
 import           Acid
 import           Admin
 import           Queue
 import           WebAPI
+
+-- This is an orphan instance!
+instance Parsable Text where
+    parseParam = either (Left . id) (Right . toStrict) . parseParam
+
+-- |This function renders 'Html' as 'Text' and passes it to scotty
+html' = html . renderHtml
 
 -- *Helpers
 -- |This contains a global IORef to the Resource folder inside the Application bundle. All web assets are stored in Resources/web
@@ -41,11 +52,11 @@ webResources :: IO FilePath
 webResources = (++ "/web/") <$> readIORef resourcePath
 
 -- |Default layout including Foundation stylesheets
-defaultLayout :: Text     -- ^ Title
+defaultLayout :: TL.Text     -- ^ Title
               -> [H.Html] -- ^ Additional scripts
               -> H.Html   -- ^ Body
-              -> ServerPart Response
-defaultLayout  title scripts body = ok $ toResponse $
+              -> ActionM ()
+defaultLayout title scripts body = html' $
     H.docTypeHtml $ do
         H.head $ do
             H.title (H.toHtml title)
@@ -83,7 +94,7 @@ defaultLayout  title scripts body = ok $ toResponse $
             sequence_ scripts
 
 -- |Displays the user facing queue list
-queueView :: ServerPart Response
+queueView :: ActionM ()
 queueView = do
     acid <- liftIO $ readIORef playQueue
     current <- liftIO $ displayCurrentTrack
@@ -123,7 +134,7 @@ displayCurrentTrack = do
     let content = case current of
                     Nothing -> do
                         H.p ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
-                    Just SpotifyTrack{..} -> H.a ! A.href (toValue $ T.append "spotify:track:" tId) $ do
+                    Just SpotifyTrack{..} -> H.a ! A.href (toValue $ TL.append "spotify:track:" tId) $ do
                         H.br
                         H.span ! A.class_ "track" $ do toHtml ("Current track:" :: Text)
                                                        H.br
@@ -137,7 +148,7 @@ displayCurrentTrack = do
         H.div ! A.class_ "large-10 columns" $ content
 
 -- |Page that displays the song adding interface
-addSongView :: ServerPart Response
+addSongView :: ActionM ()
 addSongView =
     defaultLayout "Democrify - Add song"
                   [ H.script ! A.src "/addsong.js" $ mempty ] $ do
@@ -156,27 +167,27 @@ addSongView =
         H.div ! A.class_ "row" ! A.id "resultcontainer" ! A.class_ "small-12 columns" $ mempty
 
 -- |Upvotes a song based on the ID
-upvoteHandler :: Text -> ServerPart Response
+upvoteHandler :: TL.Text -> ActionM ()
 upvoteHandler song = do
     acid <- liftIO $ readIORef playQueue
     update' acid $ UpvoteTrack song
-    ok $ toResponse $ T.append "Upvoted " song
+    text $ TL.append "Upvoted " song
 
 -- |Adds a song to the queue based on its ID. If the song cannot be
 --  found a 404 will be returned, if the song is already in the queue
 --  it will be upvoted.
-addHandler :: Text -> ServerPart Response
+addHandler :: TL.Text -> ActionM ()
 addHandler trackId = do
     track <- liftIO $ identifyTrack trackId
     Preferences{..} <- liftIO getPrefs
     case track of
-        Nothing  -> notFound $ toResponse $ ("notfound" :: Text)
+        Nothing  -> (status $ mkStatus 404 "Not found") >> text "notfound"
         (Just t) -> do acid <- liftIO $ readIORef playQueue
                        when autoShuffle (liftIO shuffleQueue)
                        update' acid $ AddTrackToQueue duplicates t
-                       ok $ toResponse $ ("ok" :: Text)
+                       text "ok"
 
-adminHandler :: ServerPart Response
+adminHandler :: ActionM ()
 adminHandler = do
     acid <- liftIO $ readIORef playQueue
     queue <- query' acid GetQueue
@@ -184,7 +195,7 @@ adminHandler = do
                   [ H.script ! A.src "/admin.js" $ mempty ]
                   (adminQueue queue)
 
-showPrefs :: ServerPart Response
+showPrefs :: ActionM ()
 showPrefs = do
     prefs <- liftIO getPrefs
     defaultLayout "Democrify - Settings" [] (adminPrefs prefs)
@@ -195,7 +206,7 @@ loadPlaylist pl = do
     acid <- readIORef playQueue
     Preferences{..} <- liftIO getPrefs
     runId $ do
-        trackIds <- fromId pl
+        trackIds <- fmap (map TL.fromStrict) $ fromId pl
         mTracks <- liftIO $ getTrackData trackIds
         let tracks = map (\(Just t) -> t) $ filter isJust mTracks
         forM_ tracks $ \t -> update' acid $ AddTrackToQueue duplicates t
@@ -205,20 +216,19 @@ loadPlaylist pl = do
 -- * Happstack things
 
 -- |This contains the routing function for Happstack. I don't have time for type-safe routing in this project! :D
-democrify :: ServerPart Response
-democrify = liftIO webResources >>= \resPath -> msum
-    [ nullDir >> queueView
-    , dir "upvote" $ path $ \song -> upvoteHandler song
-    , dir "add" $ nullDir >> addSongView
-    , dir "add" $ path $ \song -> addHandler song
-    , serveDirectory DisableBrowsing [] resPath
-    , dir "admin" $ nullDir >> host "localhost:8686" adminHandler
-    , dir "admin" $ dir "vote" $ host "localhost:8686" $ path $ \song -> adminUpvoteHandler song
-    , dir "admin" $ dir "delete" $ host "localhost:8686" $ path $ \song -> adminDeleteHandler song
-    , dir "admin" $ dir "config" $ host "localhost:8686" $ showPrefs
-    ]
+--democrify :: ActionM
+democrify = liftIO webResources >>= \resPath -> do
+    get "/"                     $ queueView
+    get "/upvote/:song"         $ param "song" >>= upvoteHandler
+    get "/add"                  $ addSongView
+    get "/add/:song"            $ param "song" >>= addHandler
+    get "/admin"                $ adminHandler -- FIXME: Check host param (on all /admin)
+    get "/admin/vote/:song"     $ param "song" >>= adminUpvoteHandler
+    get "/admin/delete/:song"   $ param "song" >>= adminDeleteHandler
+    get "/admin/config"         $ showPrefs
+    get "/:file"                $ param "file" >>= \f -> file $ resPath ++ f
 
 runServer :: IO ()
-runServer = simpleHTTP nullConf{port = 8686} democrify
+runServer = scotty 8686 democrify
 
 foreign export ccall loadPlaylist    :: Id -> IO ()

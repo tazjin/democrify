@@ -9,6 +9,7 @@ import           Data.Acid
 import           Data.Acid.Local
 import           Data.IORef             (readIORef, writeIORef)
 import           Data.Text              (unpack)
+import           Data.Text.Lazy         (toStrict)
 import           Foreign
 import           HSObjC
 
@@ -33,7 +34,7 @@ getNextTrack = do
     acid <- readIORef playQueue
     next <- update acid $ GetQueueHead repeatAll
     setCurrentTrack $ tId next
-    runId $ return $ tId next
+    runId $ return $ toStrict $ tId next
 
 setResourcePath :: Id -> IO ()
 setResourcePath p = do

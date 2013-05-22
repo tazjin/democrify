@@ -13,15 +13,16 @@ import           Control.Monad                (forM, forM_)
 import           Control.Monad.IO.Class       (liftIO)
 import           Data.Acid
 import           Data.Acid.Advanced           (update')
-import           Data.Acid.Local              (createCheckpointAndClose, createArchive)
+import           Data.Acid.Local              (createArchive,
+                                               createCheckpointAndClose)
 import           Data.Data                    (Data, Typeable)
 import           Data.IORef
 import           Data.Random                  (runRVar)
 import           Data.Random.Extras           (shuffleSeq)
 import           Data.Random.Source.DevRandom (DevRandom (..))
 import qualified Data.Sequence                as SQ
-import           Data.Text                    (Text, unpack)
-import qualified Data.Text                    as T
+import           Data.Text.Lazy               (Text, unpack)
+import qualified Data.Text.Lazy               as T
 import           HSObjC
 import           System.Directory             (createDirectoryIfMissing,
                                                getHomeDirectory)
@@ -63,7 +64,7 @@ gracefulQuit = do
 statePath :: IO FilePath
 statePath = do
     path <- (++ "/Library/Application Support/Democrify/queue") <$> getHomeDirectory
-    createDirectoryIfMissing False path
+    createDirectoryIfMissing True path
     return path
 
 -- |Gets the folder @~/Library/Application Support/Democrify@ and creates it if it doesn't exist

@@ -21,7 +21,7 @@ import           Data.Data            (Data, Typeable)
 import           Data.SafeCopy
 import           Data.Sequence        (Seq (..), (<|), (|>))
 import qualified Data.Sequence        as SQ
-import           Data.Text            (Text)
+import           Data.Text.Lazy       (Text)
 import           Data.Typeable
 import           Data.Word
 

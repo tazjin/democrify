@@ -12,10 +12,9 @@ import           Data.Foldable               (forM_)
 import           Data.IORef
 import           Data.Monoid                 (mempty)
 import           Data.Sequence               (Seq (..))
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
+import           Data.Text.Lazy              (Text)
+import qualified Data.Text.Lazy              as T
 import           Data.Yaml
-import           Happstack.Server
 import           Prelude                     hiding (catch)
 import           System.Directory            (doesFileExist)
 import           System.IO.Unsafe            (unsafePerformIO)
@@ -23,6 +22,7 @@ import           Text.Blaze                  (toValue, (!))
 import           Text.Blaze.Html5            (toHtml)
 import qualified Text.Blaze.Html5            as H
 import qualified Text.Blaze.Html5.Attributes as A
+import           Web.Scotty
 
 -- Democrify modules
 import           Acid
@@ -155,16 +155,16 @@ adminPrefs Preferences{..} = do
 
 -- |Deletes a track when requested by the admin
 adminDeleteHandler :: Text -- ^ Track id
-                   -> ServerPart Response
+                   -> ActionM ()
 adminDeleteHandler track = do
     acid <- liftIO $ readIORef playQueue
     update' acid $ RemoveTrack track
-    ok $ toResponse $ ("removed" :: Text)
+    text "removed"
 
 -- |Upvotes OVER 9000!
 adminUpvoteHandler :: Text
-                   -> ServerPart Response
+                   -> ActionM ()
 adminUpvoteHandler track = do
     acid <- liftIO $ readIORef playQueue
     update' acid $ AdminUpvote track
-    ok $ toResponse $ ("over9000" :: Text)
+    text "over9000"

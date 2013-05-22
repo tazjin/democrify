@@ -10,7 +10,7 @@ import           Acid
 import           Control.Applicative  (pure, (<$>), (<*>))
 import           Control.Exception
 import           Data.Aeson
-import           Data.Text            (Text, unpack)
+import           Data.Text.Lazy       (Text, unpack)
 import           Network.HTTP.Conduit
 import           Prelude              hiding (catch)
 
