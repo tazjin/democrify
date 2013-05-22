@@ -30,10 +30,10 @@ import           System.IO.Unsafe             (unsafePerformIO)
 import           WebAPI
 
 -- |This function runs an Acid Query and retrieves the state from the global IORef
-dfQuery u = (liftIO $ readIORef playQueue) >>= flip query' u
+dfQuery u = liftIO (readIORef playQueue) >>= flip query' u
 
 -- |This function runs an Acid Update and retrieves the state from the global IORef
-dfUpdate u = (liftIO $ readIORef playQueue) >>= flip update' u
+dfUpdate u = liftIO (readIORef playQueue) >>= flip update' u
 
 initialPlayQueue :: PlayQueue
 initialPlayQueue = PlayQueue SQ.empty
@@ -54,7 +54,7 @@ getTrackData trackIds = forM (map (T.drop 14) trackIds) $ \t -> do
 shuffleQueue :: IO ()
 shuffleQueue = do
     queue <- dfQuery GetQueue
-    shuffled <- SQ.fromList <$> (runRVar (shuffleSeq queue) DevURandom)
+    shuffled <- SQ.fromList <$> runRVar (shuffleSeq queue) DevURandom
     dfUpdate $ PutQueue shuffled
     dfUpdate SortQueue
 

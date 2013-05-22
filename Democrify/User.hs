@@ -8,7 +8,6 @@ module User where
 import           Control.Applicative           (optional, (<$>))
 import           Control.Monad                 (msum, when)
 import           Control.Monad.IO.Class        (liftIO)
-import           Data.Acid.Advanced            (query', update')
 import           Data.ByteString.Char8         (ByteString)
 import           Data.Foldable                 (forM_)
 import           Data.IORef
@@ -42,12 +41,6 @@ instance Parsable Text where
 
 -- |This function renders 'Html' as 'Text' and passes it to scotty
 html' = html . renderHtml
-
--- |This function runs an Acid Query and retrieves the state from the global IORef
-dfQuery u = (liftIO $ readIORef playQueue) >>= flip query' u
-
--- |This function runs an Acid Update and retrieves the state from the global IORef
-dfUpdate u = (liftIO $ readIORef playQueue) >>= flip update' u
 
 -- *Helpers
 -- |This contains a global IORef to the Resource folder inside the Application bundle. All web assets are stored in Resources/web
@@ -86,8 +79,8 @@ defaultLayout title scripts body =
                             H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;float:left;"
                             H.span ! A.style "margin-left:5px;float:right;" $ toHtml ("Democrify" :: Text)
                     H.li ! A.class_ "toggle-topbar menu-icon" $
-                        H.a ! A.href "#" $ H.span $ "menu"
-                H.section ! A.class_ "top-bar-section" $ do
+                        H.a ! A.href "#" $ H.span "menu"
+                H.section ! A.class_ "top-bar-section" $
                     H.ul ! A.class_ "right" $ do
                         H.li ! A.class_ "divider" $ mempty
                         H.li $
@@ -106,9 +99,9 @@ defaultLayout title scripts body =
 -- |Displays the user facing queue list
 queueView :: ActionM ()
 queueView = do
-    current <- liftIO $ displayCurrentTrack
+    current <- liftIO displayCurrentTrack
     queue <- dfQuery GetQueue
-    defaultLayout "Democrify - Queue" [] $ do
+    defaultLayout "Democrify - Queue" [] $
         H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ do
             H.br
             current
@@ -128,12 +121,12 @@ queueView = do
             H.div ! A.class_ "row" $ do
                 H.div ! A.class_ "small-3 large-2 columns" $
                     H.img ! A.src "http://placehold.it/80x80&text=:("
-                H.div ! A.class_ "large-10 columns trackitem" $ do
+                H.div ! A.class_ "large-10 columns trackitem" $
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
 
 queueNum :: SQ.Seq SpotifyTrack -> H.Html
 queueNum s | l == 1    = H.span ! A.class_ "queuenum" $ "1 song in the queue"
-           | otherwise = H.span ! A.class_ "queuenum" $ toHtml $ T.append (T.pack $ show $ l) " songs in the queue"
+           | otherwise = H.span ! A.class_ "queuenum" $ toHtml $ T.append (T.pack $ show l) " songs in the queue"
   where
     l = SQ.length s
 
@@ -141,7 +134,7 @@ displayCurrentTrack :: IO H.Html
 displayCurrentTrack = do
     current <- readIORef currentTrack
     let content = case current of
-                    Nothing -> do
+                    Nothing ->
                         H.p ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
                     Just SpotifyTrack{..} -> H.a ! A.href (toValue $ TL.append "spotify:track:" tId) $ do
                         H.br
@@ -168,11 +161,11 @@ addSongView =
             H.div ! A.class_ "large-1 small-3 columns" $
                 H.a ! A.class_ "button expand postfix" ! A.id "searchbutton"  $
                     toHtml ("Search" :: Text)
-            H.div ! A.class_ "large-1 small-3 columns" $ H.form ! A.class_ "custom" $ do
+            H.div ! A.class_ "large-1 small-3 columns" $ H.form ! A.class_ "custom" $
                 H.select ! A.id "searchtype" $ do
                     H.option ! A.selected "" $ "Track"
-                    H.option $ "Artist"
-                    H.option $ "Album"
+                    H.option "Artist"
+                    H.option "Album"
         H.div ! A.class_ "row" ! A.id "resultcontainer" ! A.class_ "small-12 columns" $ mempty
 
 -- |Upvotes a song based on the ID
@@ -189,7 +182,7 @@ addHandler trackId = do
     track <- liftIO $ identifyTrack trackId
     Preferences{..} <- liftIO getPrefs
     case track of
-        Nothing  -> (status $ mkStatus 404 "Not found") >> text "notfound"
+        Nothing  -> status (mkStatus 404 "Not found") >> text "notfound"
         (Just t) -> do when autoShuffle (liftIO shuffleQueue)
                        dfUpdate $ AddTrackToQueue duplicates t
                        text "ok"
@@ -227,20 +220,20 @@ serveStatic f = liftIO webResources >>= (\resPath -> file $ resPath ++ f)
 --democrify :: ActionM
 democrify :: ScottyM ()
 democrify = do
-    get "/"                     $ queueView
+    get "/"                     queueView
     get "/upvote/:song"         $ param "song" >>= upvoteHandler
-    get "/add"                  $ addSongView
+    get "/add"                  addSongView
     get "/add/:song"            $ param "song" >>= addHandler
-    get "/:file"                $ serveStatic
+    get "/:file"                serveStatic
 
 -- |This is the Scotty Application representing the admin handler.
 adminRoutes :: ScottyM ()
 adminRoutes = liftIO webResources >>= \resPath -> do
-    get "/admin"                $ adminHandler -- FIXME: Check host param (on all /admin)
+    get "/admin"                adminHandler
     get "/admin/vote/:song"     $ param "song" >>= adminUpvoteHandler
     get "/admin/delete/:song"   $ param "song" >>= adminDeleteHandler
-    get "/admin/config"         $ showPrefs
-    get "/:file"                $ serveStatic
+    get "/admin/config"         showPrefs
+    get "/:file"                serveStatic
 
 runServer :: IO ()
 runServer = scotty 8686 democrify

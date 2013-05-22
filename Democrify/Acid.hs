@@ -1,5 +1,4 @@
 {-# LANGUAGE DeriveDataTypeable       #-}
-{-# LANGUAGE ForeignFunctionInterface #-}
 {-# LANGUAGE OverloadedStrings        #-}
 {-# LANGUAGE RecordWildCards          #-}
 {-# LANGUAGE StandaloneDeriving       #-}
@@ -13,6 +12,7 @@ module Acid where
 
 import           Control.Applicative  ((<$>), (<*>))
 import           Control.Exception    (bracket)
+import           Control.Monad        (void)
 import           Control.Monad.Reader (ask)
 import           Control.Monad.State
 import           Data.Acid
@@ -144,7 +144,7 @@ upvoteTrack t = do
     q@PlayQueue{..} <- get
     case SQ.findIndexL (\tr -> tId tr == t) queue of
         Nothing -> return ()
-        Just i  -> (put $ q { queue = SQ.adjust upvote i queue }) >> return ()
+        Just i  ->void $ put q { queue = SQ.adjust upvote i queue }
 
 -- |Sorts the queue. By doing this inside an 'Update' we ensure
 --  atomicity and thus that no tracks are forgotten! :)
@@ -165,7 +165,7 @@ adminUpvote t = do
     q@PlayQueue{..} <- get
     case SQ.findIndexL (\tr -> tId tr == t) queue of
         Nothing -> return ()
-        Just i  -> (put $ q { queue = SQ.adjust upvote9000 i queue }) >> return ()
+        Just i  -> void $ put q { queue = SQ.adjust upvote9000 i queue }
 
 -- |Empties the queue (Who would've guessed?)
 emptyQueue :: Update PlayQueue ()
@@ -215,7 +215,7 @@ instance SafeCopy PutQueue where
     getCopy = contain $ PutQueue <$> safeGet
 
 instance SafeCopy AddTrackToQueue where
-    putCopy (AddTrackToQueue d t) = contain $ (safePut d >> safePut t)
+    putCopy (AddTrackToQueue d t) = contain (safePut d >> safePut t)
     getCopy = contain $ AddTrackToQueue <$> safeGet <*> safeGet
 
 instance SafeCopy UpvoteTrack where

@@ -87,8 +87,8 @@ getPrefs :: IO Preferences
 getPrefs = readIORef preferences
 
 -- |This creates the admin queue view (including the remove and "Vote over 9000" option)
-adminQueue :: (Seq SpotifyTrack) -> H.Html
-adminQueue queue = do
+adminQueue :: Seq SpotifyTrack -> H.Html
+adminQueue queue =
     H.div ! A.class_ "row" $ do
         H.br
         forM_ queue (\SpotifyTrack{..} -> do
@@ -109,7 +109,7 @@ adminQueue queue = do
         H.div ! A.class_ "row" $ do
             H.div ! A.class_ "large-2 small-3 columns" $
                 H.img ! A.src "http://placehold.it/80x80&text=:("
-            H.div ! A.class_ "large-10 columns trackitem" $ do
+            H.div ! A.class_ "large-10 columns trackitem" $
                 H.span ! A.class_ "oh-no" $ "Oh no! There is nothing more in the queue! What will happen now?"
 
 -- |Admin web interface with the ability to set the few preferences that we have
@@ -124,9 +124,9 @@ adminPrefs Preferences{..} = do
       H.input ! A.id "ron" ! A.name "repeat" ! A.type_ "radio"
       H.label ! A.for "ron" ! A.onclick "" $ "Repeat on"
 
-      H.span $ mempty
+      H.span mempty
     H.div ! A.class_ "small-8 columns" $
-      H.p $ "If repeat is activated a played song will be re-added at the end of the queue."
+      H.p "If repeat is activated a played song will be re-added at the end of the queue."
 -- auto shuffle
   H.div ! A.class_ "row" $ do
     H.div ! A.class_ "switch small-4 columns" $ do
@@ -136,9 +136,9 @@ adminPrefs Preferences{..} = do
       H.input ! A.id "son" ! A.name "shuffle" ! A.type_ "radio"
       H.label ! A.for "son" ! A.onclick "" $ "Shuffle on"
 
-      H.span $ mempty
+      H.span mempty
     H.div ! A.class_ "small-8 columns" $
-      H.p $ "When shuffle is activated the queue will be shuffled when a song / playlist is added."
+      H.p "When shuffle is activated the queue will be shuffled when a song / playlist is added."
 -- duplicates
   H.div ! A.class_ "row" $ do
     H.div ! A.class_ "switch small-4 columns" $ do
@@ -148,9 +148,9 @@ adminPrefs Preferences{..} = do
       H.input ! A.id "don" ! A.name "duplicates" ! A.type_ "radio"
       H.label ! A.for "don" ! A.onclick "" $ "Duplicates on"
 
-      H.span $ mempty
+      H.span mempty
     H.div ! A.class_ "small-8 columns" $
-      H.p $ "If duplicates are allowed a song can be added to the queue twice."
+      H.p "If duplicates are allowed a song can be added to the queue twice."
 
 
 -- |Deletes a track when requested by the admin
