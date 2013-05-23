@@ -94,9 +94,9 @@ adminQueue queue =
         forM_ queue (\SpotifyTrack{..} -> do
             H.div ! A.class_ "row" ! A.id "adminc" $ do
                 H.div ! A.class_ "large-2 small-3 columns" $
-                    H.img ! A.onclick "void(0)" ! A.class_ "delete" ! A.id (toValue tId) ! A.src "http://placehold.it/80x80&text=DELETE"
+                    H.img ! A.onclick "void(0)" ! A.class_ "delete" ! A.id (toValue tId) ! A.alt "delete" ! A.src "http://placehold.it/80x80&text=DELETE"
                 H.div ! A.class_ "large-2 small-3 columns" $
-                    H.img ! A.onclick "void(0)" ! A.class_ "next" ! A.id (toValue tId) ! A.src "http://placehold.it/80x80&text=NEXT"
+                    H.img ! A.onclick "void(0)" ! A.class_ "next" ! A.id (toValue tId) ! A.alt "next" ! A.src "http://placehold.it/80x80&text=NEXT"
                 H.div ! A.class_ "large-8 columns trackitem" $ do
                     H.span ! A.class_ "track" $ do toHtml track
                                                    " ("
@@ -108,7 +108,7 @@ adminQueue queue =
             H.hr)
         H.div ! A.class_ "row" $ do
             H.div ! A.class_ "large-2 small-3 columns" $
-                H.img ! A.src "http://placehold.it/80x80&text=:("
+                H.img ! A.alt "sad-face" ! A.src "http://placehold.it/80x80&text=:("
             H.div ! A.class_ "large-10 columns trackitem" $
                 H.span ! A.class_ "oh-no" $ "Oh no! There is nothing more in the queue! What will happen now?"
 

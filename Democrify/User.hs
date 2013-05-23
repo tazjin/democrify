@@ -111,7 +111,7 @@ queueView = do
             forM_ queue (\SpotifyTrack{..} -> do
                 H.div ! A.class_ "row" $ do
                     H.div ! A.class_ "small-3 large-2 columns" $
-                        H.img ! A.onclick "void(0)" ! A.class_ "vote" ! A.id (toValue tId) ! A.src "/upvote_bw.png"
+                        H.img ! A.onclick "void(0)" ! A.class_ "vote" ! A.id (toValue tId) ! A.alt "upvote-arrow" ! A.src "/upvote_bw.png"
                     H.div ! A.class_ "large-10 columns trackitem" $ do
                         H.span ! A.class_ "track" $ toHtml track
                         H.br
@@ -120,7 +120,7 @@ queueView = do
                 H.hr)
             H.div ! A.class_ "row" $ do
                 H.div ! A.class_ "small-3 large-2 columns" $
-                    H.img ! A.src "http://placehold.it/80x80&text=:("
+                    H.img ! A.alt "sad-face" ! A.src "http://placehold.it/80x80&text=:("
                 H.div ! A.class_ "large-10 columns trackitem" $
                     H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
 
@@ -146,7 +146,7 @@ displayCurrentTrack = do
                                                         toHtml artist
     return $ H.div ! A.class_ "row current" $ do
         H.div ! A.class_ "small-3 large-2 columns" $
-            H.img ! A.src "/current.gif"
+            H.img ! A.alt "current" ! A.src "/current.gif"
         H.div ! A.class_ "large-10 columns" $ content
 
 -- |Page that displays the song adding interface
