@@ -77,18 +77,18 @@ defaultLayout title scripts body =
                     H.li ! A.class_ "name" $
                         H.h1 $ H.a ! A.href "/" $ do
                             H.img ! A.alt "Logo" ! A.src "/democrify_small.png" ! A.style "height:45px;float:left;"
-                            H.span ! A.style "margin-left:5px;float:right;" $ toHtml ("Democrify" :: Text)
+                            H.span ! A.style "margin-left:5px;float:right;" $ "Democrify"
                     H.li ! A.class_ "toggle-topbar menu-icon" $
                         H.a ! A.href "#" $ H.span "menu"
                 H.section ! A.class_ "top-bar-section" $
                     H.ul ! A.class_ "right" $ do
                         H.li ! A.class_ "divider" $ mempty
                         H.li $
-                            H.a ! A.href "/add" $ toHtml ("Add song" :: Text)
+                            H.a ! A.href "/add" $ "Add song"
             body
             H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ H.footer $ do
                 H.hr
-                H.p ! A.style "text-align:center;" $ "Powered by Democrify"
+                H.p ! A.style "text-align:center;" $ H.a ! A.href "https://github.com/tazjin/democrify" $ "Powered by Democrify"
             H.script ! A.src "/jquery.js" $ mempty
             H.script ! A.src "/foundation.min.js" $ mempty
             H.script ! A.src "/jquery.cookie.js" $ mempty
@@ -115,14 +115,14 @@ queueView = do
                     H.div ! A.class_ "large-10 columns trackitem" $ do
                         H.span ! A.class_ "track" $ toHtml track
                         H.br
-                        H.span ! A.class_ "artist" $ do toHtml (" by " :: Text)
+                        H.span ! A.class_ "artist" $ do " by "
                                                         toHtml artist
                 H.hr)
             H.div ! A.class_ "row" $ do
                 H.div ! A.class_ "small-3 large-2 columns" $
                     H.img ! A.alt "sad-face" ! A.src "http://placehold.it/80x80&text=:("
                 H.div ! A.class_ "large-10 columns trackitem" $
-                    H.span ! A.class_ "oh-no" $ toHtml ("Oh no! There is nothing more in the queue! What will happen now?" :: Text)
+                    H.span ! A.class_ "oh-no" $ "Oh no! There is nothing more in the queue! What will happen now?"
 
 queueNum :: SQ.Seq SpotifyTrack -> H.Html
 queueNum s | l == 1    = H.span ! A.class_ "queuenum" $ "1 song in the queue"
@@ -135,14 +135,14 @@ displayCurrentTrack = do
     current <- readIORef currentTrack
     let content = case current of
                     Nothing ->
-                        H.p ! A.class_ "oh-no" $ toHtml ("No track is playing right now!" :: Text)
+                        H.p ! A.class_ "oh-no" $ "No track is playing right now!"
                     Just SpotifyTrack{..} -> H.a ! A.href (toValue $ TL.append "spotify:track:" tId) $ do
                         H.br
-                        H.span ! A.class_ "track" $ do toHtml ("Current track:" :: Text)
+                        H.span ! A.class_ "track" $ do "Current track:"
                                                        H.br
                                                        toHtml track
                         H.br
-                        H.span ! A.class_ "artist" $ do toHtml ("by " :: Text)
+                        H.span ! A.class_ "artist" $ do "by "
                                                         toHtml artist
     return $ H.div ! A.class_ "row current" $ do
         H.div ! A.class_ "small-3 large-2 columns" $
@@ -154,13 +154,12 @@ addSongView :: ActionM ()
 addSongView =
     defaultLayout "Democrify - Add song"
                   [ H.script ! A.src "/addsong.js" $ mempty ] $ do
-        H.style $ toHtml ("body{background-color: #222 !important;} footer{color:white;}" :: Text)
+        H.style $ "body{background-color: #222 !important;} footer{color:white;}"
         H.div ! A.class_ "row collapse" $ do
             H.div ! A.class_ "large-10 small-6 columns" $
                 H.input ! A.id "search" ! A.type_ "text"
             H.div ! A.class_ "large-1 small-3 columns" $
-                H.a ! A.class_ "button expand postfix" ! A.id "searchbutton"  $
-                    toHtml ("Search" :: Text)
+                H.a ! A.class_ "button expand postfix" ! A.id "searchbutton" $ "Search"
             H.div ! A.class_ "large-1 small-3 columns" $ H.form ! A.class_ "custom" $
                 H.select ! A.id "searchtype" $ do
                     H.option ! A.selected "" $ "Track"
