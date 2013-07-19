@@ -10,9 +10,17 @@ function runSearch(e){
             var trackId = track.href.replace('spotify:track:', '');
             $('#resultcontainer').append('<div class="row"><div class="large-2 small-3 columns"><a href="#" id="'+trackId+'" class="addtrack"><img src="http://placehold.it/80x80&text=ADD"></a></div><div class="large-10 small-8 columns resultspans"><span class="track">'+track.name+'</span><br /><span class="artist">by '+track.artists[0].name+'</span></div><br /><hr /></div>');
             $('#' + trackId).click(function(t){
-                $.get('/add/' + trackId);
-                $(this).attr('id', 'added');
-                $(this).children('img').attr('src', 'http://placehold.it/80x80&text=ADDED');
+                if ($.cookie(trackId) !== undefined) {
+                    $(this).attr('id', 'added');
+                    $(this).children('img').attr('src', 'http://placehold.it/80x80&text=CHEATER');
+                } else {
+                    var now = new Date();
+                    $.get('/add/' + trackId);
+                    $.cookie(trackId, '1', {expires : now.addHours(1) });
+                    $(this).attr('id', 'added');
+                    $(this).children('img').attr('src', 'http://placehold.it/80x80&text=ADDED');
+                }
+
             });
         });
     });
