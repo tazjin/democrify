@@ -183,7 +183,7 @@ addHandler trackId = do
     case track of
         Nothing  -> status (mkStatus 404 "Not found") >> text "notfound"
         (Just t) -> do when autoShuffle (liftIO shuffleQueue)
-                       dfUpdate $ AddTrackToQueue duplicates t
+                       dfUpdate $ AddTrackToQueue duplicates (t { votes = 0})
                        text "ok"
 
 adminHandler :: ActionM ()
