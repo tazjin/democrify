@@ -181,7 +181,7 @@ displayCurrentTrack = do
 addSongView :: ActionM ()
 addSongView =
     defaultLayout "Democrify - Add song"
-                  [ H.script ! A.src "/addsong.js" $ mempty ] [] $ do
+                  [] [ H.script ! A.src "/addsong.js" $ mempty ] $ do
         H.style $ "body{background-color: #222 !important;} footer{color:white;}"
         H.div ! A.class_ "row collapse" $ do
             H.div ! A.class_ "large-10 small-6 columns" $

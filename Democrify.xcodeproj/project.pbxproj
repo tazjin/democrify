@@ -15,7 +15,6 @@
 		BF09F95216D39680002E2FDA /* current.gif in Resources */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
 		BF09F95316D3968E002E2FDA /* current.gif in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95116D39680002E2FDA /* current.gif */; };
 		BF09F95816D3ECFB002E2FDA /* addsong.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF09F95416D3ECE6002E2FDA /* addsong.js */; };
-		BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D7D16CEA5B600A899A1 /* Acid.hs */; };
 		BF2F6D8016D117E300A899A1 /* CocoaLibSpotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
 		BF2F6D8316D11C5700A899A1 /* CocoaLibSpotify.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F6D7F16D117E300A899A1 /* CocoaLibSpotify.framework */; };
 		BF2F6D8516D16F3400A899A1 /* democrify.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF2F6D8416D16F3400A899A1 /* democrify.icns */; };
@@ -40,14 +39,9 @@
 		BF41461A16CCF31D00AD69AA /* democrify.png in Resources */ = {isa = PBXBuildFile; fileRef = BF41461916CCF31D00AD69AA /* democrify.png */; };
 		BF41462016CCFEDD00AD69AA /* HSObjC_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461D16CCFEDD00AD69AA /* HSObjC_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF41462116CCFEDD00AD69AA /* HSOBJC_dummy_C.m in Sources */ = {isa = PBXBuildFile; fileRef = BF41461E16CCFEDD00AD69AA /* HSOBJC_dummy_C.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		BF41462816CCFF5A00AD69AA /* Main.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF41462516CCFF5A00AD69AA /* Main.hs */; };
 		BF5740991700CE14006F62AA /* jquery.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF2F6DD616D2389B00A899A1 /* jquery.js */; };
 		BF57409C1700E207006F62AA /* custom.modernizr.js in Sources */ = {isa = PBXBuildFile; fileRef = BF57409B1700E207006F62AA /* custom.modernizr.js */; };
 		BF57409D1700E214006F62AA /* custom.modernizr.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF57409B1700E207006F62AA /* custom.modernizr.js */; };
-		BF7D22D316D7817600460FC4 /* Admin.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF7D22D216D7817600460FC4 /* Admin.hs */; };
-		BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26916D6291D00BD2AB3 /* Queue.hs */; };
-		BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26A16D6291D00BD2AB3 /* User.hs */; };
-		BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */ = {isa = PBXBuildFile; fileRef = BF95D26B16D6291D00BD2AB3 /* WebAPI.hs */; };
 		BF95D27116D6888700BD2AB3 /* admin.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF95D26F16D6887D00BD2AB3 /* admin.js */; };
 /* End PBXBuildFile section */
 
@@ -348,8 +342,6 @@
 				BF41460E16CC5C8A00AD69AA /* statusicon.tiff in Resources */,
 				BF41460F16CC5C8A00AD69AA /* statusicon@2x.tiff in Resources */,
 				BF41461A16CCF31D00AD69AA /* democrify.png in Resources */,
-				BF41462816CCFF5A00AD69AA /* Main.hs in Resources */,
-				BF2F6D7E16CEA5B600A899A1 /* Acid.hs in Resources */,
 				BF2F6D8516D16F3400A899A1 /* democrify.icns in Resources */,
 				BF2F6DFE16D2389B00A899A1 /* app.css in Resources */,
 				BF2F6DFF16D2389B00A899A1 /* foundation.css in Resources */,
@@ -358,10 +350,6 @@
 				BF2F6E0F16D2BA8B00A899A1 /* upvote_colour.png in Resources */,
 				BF2F6E1016D2BA8B00A899A1 /* upvote_bw.png in Resources */,
 				BF09F95216D39680002E2FDA /* current.gif in Resources */,
-				BF95D26C16D6291D00BD2AB3 /* Queue.hs in Resources */,
-				BF95D26D16D6291D00BD2AB3 /* User.hs in Resources */,
-				BF95D26E16D6291D00BD2AB3 /* WebAPI.hs in Resources */,
-				BF7D22D316D7817600460FC4 /* Admin.hs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
