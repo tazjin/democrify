@@ -53,10 +53,11 @@ webResources = (++ "/web/") <$> readIORef resourcePath
 
 -- |Default layout including Foundation stylesheets
 defaultLayout :: TL.Text     -- ^ Title
+              -> [H.Html] -- ^ Additional head-tag-elements
               -> [H.Html] -- ^ Additional scripts
               -> H.Html   -- ^ Body
               -> ActionM ()
-defaultLayout title scripts body =
+defaultLayout title headtags scripts body =
   -- The weird-looking line below makes sure that the content header is set after executing html'.
   -- This is done to prevent it from being overridden.
   flip (>>) (header "Content-Type" "text/html; charset=utf-8") $ html' $ H.docTypeHtml $ do
@@ -71,6 +72,7 @@ defaultLayout title scripts body =
             H.link ! A.href "/democrify_small.png" ! A.rel "icon"
             -- Scripts
             H.script ! A.src "/custom.modernizr.js" $ mempty
+            sequence_ headtags
         H.body $ do
             H.nav ! A.class_ "top-bar" $ do
                 H.ul ! A.class_ "title-area" $ do
@@ -101,7 +103,7 @@ queueView :: ActionM ()
 queueView = do
     current <- liftIO displayCurrentTrack
     queue <- dfQuery GetQueue
-    defaultLayout "Democrify - Queue" [] $
+    defaultLayout "Democrify - Queue" [] [] $
         H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ do
             H.br
             current
@@ -113,6 +115,32 @@ queueView = do
                     H.div ! A.class_ "small-3 large-2 columns" $
                         H.img ! A.onclick "void(0)" ! A.class_ "vote" ! A.id (toValue tId) ! A.alt "upvote-arrow" ! A.src "/upvote_bw.png"
                     H.div ! A.class_ "large-10 columns trackitem" $ do
+                        H.span ! A.class_ "track" $ toHtml track
+                        H.br
+                        H.span ! A.class_ "artist" $ do " by "
+                                                        toHtml artist
+                H.hr)
+            H.div ! A.class_ "row" $ do
+                H.div ! A.class_ "small-3 large-2 columns" $
+                    H.img ! A.alt "sad-face" ! A.src "http://placehold.it/80x80&text=:("
+                H.div ! A.class_ "large-10 columns trackitem" $
+                    H.span ! A.class_ "oh-no" $ "Oh no! There is nothing more in the queue! What will happen now?"
+
+-- |Displays the user facing queue list
+queuePassive :: ActionM ()
+queuePassive = do
+    current <- liftIO displayCurrentTrack
+    queue <- dfQuery GetQueue
+    defaultLayout "Democrify - Queue" [H.meta ! A.httpEquiv "refresh" ! A.content "30"] [] $
+        H.div ! A.class_ "row" $ H.div ! A.class_ "small-12 columns" $ do
+            H.br
+            current
+            H.div ! A.class_ "row" $ H.div ! A.class_ "small-10 columns" $
+                queueNum queue
+            H.hr
+            forM_ queue (\SpotifyTrack{..} -> do
+                H.div ! A.class_ "row" $ do
+                    H.div ! A.class_ "large-12 small-4 columns trackitem" $ do
                         H.span ! A.class_ "track" $ toHtml track
                         H.br
                         H.span ! A.class_ "artist" $ do " by "
@@ -153,7 +181,7 @@ displayCurrentTrack = do
 addSongView :: ActionM ()
 addSongView =
     defaultLayout "Democrify - Add song"
-                  [ H.script ! A.src "/addsong.js" $ mempty ] $ do
+                  [ H.script ! A.src "/addsong.js" $ mempty ] [] $ do
         H.style $ "body{background-color: #222 !important;} footer{color:white;}"
         H.div ! A.class_ "row collapse" $ do
             H.div ! A.class_ "large-10 small-6 columns" $
@@ -190,13 +218,14 @@ adminHandler :: ActionM ()
 adminHandler = do
     queue <- dfQuery GetQueue
     defaultLayout "Democrify - Admin"
+                  []
                   [ H.script ! A.src "/admin.js" $ mempty ]
                   (adminQueue queue)
 
 showPrefs :: ActionM ()
 showPrefs = do
     prefs <- liftIO getPrefs
-    defaultLayout "Democrify - Settings" [] (adminPrefs prefs)
+    defaultLayout "Democrify - Settings" [] [] (adminPrefs prefs)
 
 -- |This is supplised with the NSArray that contains all the NSStrings to the URLs.
 loadPlaylist :: Id -> IO ()
@@ -220,6 +249,7 @@ serveStatic f = liftIO webResources >>= (\resPath -> file $ resPath ++ f)
 democrify :: ScottyM ()
 democrify = do
     get "/"                     queueView
+    get "/view"                 queuePassive
     get "/upvote/:song"         $ param "song" >>= upvoteHandler
     get "/add"                  addSongView
     get "/add/:song"            $ param "song" >>= addHandler
