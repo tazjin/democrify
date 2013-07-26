@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                Democrify
-version:             0.1.4.0
+version:             0.1.5.0
 synopsis:            A democratic music experience using Spotify
 -- description:
 homepage:            http://github.com/tazjin/democrify
